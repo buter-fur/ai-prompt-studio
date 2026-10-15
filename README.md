@@ -16,8 +16,8 @@
 
 | 平台 | 文件 | 说明 |
 | --- | --- | --- |
-| **macOS** | `AI提示词工作台-macOS.zip` | 解压得到 `.app`，拖进「应用程序」。**免装 Python** |
-| **Windows** | `AI提示词工作台-Windows.zip` | 解压后双击 `PromptStudio.exe`。**免装 Python** |
+| **macOS** | `AI-Prompt-Studio-macOS.zip` | 解压得到 `.app`，拖进「应用程序」。**免装 Python** |
+| **Windows** | `AI-Prompt-Studio-Windows.zip` | 解压后双击 `PromptStudio.exe`。**免装 Python** |
 
 > macOS 首次打开如果提示"无法验证开发者"：右键点 App →「打开」→ 再点「打开」。
 > （因为没做 Apple 开发者签名，属于正常现象。）
@@ -71,7 +71,7 @@ git push origin v1.0.0
 ```
 
 CI 会跑三个任务：前端断言 → macOS 打包 → Windows 打包，
-全部通过后自动建 Release，把 `AI提示词工作台-macOS.zip` 和 `AI提示词工作台-Windows.zip` 挂上去。
+全部通过后自动建 Release，把 `AI-Prompt-Studio-macOS.zip` 和 `AI-Prompt-Studio-Windows.zip` 挂上去。
 
 只想拿构建产物不发版：推任意提交后在仓库的 **Actions** 页面下载 Artifacts。
 
