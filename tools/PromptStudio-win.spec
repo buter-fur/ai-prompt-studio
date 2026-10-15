@@ -51,8 +51,13 @@ a = Analysis(
         # 界面跑在 pywebview 的原生窗口里，不需要 tkinter / Tcl / Tk
         "tkinter", "_tkinter", "Tkinter", "turtle", "turtledemo", "idlelib",
         "numpy", "pandas", "matplotlib", "PIL", "lxml", "openpyxl",
-        "pptx", "docx", "scipy", "pytest", "setuptools", "pip",
-        "unittest", "pydoc", "doctest", "distutils",
+        "pptx", "docx", "scipy", "pytest",
+        # 注意：不要排除 setuptools / pip / distutils。
+        # Python 3.12 起 distutils 已从标准库移除，只由 setuptools._distutils 提供，
+        # PyInstaller 的 hook-distutils 会做 setuptools._distutils → distutils 的别名，
+        # 一旦 distutils 被 exclude，就会抛
+        # ValueError: Target module "distutils" already imported as "ExcludedModule(...)"
+        "unittest", "pydoc", "doctest",
     ],
     noarchive=False,
     optimize=1,
