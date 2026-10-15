@@ -1122,11 +1122,13 @@ def main() -> None:
         print("  关闭此窗口即可停止服务", flush=True)
     print("=" * 58, flush=True)
 
-    if os.environ.get("APS_NO_BROWSER") != "1":
+    # 会开原生窗口时就别再开浏览器了（否则窗口和标签页会同时冒出来）
+    will_open_window = is_frozen() and os.environ.get("APS_NO_WINDOW") != "1"
+    if not will_open_window and os.environ.get("APS_NO_BROWSER") != "1":
         threading.Timer(0.8, lambda: webbrowser.open(url)).start()
 
     # 打包成 App：优先开原生窗口，关掉窗口就退出
-    if is_frozen() and os.environ.get("APS_NO_WINDOW") != "1":
+    if will_open_window:
         worker = threading.Thread(target=server.serve_forever, daemon=True)
         worker.start()
 
@@ -1151,9 +1153,9 @@ def main() -> None:
             server.server_close()
             return
 
-        # ③ 什么窗口都开不了：开浏览器，进程留在后台
-        print("已改为后台运行，可在「活动监视器」里结束本进程。", file=sys.stderr, flush=True)
-        if os.environ.get("APS_NO_BROWSER") == "1":
+        # ③ 什么窗口都开不了：退回浏览器，进程留在后台
+        print("已改为后台运行，关掉浏览器不会停止服务。", file=sys.stderr, flush=True)
+        if os.environ.get("APS_NO_BROWSER") != "1":
             webbrowser.open(url)
         try:
             worker.join()

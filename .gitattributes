@@ -1,0 +1,12 @@
+# 统一按 LF 存，检出时也不转换，避免跨平台差异
+* text=auto eol=lf
+
+# 二进制
+*.png binary
+*.ico binary
+*.icns binary
+*.zip binary
+*.app binary
+
+# 生成的标签库不参与 diff 统计
+app/data/tags.json linguist-generated=true

@@ -1,6 +1,6 @@
 # AI 文生图提示词工作台
 
-[![构建](https://github.com/OWNER/REPO/actions/workflows/build.yml/badge.svg)](https://github.com/OWNER/REPO/actions/workflows/build.yml)
+[![构建](../../actions/workflows/build.yml/badge.svg)](../../actions/workflows/build.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 一个**本地运行**的 AI 绘画提示词编辑器：分类标签库 · 中英对照 · 智能推荐 · 权重编辑 · 大模型润色 · 图片反推。
@@ -62,6 +62,18 @@ macOS 的 `.app` 额外需要 Xcode 命令行工具（提供 `swiftc`）：`xcod
 
 仓库里带了 GitHub Actions（[.github/workflows/build.yml](.github/workflows/build.yml)），
 推 tag 就会在两个平台上自动打包并发 Release。
+
+### 发一个新版本
+
+```bash
+git tag v1.0.0
+git push origin v1.0.0
+```
+
+CI 会跑三个任务：前端断言 → macOS 打包 → Windows 打包，
+全部通过后自动建 Release，把 `AI提示词工作台-macOS.zip` 和 `AI提示词工作台-Windows.zip` 挂上去。
+
+只想拿构建产物不发版：推任意提交后在仓库的 **Actions** 页面下载 Artifacts。
 
 ---
 
