@@ -64,7 +64,30 @@ jobs:
       - name: 安装 Pillow（生成图标用）
         run: python -m pip install --upgrade pillow
       - name: 打包
-        run: python tools/build.py
+        id: pkg
+        shell: pwsh
+        run: |
+          python tools/build.py 2>&1 | Tee-Object -FilePath build-win.log
+          exit $LASTEXITCODE
+      - name: 失败时把日志推到 ci-log 分支（便于排查）
+        if: failure()
+        shell: bash
+        run: |
+          set -x
+          git config user.name "ci-bot"
+          git config user.email "ci-bot@users.noreply.github.com"
+          git checkout -B ci-log
+          mkdir -p ci-log
+          cp build-win.log ci-log/windows.txt 2>/dev/null || echo "(没有 build-win.log)" > ci-log/windows.txt
+          { echo "=== python ==="; python -V;
+            echo "=== platform ==="; python -c "import platform,sys;print(platform.platform(), sys.version)";
+            echo "=== 已装包 ==="; python -m pip list;
+            echo "=== build 目录 ==="; ls -la build/ 2>/dev/null || echo "(无)";
+            echo "=== pylibs ==="; ls build/pylibs 2>/dev/null | head -30 || echo "(无)";
+          } > ci-log/env.txt 2>&1
+          git add -f ci-log
+          git commit -m "windows build log [skip ci]"
+          git push -f origin ci-log
       - name: 上传产物
         uses: actions/upload-artifact@v4
         with:
