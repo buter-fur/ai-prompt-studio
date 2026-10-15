@@ -1,0 +1,277 @@
+[
+  {
+    "id": "quality",
+    "name": "画质",
+    "nameEn": "Quality",
+    "icon": "✨",
+    "groups": [
+      {
+        "id": "quality.level",
+        "name": "画质等级",
+        "nameEn": "Quality Level",
+        "tags": [
+          { "zh": "杰作", "en": "masterpiece" },
+          { "zh": "最佳画质", "en": "best quality" },
+          { "zh": "超精细", "en": "ultra detailed" },
+          { "zh": "高分辨率", "en": "high resolution" },
+          { "zh": "8K", "en": "8k" },
+          { "zh": "4K", "en": "4k" },
+          { "zh": "高清", "en": "high definition" },
+          { "zh": "精细面部细节", "en": "detailed face" },
+          { "zh": "精细眼睛细节", "en": "detailed eyes" },
+          { "zh": "锐利对焦", "en": "sharp focus" },
+          { "zh": "专业摄影", "en": "professional photography" },
+          { "zh": "获奖作品", "en": "award winning" },
+          { "zh": "极其细致", "en": "extremely detailed" },
+          { "zh": "超高分辨率", "en": "ultra high resolution" },
+          { "zh": "16K", "en": "16k" },
+          { "zh": "艺术站热门", "en": "trending on artstation" },
+          { "zh": "画廊级画质", "en": "gallery quality" }
+        ]
+      },
+      {
+        "id": "quality.render",
+        "name": "渲染增强",
+        "nameEn": "Render Boost",
+        "tags": [
+          { "zh": "光线追踪", "en": "ray tracing" },
+          { "zh": "全局光照", "en": "global illumination" },
+          { "zh": "次表面散射", "en": "subsurface scattering" },
+          { "zh": "高质量纹理", "en": "high quality texture" },
+          { "zh": "物理渲染", "en": "physically based rendering" },
+          { "zh": "超采样", "en": "supersampling" },
+          { "zh": "抗锯齿", "en": "anti-aliasing" },
+          { "zh": "景深", "en": "depth of field" },
+          { "zh": "动态模糊", "en": "motion blur" },
+          { "zh": "胶片颗粒", "en": "film grain" },
+          { "zh": "镜头光晕", "en": "lens flare" },
+          { "zh": "色差", "en": "chromatic aberration" },
+          { "zh": "路径追踪", "en": "path tracing" },
+          { "zh": "屏幕空间反射", "en": "screen space reflections" },
+          { "zh": "泛光溢出", "en": "bloom" },
+          { "zh": "柔和阴影", "en": "soft shadows" },
+          { "zh": "置换贴图", "en": "displacement mapping" },
+          { "zh": "布料模拟", "en": "cloth simulation" },
+          { "zh": "流体模拟", "en": "fluid simulation" },
+          { "zh": "粒子系统", "en": "particle system" }
+        ]
+      },
+      {
+        "id": "quality.detail",
+        "name": "细节强化",
+        "nameEn": "Detail Boost",
+        "tags": [
+          { "zh": "皮肤纹理", "en": "skin texture" },
+          { "zh": "皮肤毛孔", "en": "skin pores" },
+          { "zh": "织物纹理", "en": "fabric texture" },
+          { "zh": "织物织纹", "en": "fabric weave" },
+          { "zh": "毛发细节", "en": "hair detail" },
+          { "zh": "绒毛细节", "en": "fur detail" },
+          { "zh": "羽毛细节", "en": "feather detail" },
+          { "zh": "金属反射", "en": "metal reflection" },
+          { "zh": "水面反射", "en": "water reflection" },
+          { "zh": "环境光遮蔽", "en": "ambient occlusion" },
+          { "zh": "菲涅尔反射", "en": "fresnel" },
+          { "zh": "焦散", "en": "caustics" },
+          { "zh": "光线散射", "en": "light scattering" },
+          { "zh": "表面瑕疵", "en": "surface imperfection" },
+          { "zh": "眼部反射光", "en": "eye reflection" }
+        ]
+      },
+      {
+        "id": "quality.output",
+        "name": "输出规格",
+        "nameEn": "Output Spec",
+        "tags": [
+          { "zh": "8K 超高清", "en": "8k uhd" },
+          { "zh": "4K 超高清", "en": "4k uhd" },
+          { "zh": "高动态范围", "en": "hdr" },
+          { "zh": "原始格式照片", "en": "raw photo" },
+          { "zh": "中画幅", "en": "medium format" },
+          { "zh": "全画幅", "en": "full frame" },
+          { "zh": "大画幅", "en": "large format" },
+          { "zh": "胶片扫描", "en": "film scan" },
+          { "zh": "35mm 胶片", "en": "35mm film" },
+          { "zh": "即显胶片", "en": "instant film" },
+          { "zh": "广色域", "en": "wide color gamut" },
+          { "zh": "印刷级分辨率", "en": "print resolution" }
+        ]
+      },
+      {
+        "id": "quality.post",
+        "name": "后期处理",
+        "nameEn": "Post Processing",
+        "tags": [
+          { "zh": "色调映射", "en": "tone mapping" },
+          { "zh": "色彩分级", "en": "color grading" },
+          { "zh": "降噪", "en": "noise reduction" },
+          { "zh": "锐化", "en": "sharpening" },
+          { "zh": "暗角", "en": "vignette" },
+          { "zh": "分离色调", "en": "split toning" },
+          { "zh": "交叉冲洗", "en": "cross processing" },
+          { "zh": "漏光", "en": "light leaks" },
+          { "zh": "光晕溢出", "en": "halation" },
+          { "zh": "胶片模拟", "en": "film emulation" },
+          { "zh": "局部减淡加深", "en": "dodge and burn" },
+          { "zh": "局部色彩", "en": "selective color" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "camera",
+    "name": "构图镜头",
+    "nameEn": "Camera",
+    "icon": "📷",
+    "groups": [
+      {
+        "id": "camera.shot",
+        "name": "景别视角",
+        "nameEn": "Shot",
+        "tags": [
+          { "zh": "特写", "en": "close-up" },
+          { "zh": "大特写", "en": "extreme close-up" },
+          { "zh": "半身像", "en": "upper body" },
+          { "zh": "全身像", "en": "full body" },
+          { "zh": "远景", "en": "wide shot" },
+          { "zh": "全景", "en": "panorama" },
+          { "zh": "中景", "en": "medium shot" },
+          { "zh": "过肩镜头", "en": "over-the-shoulder shot" },
+          { "zh": "俯视", "en": "high angle" },
+          { "zh": "仰视", "en": "low angle" },
+          { "zh": "平视", "en": "eye level" },
+          { "zh": "鸟瞰", "en": "bird's eye view" },
+          { "zh": "荷兰角", "en": "dutch angle" },
+          { "zh": "中近景", "en": "medium close-up" },
+          { "zh": "牛仔镜头", "en": "cowboy shot" },
+          { "zh": "极远景", "en": "extreme long shot" },
+          { "zh": "双人镜头", "en": "two shot" },
+          { "zh": "定场镜头", "en": "establishing shot" }
+        ]
+      },
+      {
+        "id": "camera.lens",
+        "name": "镜头参数",
+        "nameEn": "Lens",
+        "tags": [
+          { "zh": "广角", "en": "wide angle" },
+          { "zh": "长焦", "en": "telephoto" },
+          { "zh": "微距镜头", "en": "macro lens" },
+          { "zh": "50mm 镜头", "en": "50mm lens" },
+          { "zh": "85mm 镜头", "en": "85mm lens" },
+          { "zh": "大光圈", "en": "large aperture" },
+          { "zh": "浅景深", "en": "shallow depth of field" },
+          { "zh": "背景虚化", "en": "bokeh" },
+          { "zh": "移轴", "en": "tilt-shift" },
+          { "zh": "广角畸变", "en": "wide angle distortion" },
+          { "zh": "35mm 镜头", "en": "35mm lens" },
+          { "zh": "24mm 镜头", "en": "24mm lens" },
+          { "zh": "135mm 镜头", "en": "135mm lens" },
+          { "zh": "定焦镜头", "en": "prime lens" },
+          { "zh": "变焦镜头", "en": "zoom lens" },
+          { "zh": "长焦压缩感", "en": "telephoto compression" }
+        ]
+      },
+      {
+        "id": "camera.composition",
+        "name": "构图",
+        "nameEn": "Composition",
+        "tags": [
+          { "zh": "三分法", "en": "rule of thirds" },
+          { "zh": "对称构图", "en": "symmetrical composition" },
+          { "zh": "中心构图", "en": "centered composition" },
+          { "zh": "对角线构图", "en": "diagonal composition" },
+          { "zh": "框架构图", "en": "framing" },
+          { "zh": "引导线", "en": "leading lines" },
+          { "zh": "留白", "en": "negative space" },
+          { "zh": "前景遮挡", "en": "foreground elements" },
+          { "zh": "黄金比例", "en": "golden ratio" },
+          { "zh": "极简构图", "en": "minimalist composition" },
+          { "zh": "三角形构图", "en": "triangular composition" },
+          { "zh": "S 形构图", "en": "s-curve composition" },
+          { "zh": "放射构图", "en": "radial composition" },
+          { "zh": "黄金三角构图", "en": "golden triangle" },
+          { "zh": "奇数构图", "en": "rule of odds" },
+          { "zh": "满构图", "en": "fill the frame" }
+        ]
+      },
+      {
+        "id": "camera.body",
+        "name": "相机机身与品牌",
+        "nameEn": "Camera Body",
+        "tags": [
+          { "zh": "佳能 EOS R5 拍摄", "en": "shot on canon eos r5" },
+          { "zh": "索尼 A7R 拍摄", "en": "shot on sony a7r" },
+          { "zh": "哈苏拍摄", "en": "shot on hasselblad" },
+          { "zh": "徕卡 M 拍摄", "en": "shot on leica m" },
+          { "zh": "尼康拍摄", "en": "shot on nikon" },
+          { "zh": "飞思拍摄", "en": "shot on phase one" },
+          { "zh": "富士拍摄", "en": "shot on fujifilm" },
+          { "zh": "苹果手机拍摄", "en": "shot on iphone" },
+          { "zh": "胶片拍摄", "en": "shot on film" },
+          { "zh": "GoPro 拍摄", "en": "shot on gopro" },
+          { "zh": "无人机镜头", "en": "drone shot" },
+          { "zh": "单反相机", "en": "dslr camera" },
+          { "zh": "无反相机", "en": "mirrorless camera" },
+          { "zh": "胶片相机", "en": "analog camera" }
+        ]
+      },
+      {
+        "id": "camera.specialty",
+        "name": "特殊镜头",
+        "nameEn": "Specialty Lens",
+        "tags": [
+          { "zh": "变形宽银幕镜头", "en": "anamorphic lens" },
+          { "zh": "微距探针镜头", "en": "macro probe lens" },
+          { "zh": "柔焦镜", "en": "soft focus filter" },
+          { "zh": "星光镜", "en": "star filter" },
+          { "zh": "中灰滤镜", "en": "nd filter" },
+          { "zh": "偏振镜", "en": "polarizing filter" },
+          { "zh": "柔光滤镜", "en": "diffusion filter" },
+          { "zh": "8mm 鱼眼", "en": "8mm fisheye" },
+          { "zh": "复古镜头", "en": "vintage lens" },
+          { "zh": "电影镜头", "en": "cine lens" },
+          { "zh": "增距镜", "en": "teleconverter" }
+        ]
+      },
+      {
+        "id": "camera.movement",
+        "name": "运镜与视角",
+        "nameEn": "Camera Movement",
+        "tags": [
+          { "zh": "第一人称视角", "en": "first person view" },
+          { "zh": "跟随镜头", "en": "tracking shot" },
+          { "zh": "推轨镜头", "en": "dolly shot" },
+          { "zh": "摇臂镜头", "en": "crane shot" },
+          { "zh": "环绕镜头", "en": "orbit shot" },
+          { "zh": "航拍俯冲", "en": "aerial dive" },
+          { "zh": "希区柯克变焦", "en": "dolly zoom" },
+          { "zh": "手持镜头", "en": "handheld camera" },
+          { "zh": "变焦拉焦", "en": "rack focus" },
+          { "zh": "甩镜头", "en": "whip pan" },
+          { "zh": "慢动作", "en": "slow motion" },
+          { "zh": "延时摄影", "en": "time lapse" }
+        ]
+      },
+      {
+        "id": "camera.perspective",
+        "name": "透视与空间",
+        "nameEn": "Perspective",
+        "tags": [
+          { "zh": "一点透视", "en": "one point perspective" },
+          { "zh": "两点透视", "en": "two point perspective" },
+          { "zh": "三点透视", "en": "three point perspective" },
+          { "zh": "等距视角", "en": "isometric view" },
+          { "zh": "强迫透视", "en": "forced perspective" },
+          { "zh": "消失点", "en": "vanishing point" },
+          { "zh": "空气透视", "en": "aerial perspective" },
+          { "zh": "透视缩短", "en": "foreshortening" },
+          { "zh": "虫眼视角", "en": "worm's eye view" },
+          { "zh": "仰视压迫感", "en": "imposing low angle" },
+          { "zh": "空间纵深", "en": "spatial depth" },
+          { "zh": "正上方俯视", "en": "top down view" }
+        ]
+      }
+    ]
+  }
+]

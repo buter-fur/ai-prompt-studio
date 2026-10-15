@@ -1,0 +1,353 @@
+[
+  {
+    "id": "food",
+    "name": "食物饮品",
+    "nameEn": "Food & Drink",
+    "icon": "🍰",
+    "groups": [
+      {
+        "id": "food.staple",
+        "name": "主食与菜肴",
+        "nameEn": "Staple & Dishes",
+        "tags": [
+          { "zh": "拉面", "en": "ramen" },
+          { "zh": "寿司", "en": "sushi" },
+          { "zh": "披萨", "en": "pizza" },
+          { "zh": "汉堡", "en": "hamburger" },
+          { "zh": "炸鸡", "en": "fried chicken" },
+          { "zh": "牛排", "en": "steak" },
+          { "zh": "意面", "en": "spaghetti" },
+          { "zh": "咖喱饭", "en": "curry rice" },
+          { "zh": "火锅", "en": "hot pot" },
+          { "zh": "饺子", "en": "dumplings" },
+          { "zh": "炒饭", "en": "fried rice" },
+          { "zh": "三明治", "en": "sandwich" }
+        ]
+      },
+      {
+        "id": "food.dessert",
+        "name": "甜点与烘焙",
+        "nameEn": "Dessert & Bakery",
+        "tags": [
+          { "zh": "草莓蛋糕", "en": "strawberry cake" },
+          { "zh": "巧克力蛋糕", "en": "chocolate cake" },
+          { "zh": "马卡龙", "en": "macaron" },
+          { "zh": "甜甜圈", "en": "donut" },
+          { "zh": "冰淇淋", "en": "ice cream" },
+          { "zh": "布丁", "en": "pudding" },
+          { "zh": "蛋挞", "en": "egg tart" },
+          { "zh": "可颂", "en": "croissant" },
+          { "zh": "纸杯蛋糕", "en": "cupcake" },
+          { "zh": "芝士蛋糕", "en": "cheesecake" },
+          { "zh": "提拉米苏", "en": "tiramisu" },
+          { "zh": "泡芙", "en": "cream puff" }
+        ]
+      },
+      {
+        "id": "food.drink",
+        "name": "饮品",
+        "nameEn": "Drink",
+        "tags": [
+          { "zh": "拿铁咖啡", "en": "latte" },
+          { "zh": "卡布奇诺", "en": "cappuccino" },
+          { "zh": "浓缩咖啡", "en": "espresso" },
+          { "zh": "冰美式", "en": "iced americano" },
+          { "zh": "抹茶拿铁", "en": "matcha latte" },
+          { "zh": "珍珠奶茶", "en": "bubble tea" },
+          { "zh": "柠檬汽水", "en": "lemon soda" },
+          { "zh": "橙汁", "en": "orange juice" },
+          { "zh": "鸡尾酒", "en": "cocktail" },
+          { "zh": "香槟", "en": "champagne" },
+          { "zh": "红酒", "en": "red wine" },
+          { "zh": "啤酒", "en": "beer" }
+        ]
+      },
+      {
+        "id": "food.fruit",
+        "name": "水果",
+        "nameEn": "Fruit",
+        "tags": [
+          { "zh": "草莓", "en": "strawberry" },
+          { "zh": "蓝莓", "en": "blueberry" },
+          { "zh": "樱桃", "en": "cherry" },
+          { "zh": "西瓜", "en": "watermelon" },
+          { "zh": "芒果", "en": "mango" },
+          { "zh": "菠萝", "en": "pineapple" },
+          { "zh": "葡萄", "en": "grapes" },
+          { "zh": "桃子", "en": "peach" },
+          { "zh": "石榴", "en": "pomegranate" }
+        ]
+      },
+      {
+        "id": "food.plating",
+        "name": "料理风格与摆盘",
+        "nameEn": "Plating & Food Style",
+        "tags": [
+          { "zh": "美食摄影", "en": "food photography" },
+          { "zh": "俯拍平铺", "en": "flat lay" },
+          { "zh": "摆盘", "en": "plating" },
+          { "zh": "餐桌布置", "en": "table setting" },
+          { "zh": "热气腾腾", "en": "steaming" },
+          { "zh": "拉丝芝士", "en": "melted cheese" },
+          { "zh": "野餐", "en": "picnic" },
+          { "zh": "日式便当", "en": "bento box" },
+          { "zh": "咖啡拉花", "en": "latte art" },
+          { "zh": "精致甜点盘", "en": "dessert plate" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "object",
+    "name": "道具物品",
+    "nameEn": "Object",
+    "icon": "⚔️",
+    "groups": [
+      {
+        "id": "object.blade",
+        "name": "冷兵器",
+        "nameEn": "Melee Weapon",
+        "tags": [
+          { "zh": "长剑", "en": "longsword" },
+          { "zh": "短剑", "en": "short sword" },
+          { "zh": "匕首", "en": "dagger" },
+          { "zh": "长枪", "en": "spear" },
+          { "zh": "弓箭", "en": "bow and arrow" },
+          { "zh": "战斧", "en": "battle axe" },
+          { "zh": "镰刀", "en": "scythe" },
+          { "zh": "武士刀", "en": "katana" },
+          { "zh": "双刀", "en": "dual blades" },
+          { "zh": "盾牌", "en": "shield" },
+          { "zh": "战锤", "en": "war hammer" },
+          { "zh": "飞刀", "en": "throwing knives" },
+          { "zh": "三叉戟", "en": "trident" },
+          { "zh": "巨剑", "en": "greatsword" },
+          { "zh": "戟", "en": "halberd" },
+          { "zh": "细剑", "en": "rapier" }
+        ]
+      },
+      {
+        "id": "object.firearm",
+        "name": "火器与科幻武器",
+        "nameEn": "Firearm & Sci-Fi Weapon",
+        "tags": [
+          { "zh": "手枪", "en": "handgun" },
+          { "zh": "左轮手枪", "en": "revolver" },
+          { "zh": "霰弹枪", "en": "shotgun" },
+          { "zh": "狙击步枪", "en": "sniper rifle" },
+          { "zh": "突击步枪", "en": "assault rifle" },
+          { "zh": "冲锋枪", "en": "submachine gun" },
+          { "zh": "激光枪", "en": "laser gun" },
+          { "zh": "等离子炮", "en": "plasma cannon" },
+          { "zh": "能量刃", "en": "energy blade" },
+          { "zh": "光剑", "en": "lightsaber" },
+          { "zh": "电磁炮", "en": "railgun" },
+          { "zh": "火箭筒", "en": "rocket launcher" },
+          { "zh": "手榴弹", "en": "grenade" },
+          { "zh": "子弹", "en": "bullets" },
+          { "zh": "加特林机枪", "en": "gatling gun" },
+          { "zh": "火焰喷射器", "en": "flamethrower" }
+        ]
+      },
+      {
+        "id": "object.magic",
+        "name": "魔法道具",
+        "nameEn": "Magic Item",
+        "tags": [
+          { "zh": "法杖", "en": "magic staff" },
+          { "zh": "魔杖", "en": "magic wand" },
+          { "zh": "魔法书", "en": "grimoire" },
+          { "zh": "水晶球", "en": "crystal ball" },
+          { "zh": "药水瓶", "en": "potion bottle" },
+          { "zh": "卷轴", "en": "scroll" },
+          { "zh": "护身符", "en": "amulet" },
+          { "zh": "魔法戒指", "en": "magic ring" },
+          { "zh": "符文石", "en": "runestone" },
+          { "zh": "塔罗牌", "en": "tarot cards" },
+          { "zh": "发光宝珠", "en": "glowing orb" },
+          { "zh": "炼金烧瓶", "en": "alchemy flask" },
+          { "zh": "女巫帽", "en": "witch hat" },
+          { "zh": "灵魂灯笼", "en": "soul lantern" },
+          { "zh": "飞天扫帚", "en": "broomstick" },
+          { "zh": "水晶碎片", "en": "crystal shard" }
+        ]
+      },
+      {
+        "id": "object.daily",
+        "name": "日常物品",
+        "nameEn": "Everyday Item",
+        "tags": [
+          { "zh": "书", "en": "book" },
+          { "zh": "雨伞", "en": "umbrella" },
+          { "zh": "怀表", "en": "pocket watch" },
+          { "zh": "提灯", "en": "lantern" },
+          { "zh": "相机", "en": "camera" },
+          { "zh": "耳机", "en": "headphones" },
+          { "zh": "手机", "en": "smartphone" },
+          { "zh": "茶具", "en": "tea set" },
+          { "zh": "酒瓶", "en": "wine bottle" },
+          { "zh": "烟斗", "en": "smoking pipe" },
+          { "zh": "手写信笺", "en": "handwritten letter" },
+          { "zh": "羽毛笔", "en": "quill pen" },
+          { "zh": "钢笔", "en": "fountain pen" },
+          { "zh": "蜡烛", "en": "candle" },
+          { "zh": "古董钥匙", "en": "antique key" },
+          { "zh": "眼镜", "en": "glasses" },
+          { "zh": "围巾", "en": "scarf" },
+          { "zh": "香水瓶", "en": "perfume bottle" },
+          { "zh": "音乐盒", "en": "music box" },
+          { "zh": "泰迪熊", "en": "teddy bear" },
+          { "zh": "沙漏", "en": "hourglass" },
+          { "zh": "望远镜", "en": "telescope" }
+        ]
+      },
+      {
+        "id": "object.vehicle",
+        "name": "载具",
+        "nameEn": "Vehicle",
+        "tags": [
+          { "zh": "跑车", "en": "sports car" },
+          { "zh": "摩托车", "en": "motorcycle" },
+          { "zh": "飞船", "en": "spaceship" },
+          { "zh": "飞艇", "en": "airship" },
+          { "zh": "热气球", "en": "hot air balloon" },
+          { "zh": "蒸汽火车", "en": "steam train" },
+          { "zh": "帆船", "en": "sailboat" },
+          { "zh": "潜艇", "en": "submarine" },
+          { "zh": "直升机", "en": "helicopter" },
+          { "zh": "喷气战机", "en": "fighter jet" },
+          { "zh": "马车", "en": "horse carriage" },
+          { "zh": "自行车", "en": "bicycle" },
+          { "zh": "坦克", "en": "tank" },
+          { "zh": "悬浮摩托", "en": "hover bike" }
+        ]
+      },
+      {
+        "id": "object.furniture",
+        "name": "家具与陈设",
+        "nameEn": "Furniture & Decor",
+        "tags": [
+          { "zh": "沙发", "en": "sofa" },
+          { "zh": "书架", "en": "bookshelf" },
+          { "zh": "壁炉", "en": "fireplace" },
+          { "zh": "吊灯", "en": "chandelier" },
+          { "zh": "地毯", "en": "carpet" },
+          { "zh": "梳妆台", "en": "vanity table" },
+          { "zh": "摇椅", "en": "rocking chair" },
+          { "zh": "实木桌", "en": "wooden table" },
+          { "zh": "扶手椅", "en": "armchair" },
+          { "zh": "屏风", "en": "folding screen" },
+          { "zh": "衣柜", "en": "wardrobe" },
+          { "zh": "落地镜", "en": "floor mirror" },
+          { "zh": "四柱床", "en": "four-poster bed" },
+          { "zh": "烛台", "en": "candlestick" },
+          { "zh": "挂钟", "en": "wall clock" },
+          { "zh": "三角钢琴", "en": "grand piano" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "effect",
+    "name": "特效",
+    "nameEn": "Effect",
+    "icon": "✨",
+    "groups": [
+      {
+        "id": "effect.light",
+        "name": "光效",
+        "nameEn": "Light",
+        "tags": [
+          { "zh": "星芒", "en": "starburst" },
+          { "zh": "泛光辉光", "en": "bloom" },
+          { "zh": "光束", "en": "light beam" },
+          { "zh": "彩虹光晕", "en": "rainbow glow" },
+          { "zh": "神明光", "en": "god rays" },
+          { "zh": "霓虹边缘光", "en": "neon rim light" },
+          { "zh": "光环辉光", "en": "halo glow" },
+          { "zh": "光斑", "en": "light spots" },
+          { "zh": "逆光剪影", "en": "backlit silhouette" },
+          { "zh": "阳光洒落", "en": "sunbeams" },
+          { "zh": "聚光灯", "en": "spotlight" },
+          { "zh": "光环", "en": "light ring" },
+          { "zh": "激光网格", "en": "laser grid" },
+          { "zh": "舞台灯光", "en": "stage lights" },
+          { "zh": "棱镜反光", "en": "prismatic reflections" },
+          { "zh": "微光闪烁", "en": "shimmering light" }
+        ]
+      },
+      {
+        "id": "effect.particle",
+        "name": "粒子",
+        "nameEn": "Particle",
+        "tags": [
+          { "zh": "火花", "en": "sparks" },
+          { "zh": "烟雾", "en": "smoke" },
+          { "zh": "漂浮花瓣", "en": "floating petals" },
+          { "zh": "雪花", "en": "snowflakes" },
+          { "zh": "尘埃微粒", "en": "dust motes" },
+          { "zh": "余烬", "en": "embers" },
+          { "zh": "火花四溅", "en": "spark shower" },
+          { "zh": "气泡", "en": "bubbles" },
+          { "zh": "飘落羽毛", "en": "drifting feathers" },
+          { "zh": "蒲公英种子", "en": "dandelion seeds" },
+          { "zh": "发光粒子", "en": "glowing particles" },
+          { "zh": "旋转落叶", "en": "swirling leaves" },
+          { "zh": "烟雾缭绕", "en": "smoke wisps" },
+          { "zh": "雨滴", "en": "raindrops" },
+          { "zh": "星尘", "en": "stardust" },
+          { "zh": "彩色纸屑", "en": "confetti" }
+        ]
+      },
+      {
+        "id": "effect.magic",
+        "name": "魔法与元素",
+        "nameEn": "Magic & Element",
+        "tags": [
+          { "zh": "魔法阵", "en": "magic circle" },
+          { "zh": "发光符文", "en": "glowing runes" },
+          { "zh": "闪电", "en": "lightning bolt" },
+          { "zh": "火焰", "en": "flames" },
+          { "zh": "冰霜", "en": "frost" },
+          { "zh": "流水", "en": "flowing water" },
+          { "zh": "藤蔓生长", "en": "growing vines" },
+          { "zh": "奥术能量", "en": "arcane energy" },
+          { "zh": "传送门", "en": "portal" },
+          { "zh": "能量护盾", "en": "energy shield" },
+          { "zh": "水晶魔法", "en": "crystal magic" },
+          { "zh": "暗影触须", "en": "shadow tendrils" },
+          { "zh": "神圣光环", "en": "holy aura" },
+          { "zh": "龙卷风", "en": "tornado" },
+          { "zh": "熔岩", "en": "molten lava" },
+          { "zh": "电弧", "en": "electric arc" },
+          { "zh": "灵魂火焰", "en": "soul flames" }
+        ]
+      },
+      {
+        "id": "effect.render",
+        "name": "画面效果",
+        "nameEn": "Render Effect",
+        "tags": [
+          { "zh": "故障艺术", "en": "glitch art" },
+          { "zh": "色散", "en": "color dispersion" },
+          { "zh": "半调网点", "en": "halftone dots" },
+          { "zh": "漫画分格", "en": "comic panels" },
+          { "zh": "速度线", "en": "speed lines" },
+          { "zh": "残影拖尾", "en": "afterimage trail" },
+          { "zh": "水墨晕染", "en": "ink splash" },
+          { "zh": "扫描线", "en": "scanlines" },
+          { "zh": "网点阴影", "en": "screentone" },
+          { "zh": "颗粒质感", "en": "grainy texture" },
+          { "zh": "老照片褪色", "en": "faded film" },
+          { "zh": "暗角", "en": "vignette" },
+          { "zh": "边缘模糊", "en": "blurred edges" },
+          { "zh": "镜头畸变", "en": "lens distortion" },
+          { "zh": "波纹扭曲", "en": "ripple distortion" },
+          { "zh": "复古显像管效果", "en": "crt effect" },
+          { "zh": "颜料喷溅", "en": "paint splatter" },
+          { "zh": "素描排线", "en": "cross hatching" }
+        ]
+      }
+    ]
+  }
+]

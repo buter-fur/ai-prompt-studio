@@ -1,0 +1,322 @@
+[
+  {
+    "id": "scene",
+    "name": "场景",
+    "nameEn": "Scene",
+    "icon": "🏞",
+    "groups": [
+      {
+        "id": "scene.nature",
+        "name": "自然风光",
+        "nameEn": "Nature",
+        "tags": [
+          { "zh": "丛林", "en": "jungle" },
+          { "zh": "沼泽", "en": "swamp" },
+          { "zh": "竹林", "en": "bamboo forest" },
+          { "zh": "枫树林", "en": "maple forest" },
+          { "zh": "悬崖", "en": "cliff" },
+          { "zh": "山谷", "en": "valley" },
+          { "zh": "火山", "en": "volcano" },
+          { "zh": "温泉", "en": "hot spring" },
+          { "zh": "洞穴", "en": "cave" },
+          { "zh": "沙丘", "en": "sand dune" },
+          { "zh": "沙漠绿洲", "en": "oasis" },
+          { "zh": "冰山", "en": "iceberg" },
+          { "zh": "峡湾", "en": "fjord" },
+          { "zh": "梯田", "en": "rice terrace" },
+          { "zh": "葡萄园", "en": "vineyard" },
+          { "zh": "沙滩", "en": "sandy beach" }
+        ]
+      },
+      {
+        "id": "scene.city",
+        "name": "城市建筑",
+        "nameEn": "City & Architecture",
+        "tags": [
+          { "zh": "市中心", "en": "downtown" },
+          { "zh": "广场", "en": "plaza" },
+          { "zh": "人行横道", "en": "crosswalk" },
+          { "zh": "十字路口", "en": "intersection" },
+          { "zh": "高架桥", "en": "overpass" },
+          { "zh": "桥梁", "en": "bridge" },
+          { "zh": "隧道", "en": "tunnel" },
+          { "zh": "摩天轮", "en": "ferris wheel" },
+          { "zh": "观景台", "en": "observation deck" },
+          { "zh": "庭院", "en": "courtyard" },
+          { "zh": "喷泉", "en": "fountain" },
+          { "zh": "钟楼", "en": "clock tower" },
+          { "zh": "灯塔", "en": "lighthouse" },
+          { "zh": "店铺门面", "en": "storefront" }
+        ]
+      },
+      {
+        "id": "scene.interior",
+        "name": "室内空间",
+        "nameEn": "Interior",
+        "tags": [
+          { "zh": "客厅", "en": "living room" },
+          { "zh": "饭厅", "en": "dining room" },
+          { "zh": "书房", "en": "study room" },
+          { "zh": "车库", "en": "garage" },
+          { "zh": "酒窖", "en": "wine cellar" },
+          { "zh": "楼梯间", "en": "stairwell" },
+          { "zh": "阳光房", "en": "sunroom" },
+          { "zh": "博物馆", "en": "museum" },
+          { "zh": "美术馆", "en": "art gallery" },
+          { "zh": "工坊", "en": "workshop" },
+          { "zh": "暗房", "en": "darkroom" },
+          { "zh": "树屋", "en": "treehouse" }
+        ]
+      },
+      {
+        "id": "scene.fantasy",
+        "name": "奇幻场景",
+        "nameEn": "Fantasy",
+        "tags": [
+          { "zh": "巫师塔", "en": "wizard tower" },
+          { "zh": "精灵之城", "en": "elven city" },
+          { "zh": "水晶洞窟", "en": "crystal cave" },
+          { "zh": "浮空岛", "en": "floating islands" },
+          { "zh": "蘑菇森林", "en": "mushroom forest" },
+          { "zh": "地牢", "en": "dungeon" },
+          { "zh": "地下墓穴", "en": "catacombs" },
+          { "zh": "鬼屋", "en": "haunted mansion" },
+          { "zh": "传送门", "en": "portal" },
+          { "zh": "冥界", "en": "underworld" },
+          { "zh": "世界树", "en": "world tree" },
+          { "zh": "迷宫", "en": "labyrinth" },
+          { "zh": "冰宫", "en": "ice palace" }
+        ]
+      },
+      {
+        "id": "scene.transport",
+        "name": "交通工具相关场景",
+        "nameEn": "Transport",
+        "tags": [
+          { "zh": "港口", "en": "harbor" },
+          { "zh": "码头", "en": "pier" },
+          { "zh": "客机机舱", "en": "airplane cabin" },
+          { "zh": "驾驶舱", "en": "cockpit" },
+          { "zh": "热气球", "en": "hot air balloon" },
+          { "zh": "缆车", "en": "cable car" },
+          { "zh": "加油站", "en": "gas station" },
+          { "zh": "高速公路", "en": "highway" }
+        ]
+      },
+      {
+        "id": "scene.industrial",
+        "name": "工业与废墟",
+        "nameEn": "Industrial & Ruins",
+        "tags": [
+          { "zh": "废弃工厂", "en": "abandoned factory" },
+          { "zh": "仓库", "en": "warehouse" },
+          { "zh": "发电厂", "en": "power plant" },
+          { "zh": "矿井", "en": "mine shaft" },
+          { "zh": "采石场", "en": "quarry" },
+          { "zh": "建筑工地", "en": "construction site" },
+          { "zh": "废车场", "en": "junkyard" },
+          { "zh": "鬼城", "en": "ghost town" }
+        ]
+      },
+      {
+        "id": "scene.underwater",
+        "name": "水下与深海",
+        "nameEn": "Underwater & Deep Sea",
+        "tags": [
+          { "zh": "珊瑚礁", "en": "coral reef" },
+          { "zh": "海带森林", "en": "kelp forest" },
+          { "zh": "深海海沟", "en": "deep sea trench" },
+          { "zh": "沉船", "en": "shipwreck" },
+          { "zh": "沉没神庙", "en": "sunken temple" },
+          { "zh": "海底洞穴", "en": "underwater cave" },
+          { "zh": "生物发光深海", "en": "bioluminescent depths" }
+        ]
+      },
+      {
+        "id": "scene.space",
+        "name": "太空与星际",
+        "nameEn": "Space & Interstellar",
+        "tags": [
+          { "zh": "星云", "en": "nebula" },
+          { "zh": "星系", "en": "galaxy" },
+          { "zh": "空间站", "en": "space station" },
+          { "zh": "火箭发射", "en": "rocket launch" },
+          { "zh": "小行星带", "en": "asteroid field" },
+          { "zh": "银河", "en": "milky way" },
+          { "zh": "黑洞", "en": "black hole" },
+          { "zh": "月球表面", "en": "lunar surface" }
+        ]
+      },
+      {
+        "id": "scene.festival",
+        "name": "节庆与集市",
+        "nameEn": "Festival & Market",
+        "tags": [
+          { "zh": "夜市", "en": "night market" },
+          { "zh": "跳蚤市场", "en": "flea market" },
+          { "zh": "灯会", "en": "lantern festival" },
+          { "zh": "烟花表演", "en": "firework show" },
+          { "zh": "狂欢节", "en": "carnival" },
+          { "zh": "游行", "en": "parade" },
+          { "zh": "马戏团", "en": "circus" }
+        ]
+      },
+      {
+        "id": "scene.military",
+        "name": "军事与战场",
+        "nameEn": "Military & Battlefield",
+        "tags": [
+          { "zh": "战场", "en": "battlefield" },
+          { "zh": "堑壕战", "en": "trench warfare" },
+          { "zh": "地堡", "en": "bunker" },
+          { "zh": "指挥中心", "en": "command center" },
+          { "zh": "军事基地", "en": "military base" },
+          { "zh": "兵营", "en": "barracks" },
+          { "zh": "铁丝网", "en": "barbed wire" }
+        ]
+      },
+      {
+        "id": "scene.campus",
+        "name": "校园",
+        "nameEn": "Campus",
+        "tags": [
+          { "zh": "校园操场", "en": "schoolyard" },
+          { "zh": "阶梯教室", "en": "lecture hall" },
+          { "zh": "学生宿舍", "en": "dormitory" },
+          { "zh": "食堂", "en": "cafeteria" },
+          { "zh": "科学实验室", "en": "science lab" },
+          { "zh": "黑板", "en": "blackboard" },
+          { "zh": "毕业典礼", "en": "graduation ceremony" }
+        ]
+      },
+      {
+        "id": "scene.commercial",
+        "name": "商业空间",
+        "nameEn": "Commercial Space",
+        "tags": [
+          { "zh": "购物中心", "en": "shopping mall" },
+          { "zh": "超市", "en": "supermarket" },
+          { "zh": "便利店", "en": "convenience store" },
+          { "zh": "面包店", "en": "bakery" },
+          { "zh": "餐厅", "en": "restaurant" },
+          { "zh": "酒店大堂", "en": "hotel lobby" },
+          { "zh": "夜店", "en": "nightclub" },
+          { "zh": "书店", "en": "bookstore" }
+        ]
+      },
+      {
+        "id": "scene.medical",
+        "name": "医疗与科研",
+        "nameEn": "Medical & Research",
+        "tags": [
+          { "zh": "医院病房", "en": "hospital ward" },
+          { "zh": "手术室", "en": "operating room" },
+          { "zh": "急诊室", "en": "emergency room" },
+          { "zh": "太平间", "en": "morgue" },
+          { "zh": "洁净室", "en": "clean room" },
+          { "zh": "研究设施", "en": "research facility" },
+          { "zh": "机房", "en": "server room" }
+        ]
+      },
+      {
+        "id": "scene.religious",
+        "name": "宗教与祭祀",
+        "nameEn": "Religious & Ritual",
+        "tags": [
+          { "zh": "教堂内部", "en": "church interior" },
+          { "zh": "清真寺", "en": "mosque" },
+          { "zh": "修道院", "en": "monastery" },
+          { "zh": "祭坛", "en": "altar" },
+          { "zh": "鸟居", "en": "torii gate" },
+          { "zh": "香炉", "en": "incense burner" },
+          { "zh": "墓园", "en": "cemetery" }
+        ]
+      },
+      {
+        "id": "scene.sports",
+        "name": "体育与竞技",
+        "nameEn": "Sports & Arena",
+        "tags": [
+          { "zh": "体育场", "en": "stadium" },
+          { "zh": "篮球场", "en": "basketball court" },
+          { "zh": "网球场", "en": "tennis court" },
+          { "zh": "游泳池", "en": "swimming pool" },
+          { "zh": "赛道", "en": "race track" },
+          { "zh": "滑冰场", "en": "ice rink" },
+          { "zh": "竞技场", "en": "arena" }
+        ]
+      },
+      {
+        "id": "scene.theater",
+        "name": "舞台与剧场",
+        "nameEn": "Stage & Theater",
+        "tags": [
+          { "zh": "剧场舞台", "en": "theater stage" },
+          { "zh": "歌剧院", "en": "opera house" },
+          { "zh": "音乐厅", "en": "concert hall" },
+          { "zh": "后台", "en": "backstage" },
+          { "zh": "聚光灯", "en": "spotlight" },
+          { "zh": "礼堂", "en": "auditorium" },
+          { "zh": "电影片场", "en": "film set" }
+        ]
+      },
+      {
+        "id": "scene.climate",
+        "name": "气候与灾害现场",
+        "nameEn": "Climate & Disaster",
+        "tags": [
+          { "zh": "暴风雪", "en": "blizzard" },
+          { "zh": "龙卷风", "en": "tornado" },
+          { "zh": "飓风", "en": "hurricane" },
+          { "zh": "干旱", "en": "drought" },
+          { "zh": "野火", "en": "wildfire" },
+          { "zh": "洪水", "en": "flood" },
+          { "zh": "海啸", "en": "tsunami" }
+        ]
+      },
+      {
+        "id": "scene.abstract",
+        "name": "抽象与超现实空间",
+        "nameEn": "Abstract & Surreal Space",
+        "tags": [
+          { "zh": "无尽回廊", "en": "endless corridor" },
+          { "zh": "无限镜屋", "en": "infinity room" },
+          { "zh": "镜面房间", "en": "mirrored room" },
+          { "zh": "悬浮阶梯", "en": "floating stairs" },
+          { "zh": "不可能几何", "en": "impossible geometry" },
+          { "zh": "万花筒", "en": "kaleidoscope" },
+          { "zh": "阈限空间", "en": "liminal space" }
+        ]
+      },
+      {
+        "id": "scene.wasteland",
+        "name": "废土与末世",
+        "nameEn": "Wasteland & Apocalypse",
+        "tags": [
+          { "zh": "末世城市", "en": "post-apocalyptic city" },
+          { "zh": "废弃城市", "en": "abandoned city" },
+          { "zh": "核冬天", "en": "nuclear winter" },
+          { "zh": "丧尸末世", "en": "zombie apocalypse" },
+          { "zh": "防空洞", "en": "bomb shelter" },
+          { "zh": "辐射区", "en": "radioactive zone" },
+          { "zh": "坠毁飞船", "en": "crashed spaceship" }
+        ]
+      },
+      {
+        "id": "scene.home",
+        "name": "日常家居细节",
+        "nameEn": "Home Details",
+        "tags": [
+          { "zh": "凌乱房间", "en": "messy room" },
+          { "zh": "未整理的床", "en": "unmade bed" },
+          { "zh": "台灯", "en": "desk lamp" },
+          { "zh": "书架", "en": "bookshelf" },
+          { "zh": "盆栽", "en": "potted plant" },
+          { "zh": "相框", "en": "photo frame" },
+          { "zh": "窗帘", "en": "curtains" },
+          { "zh": "壁炉", "en": "fireplace" }
+        ]
+      }
+    ]
+  }
+]

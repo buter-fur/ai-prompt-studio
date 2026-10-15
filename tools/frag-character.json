@@ -1,0 +1,416 @@
+[
+  {
+    "id": "character",
+    "name": "人物",
+    "nameEn": "Character",
+    "icon": "👤",
+    "groups": [
+      {
+        "id": "character.basic",
+        "name": "基础属性",
+        "nameEn": "Basic",
+        "tags": [
+          { "zh": "两个女孩", "en": "2girls" },
+          { "zh": "两个男孩", "en": "2boys" },
+          { "zh": "男性主体", "en": "male focus" },
+          { "zh": "女性主体", "en": "female focus" },
+          { "zh": "中性气质", "en": "androgynous" },
+          { "zh": "单人焦点", "en": "solo focus" },
+          { "zh": "群像合影", "en": "group portrait" },
+          { "zh": "人群", "en": "crowd" },
+          { "zh": "双胞胎", "en": "twins" },
+          { "zh": "原创角色", "en": "original character" },
+          { "zh": "全身肖像", "en": "full body portrait" },
+          { "zh": "无面人物", "en": "faceless" }
+        ]
+      },
+      {
+        "id": "character.age",
+        "name": "年龄段",
+        "nameEn": "Age",
+        "tags": [
+          { "zh": "新生儿", "en": "newborn" },
+          { "zh": "幼儿", "en": "toddler" },
+          { "zh": "少女", "en": "young girl" },
+          { "zh": "少年", "en": "young boy" },
+          { "zh": "青少年", "en": "teenager" },
+          { "zh": "青春期少年", "en": "adolescent" },
+          { "zh": "青年", "en": "young adult" },
+          { "zh": "中年男性", "en": "middle aged man" },
+          { "zh": "中年女性", "en": "middle aged woman" },
+          { "zh": "老年男性", "en": "old man" },
+          { "zh": "老年女性", "en": "old woman" }
+        ]
+      },
+      {
+        "id": "character.appearance",
+        "name": "外貌特征",
+        "nameEn": "Appearance",
+        "tags": [
+          { "zh": "波浪卷发", "en": "wavy hair" },
+          { "zh": "顺直长发", "en": "straight hair" },
+          { "zh": "凌乱头发", "en": "messy hair" },
+          { "zh": "波波头", "en": "bob cut" },
+          { "zh": "粉色头发", "en": "pink hair" },
+          { "zh": "紫色头发", "en": "purple hair" },
+          { "zh": "银白头发", "en": "white hair" },
+          { "zh": "白皙肌肤", "en": "pale skin" },
+          { "zh": "深色肌肤", "en": "dark skin" },
+          { "zh": "小麦色肌肤", "en": "tan skin" },
+          { "zh": "美人痣", "en": "beauty mark" },
+          { "zh": "疤痕", "en": "scar" },
+          { "zh": "纹身", "en": "tattoo" }
+        ]
+      },
+      {
+        "id": "character.hair",
+        "name": "发型细节",
+        "nameEn": "Hair Details",
+        "tags": [
+          { "zh": "渐变发色", "en": "gradient hair" },
+          { "zh": "侧马尾", "en": "side ponytail" },
+          { "zh": "高马尾", "en": "high ponytail" },
+          { "zh": "双丸子头", "en": "double bun" },
+          { "zh": "法式编发", "en": "french braid" },
+          { "zh": "侧边编发", "en": "side braid" },
+          { "zh": "公主切", "en": "hime cut" },
+          { "zh": "凌乱刘海", "en": "messy bangs" },
+          { "zh": "侧分刘海", "en": "side bangs" },
+          { "zh": "遮眼长发", "en": "hair over one eye" },
+          { "zh": "呆毛", "en": "ahoge" },
+          { "zh": "发带", "en": "hair ribbon" },
+          { "zh": "发夹", "en": "hair clip" },
+          { "zh": "花冠", "en": "flower crown" }
+        ]
+      },
+      {
+        "id": "character.face",
+        "name": "面部细节",
+        "nameEn": "Facial Details",
+        "tags": [
+          { "zh": "长睫毛", "en": "long eyelashes" },
+          { "zh": "浓密眉毛", "en": "thick eyebrows" },
+          { "zh": "紧蹙眉头", "en": "furrowed brow" },
+          { "zh": "红润双颊", "en": "rosy cheeks" },
+          { "zh": "水润双唇", "en": "glossy lips" },
+          { "zh": "口红", "en": "lipstick" },
+          { "zh": "妆容", "en": "makeup" },
+          { "zh": "眼影", "en": "eyeshadow" },
+          { "zh": "眼下泪痣", "en": "mole under eye" },
+          { "zh": "眼罩", "en": "eyepatch" },
+          { "zh": "胡茬", "en": "stubble" },
+          { "zh": "胡须", "en": "beard" }
+        ]
+      },
+      {
+        "id": "character.body",
+        "name": "体型身材",
+        "nameEn": "Body Type",
+        "tags": [
+          { "zh": "纤细身材", "en": "slender" },
+          { "zh": "娇小身材", "en": "petite" },
+          { "zh": "运动体型", "en": "athletic build" },
+          { "zh": "肌肉发达", "en": "muscular" },
+          { "zh": "微胖身材", "en": "chubby" },
+          { "zh": "曲线身材", "en": "curvy figure" },
+          { "zh": "沙漏身材", "en": "hourglass figure" },
+          { "zh": "宽厚肩背", "en": "broad shoulders" },
+          { "zh": "修长双腿", "en": "long legs" },
+          { "zh": "紧实腹肌", "en": "toned abs" },
+          { "zh": "高挑纤细", "en": "tall and slim" },
+          { "zh": "大码身材", "en": "plus size" }
+        ]
+      },
+      {
+        "id": "character.expression",
+        "name": "表情",
+        "nameEn": "Expression",
+        "tags": [
+          { "zh": "咧嘴大笑", "en": "grinning" },
+          { "zh": "得意坏笑", "en": "smirk" },
+          { "zh": "皱眉不悦", "en": "frowning" },
+          { "zh": "烦躁", "en": "annoyed" },
+          { "zh": "尴尬", "en": "embarrassed" },
+          { "zh": "害羞", "en": "shy" },
+          { "zh": "慌张", "en": "flustered" },
+          { "zh": "惊恐", "en": "scared" },
+          { "zh": "眨眼", "en": "winking" },
+          { "zh": "温柔微笑", "en": "gentle smile" },
+          { "zh": "苦笑", "en": "sad smile" },
+          { "zh": "邪恶笑容", "en": "evil grin" },
+          { "zh": "吐舌头", "en": "tongue out" }
+        ]
+      },
+      {
+        "id": "character.gaze",
+        "name": "神态与视线",
+        "nameEn": "Gaze & Demeanor",
+        "tags": [
+          { "zh": "直视镜头", "en": "looking at viewer" },
+          { "zh": "移开视线", "en": "looking away" },
+          { "zh": "向上仰望", "en": "looking up" },
+          { "zh": "低头俯视", "en": "looking down" },
+          { "zh": "目光交汇", "en": "eye contact" },
+          { "zh": "侧目而视", "en": "side glance" },
+          { "zh": "闭眼", "en": "closed eyes" },
+          { "zh": "半眯双眼", "en": "half-lidded eyes" },
+          { "zh": "锐利目光", "en": "piercing gaze" },
+          { "zh": "发光双眸", "en": "glowing eyes" },
+          { "zh": "微微歪头", "en": "head tilted" }
+        ]
+      },
+      {
+        "id": "character.action",
+        "name": "动作姿态",
+        "nameEn": "Pose & Action",
+        "tags": [
+          { "zh": "行走", "en": "walking" },
+          { "zh": "单膝跪地", "en": "kneeling" },
+          { "zh": "蹲伏", "en": "crouching" },
+          { "zh": "靠墙而立", "en": "leaning against wall" },
+          { "zh": "双臂交叉", "en": "arms crossed" },
+          { "zh": "双手叉腰", "en": "hands on hips" },
+          { "zh": "双手插兜", "en": "hands in pockets" },
+          { "zh": "伸展身体", "en": "stretching" },
+          { "zh": "熟睡", "en": "sleeping" },
+          { "zh": "打坐冥想", "en": "meditating" },
+          { "zh": "敬礼", "en": "salute" },
+          { "zh": "手指镜头", "en": "pointing at viewer" },
+          { "zh": "比剪刀手", "en": "peace sign" },
+          { "zh": "手持长剑", "en": "holding sword" },
+          { "zh": "撑伞", "en": "holding umbrella" },
+          { "zh": "施展法术", "en": "casting spell" }
+        ]
+      },
+      {
+        "id": "character.closeup",
+        "name": "局部特写",
+        "nameEn": "Close-up",
+        "tags": [
+          { "zh": "手部特写", "en": "hand close-up" },
+          { "zh": "足部特写", "en": "feet close-up" },
+          { "zh": "赤裸双足", "en": "bare feet" },
+          { "zh": "侧脸轮廓", "en": "side profile" },
+          { "zh": "背影", "en": "back view" },
+          { "zh": "眼部特写", "en": "eye close-up" },
+          { "zh": "唇部特写", "en": "lips close-up" },
+          { "zh": "精致锁骨", "en": "collarbone" },
+          { "zh": "裸露香肩", "en": "bare shoulders" },
+          { "zh": "指甲油", "en": "nail polish" },
+          { "zh": "剪影", "en": "silhouette" }
+        ]
+      },
+      {
+        "id": "character.clothing",
+        "name": "服装",
+        "nameEn": "Clothing",
+        "tags": [
+          { "zh": "T恤", "en": "t-shirt" },
+          { "zh": "牛仔外套", "en": "denim jacket" },
+          { "zh": "皮夹克", "en": "leather jacket" },
+          { "zh": "针织开衫", "en": "cardigan" },
+          { "zh": "毛衣", "en": "sweater" },
+          { "zh": "高领毛衣", "en": "turtleneck" },
+          { "zh": "短裙", "en": "skirt" },
+          { "zh": "百褶裙", "en": "pleated skirt" },
+          { "zh": "牛仔裤", "en": "jeans" },
+          { "zh": "旗袍", "en": "qipao" },
+          { "zh": "浴衣", "en": "yukata" },
+          { "zh": "哥特裙", "en": "gothic dress" },
+          { "zh": "露脐上衣", "en": "crop top" },
+          { "zh": "水手服", "en": "sailor uniform" },
+          { "zh": "束腰胸衣", "en": "corset" },
+          { "zh": "长筒袜", "en": "stockings" }
+        ]
+      },
+      {
+        "id": "character.accessory",
+        "name": "配饰",
+        "nameEn": "Accessories",
+        "tags": [
+          { "zh": "耳环", "en": "earrings" },
+          { "zh": "项链", "en": "necklace" },
+          { "zh": "颈圈", "en": "choker" },
+          { "zh": "手链", "en": "bracelet" },
+          { "zh": "戒指", "en": "ring" },
+          { "zh": "贝雷帽", "en": "beret" },
+          { "zh": "软呢礼帽", "en": "fedora" },
+          { "zh": "草帽", "en": "straw hat" },
+          { "zh": "女巫帽", "en": "witch hat" },
+          { "zh": "王冠", "en": "crown" },
+          { "zh": "眼镜", "en": "glasses" },
+          { "zh": "墨镜", "en": "sunglasses" },
+          { "zh": "围巾", "en": "scarf" },
+          { "zh": "手套", "en": "gloves" },
+          { "zh": "口罩", "en": "face mask" },
+          { "zh": "手表", "en": "watch" }
+        ]
+      },
+      {
+        "id": "character.footwear",
+        "name": "鞋履",
+        "nameEn": "Footwear",
+        "tags": [
+          { "zh": "靴子", "en": "boots" },
+          { "zh": "皮靴", "en": "leather boots" },
+          { "zh": "及膝长靴", "en": "knee-high boots" },
+          { "zh": "军靴", "en": "combat boots" },
+          { "zh": "高跟鞋", "en": "high heels" },
+          { "zh": "细高跟鞋", "en": "stiletto heels" },
+          { "zh": "厚底鞋", "en": "platform shoes" },
+          { "zh": "运动鞋", "en": "sneakers" },
+          { "zh": "凉鞋", "en": "sandals" },
+          { "zh": "玛丽珍鞋", "en": "mary janes" },
+          { "zh": "过膝长靴", "en": "thigh high boots" },
+          { "zh": "袜子", "en": "socks" }
+        ]
+      },
+      {
+        "id": "character.ethnic",
+        "name": "民族与传统服饰",
+        "nameEn": "Ethnic & Traditional",
+        "tags": [
+          { "zh": "韩服", "en": "hanbok" },
+          { "zh": "纱丽", "en": "sari" },
+          { "zh": "越南奥黛", "en": "ao dai" },
+          { "zh": "苏格兰短裙", "en": "kilt" },
+          { "zh": "弗拉门戈长裙", "en": "flamenco dress" },
+          { "zh": "部落服饰", "en": "tribal costume" },
+          { "zh": "羽毛头饰", "en": "feather headdress" },
+          { "zh": "蒙古袍", "en": "mongolian robe" },
+          { "zh": "藏袍", "en": "tibetan robe" },
+          { "zh": "希腊托加袍", "en": "greek toga" },
+          { "zh": "罗马盔甲", "en": "roman armor" },
+          { "zh": "维京服饰", "en": "viking outfit" }
+        ]
+      },
+      {
+        "id": "character.scifi",
+        "name": "科幻装备与义体",
+        "nameEn": "Sci-fi & Cybernetics",
+        "tags": [
+          { "zh": "机械义肢", "en": "cybernetic arm" },
+          { "zh": "机械义眼", "en": "cybernetic eye" },
+          { "zh": "机械手臂", "en": "robotic arm" },
+          { "zh": "机械羽翼", "en": "mecha wings" },
+          { "zh": "外骨骼装甲", "en": "exoskeleton" },
+          { "zh": "动力装甲", "en": "power armor" },
+          { "zh": "能量护盾", "en": "energy shield" },
+          { "zh": "全息护目镜", "en": "holographic visor" },
+          { "zh": "防毒面具", "en": "gas mask" },
+          { "zh": "太空服", "en": "space suit" },
+          { "zh": "等离子剑", "en": "plasma sword" },
+          { "zh": "激光枪", "en": "laser gun" }
+        ]
+      },
+      {
+        "id": "character.fantasy",
+        "name": "奇幻种族",
+        "nameEn": "Fantasy Race",
+        "tags": [
+          { "zh": "兽人", "en": "orc" },
+          { "zh": "矮人", "en": "dwarf" },
+          { "zh": "小仙子", "en": "fairy" },
+          { "zh": "美人鱼", "en": "mermaid" },
+          { "zh": "半人马", "en": "centaur" },
+          { "zh": "狼人", "en": "werewolf" },
+          { "zh": "吸血鬼", "en": "vampire" },
+          { "zh": "丧尸", "en": "zombie" },
+          { "zh": "骷髅", "en": "skeleton" },
+          { "zh": "幽灵", "en": "ghost" },
+          { "zh": "魅魔", "en": "succubus" },
+          { "zh": "猫娘", "en": "catgirl" },
+          { "zh": "九尾狐", "en": "kitsune" },
+          { "zh": "犄角", "en": "horns" },
+          { "zh": "翅膀", "en": "wings" },
+          { "zh": "光环", "en": "halo" }
+        ]
+      },
+      {
+        "id": "character.occupation",
+        "name": "职业身份",
+        "nameEn": "Occupation",
+        "tags": [
+          { "zh": "战士", "en": "warrior" },
+          { "zh": "弓箭手", "en": "archer" },
+          { "zh": "法师", "en": "mage" },
+          { "zh": "女祭司", "en": "priestess" },
+          { "zh": "武僧", "en": "monk" },
+          { "zh": "圣骑士", "en": "paladin" },
+          { "zh": "刺客", "en": "assassin" },
+          { "zh": "海盗", "en": "pirate" },
+          { "zh": "维京战士", "en": "viking" },
+          { "zh": "铁匠", "en": "blacksmith" },
+          { "zh": "炼金术士", "en": "alchemist" },
+          { "zh": "死灵法师", "en": "necromancer" },
+          { "zh": "女巫", "en": "witch" },
+          { "zh": "游侠", "en": "ranger" },
+          { "zh": "枪手", "en": "gunslinger" },
+          { "zh": "猎人", "en": "hunter" }
+        ]
+      },
+      {
+        "id": "character.identity",
+        "name": "身份标签",
+        "nameEn": "Identity",
+        "tags": [
+          { "zh": "学生", "en": "student" },
+          { "zh": "上班族", "en": "office worker" },
+          { "zh": "偶像", "en": "idol" },
+          { "zh": "运动员", "en": "athlete" },
+          { "zh": "网络主播", "en": "streamer" },
+          { "zh": "警察", "en": "police officer" },
+          { "zh": "消防员", "en": "firefighter" },
+          { "zh": "士兵", "en": "soldier" },
+          { "zh": "飞行员", "en": "pilot" },
+          { "zh": "工程师", "en": "engineer" },
+          { "zh": "程序员", "en": "programmer" },
+          { "zh": "厨师", "en": "chef" },
+          { "zh": "教师", "en": "teacher" },
+          { "zh": "护士", "en": "nurse" }
+        ]
+      },
+      {
+        "id": "character.vibe",
+        "name": "气质类型",
+        "nameEn": "Vibe & Aura",
+        "tags": [
+          { "zh": "优雅", "en": "elegant" },
+          { "zh": "优美", "en": "graceful" },
+          { "zh": "威严高贵", "en": "regal" },
+          { "zh": "贵族气质", "en": "aristocratic" },
+          { "zh": "可爱", "en": "cute" },
+          { "zh": "冷酷", "en": "cool" },
+          { "zh": "前卫叛逆", "en": "edgy" },
+          { "zh": "黑暗气场", "en": "dark aura" },
+          { "zh": "纯真", "en": "innocent" },
+          { "zh": "俏皮", "en": "playful" },
+          { "zh": "开朗", "en": "cheerful" },
+          { "zh": "温柔", "en": "gentle" },
+          { "zh": "凶猛", "en": "fierce" },
+          { "zh": "沉稳冷静", "en": "stoic" }
+        ]
+      },
+      {
+        "id": "character.relationship",
+        "name": "双人关系与互动",
+        "nameEn": "Relationship",
+        "tags": [
+          { "zh": "朋友", "en": "friends" },
+          { "zh": "竞争对手", "en": "rivals" },
+          { "zh": "宿敌", "en": "enemies" },
+          { "zh": "兄弟姐妹", "en": "siblings" },
+          { "zh": "母女", "en": "mother and daughter" },
+          { "zh": "师生", "en": "mentor and student" },
+          { "zh": "恋人", "en": "lovers" },
+          { "zh": "青梅竹马", "en": "childhood friends" },
+          { "zh": "牵手", "en": "holding hands" },
+          { "zh": "公主抱", "en": "princess carry" },
+          { "zh": "摸头", "en": "patting head" },
+          { "zh": "耳语", "en": "whispering" },
+          { "zh": "背人", "en": "piggyback" }
+        ]
+      }
+    ]
+  }
+]

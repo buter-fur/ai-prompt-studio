@@ -1,0 +1,321 @@
+[
+  {
+    "id": "mood",
+    "name": "氛围情绪",
+    "nameEn": "Mood",
+    "icon": "🌫",
+    "groups": [
+      {
+        "id": "mood.emotion",
+        "name": "情绪基调",
+        "nameEn": "Emotion",
+        "tags": [
+          { "zh": "欢欣愉悦", "en": "joyful" },
+          { "zh": "阴郁", "en": "gloomy" },
+          { "zh": "焦躁不安", "en": "anxious" },
+          { "zh": "平静", "en": "calm" },
+          { "zh": "空灵", "en": "ethereal" },
+          { "zh": "不祥", "en": "ominous" },
+          { "zh": "奇趣", "en": "whimsical" },
+          { "zh": "肃穆", "en": "solemn" },
+          { "zh": "开朗明快", "en": "cheerful" },
+          { "zh": "绝望", "en": "desperate" },
+          { "zh": "混乱", "en": "chaotic" },
+          { "zh": "苦乐参半", "en": "bittersweet" },
+          { "zh": "纯真", "en": "innocent" },
+          { "zh": "俏皮", "en": "playful" },
+          { "zh": "诡异", "en": "eerie" },
+          { "zh": "炽烈", "en": "passionate" }
+        ]
+      },
+      {
+        "id": "mood.weather",
+        "name": "天气环境",
+        "nameEn": "Weather",
+        "tags": [
+          { "zh": "细雨", "en": "drizzle" },
+          { "zh": "倾盆大雨", "en": "downpour" },
+          { "zh": "暴风雪", "en": "blizzard" },
+          { "zh": "冰雹", "en": "hailstorm" },
+          { "zh": "热浪蒸腾", "en": "heat haze" },
+          { "zh": "晴空", "en": "clear sky" },
+          { "zh": "多云天空", "en": "cloudy sky" },
+          { "zh": "乌云", "en": "storm clouds" },
+          { "zh": "闪电", "en": "lightning" },
+          { "zh": "狂风", "en": "gale" },
+          { "zh": "雨夹雪", "en": "sleet" },
+          { "zh": "露水", "en": "dew" },
+          { "zh": "水洼", "en": "puddle" },
+          { "zh": "霜", "en": "frost" }
+        ]
+      },
+      {
+        "id": "mood.time",
+        "name": "时间氛围",
+        "nameEn": "Time of Day",
+        "tags": [
+          { "zh": "黎明", "en": "dawn" },
+          { "zh": "破晓", "en": "daybreak" },
+          { "zh": "黄昏", "en": "dusk" },
+          { "zh": "暮色", "en": "twilight" },
+          { "zh": "子夜", "en": "midnight" },
+          { "zh": "正午", "en": "noon" },
+          { "zh": "晨光", "en": "morning light" },
+          { "zh": "清晨", "en": "early morning" },
+          { "zh": "深夜", "en": "late night" },
+          { "zh": "入夜", "en": "nightfall" },
+          { "zh": "晚霞", "en": "sunset glow" },
+          { "zh": "午后光线", "en": "afternoon light" },
+          { "zh": "无月之夜", "en": "moonless night" }
+        ]
+      },
+      {
+        "id": "mood.season",
+        "name": "季节氛围",
+        "nameEn": "Season",
+        "tags": [
+          { "zh": "早春", "en": "early spring" },
+          { "zh": "暮春", "en": "late spring" },
+          { "zh": "盛夏", "en": "midsummer" },
+          { "zh": "暑热", "en": "summer heat" },
+          { "zh": "初秋", "en": "early autumn" },
+          { "zh": "深秋", "en": "late autumn" },
+          { "zh": "秋叶", "en": "autumn leaves" },
+          { "zh": "初雪", "en": "first snow" },
+          { "zh": "隆冬", "en": "deep winter" },
+          { "zh": "梅雨", "en": "plum rain" },
+          { "zh": "雨季", "en": "rainy season" },
+          { "zh": "收获季", "en": "harvest season" },
+          { "zh": "春风", "en": "spring breeze" },
+          { "zh": "秋分", "en": "autumn equinox" }
+        ]
+      },
+      {
+        "id": "mood.narrative",
+        "name": "叙事氛围",
+        "nameEn": "Narrative",
+        "tags": [
+          { "zh": "悬疑", "en": "suspense" },
+          { "zh": "恐怖", "en": "horror" },
+          { "zh": "末日", "en": "doomsday" },
+          { "zh": "乌托邦", "en": "utopia" },
+          { "zh": "反乌托邦", "en": "dystopia" },
+          { "zh": "童话", "en": "fairy tale" },
+          { "zh": "黑色幽默", "en": "black comedy" },
+          { "zh": "黑色电影", "en": "noir" },
+          { "zh": "惊悚", "en": "thriller" },
+          { "zh": "神话史诗", "en": "mythic" },
+          { "zh": "侦探故事", "en": "detective story" },
+          { "zh": "爱情故事", "en": "love story" },
+          { "zh": "日常片段", "en": "slice of life" },
+          { "zh": "闹鬼", "en": "haunted" }
+        ]
+      },
+      {
+        "id": "mood.sensory",
+        "name": "感官氛围",
+        "nameEn": "Sensory",
+        "tags": [
+          { "zh": "潮湿", "en": "humid" },
+          { "zh": "干燥", "en": "arid" },
+          { "zh": "闷热", "en": "muggy" },
+          { "zh": "寒冷", "en": "chilly" },
+          { "zh": "清爽空气", "en": "crisp air" },
+          { "zh": "烟火气", "en": "smoky" },
+          { "zh": "芬芳", "en": "aromatic" },
+          { "zh": "咸湿海风", "en": "salty air" },
+          { "zh": "湿冷", "en": "damp" },
+          { "zh": "霉味", "en": "musty" },
+          { "zh": "温润宜人", "en": "balmy" },
+          { "zh": "朦胧", "en": "hazy" },
+          { "zh": "雨后泥土气息", "en": "petrichor" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "functional",
+    "name": "功能性",
+    "nameEn": "Functional",
+    "icon": "🧩",
+    "groups": [
+      {
+        "id": "functional.material",
+        "name": "材质质感",
+        "nameEn": "Material",
+        "tags": [
+          { "zh": "天鹅绒", "en": "velvet" },
+          { "zh": "金箔", "en": "gold leaf" },
+          { "zh": "铬金属", "en": "chrome" },
+          { "zh": "拉丝钢", "en": "brushed steel" },
+          { "zh": "哑光质感", "en": "matte finish" },
+          { "zh": "亮面", "en": "glossy" },
+          { "zh": "缎面", "en": "satin" },
+          { "zh": "牛仔布", "en": "denim" },
+          { "zh": "帆布", "en": "canvas" },
+          { "zh": "毛皮", "en": "fur" },
+          { "zh": "乳胶", "en": "latex" },
+          { "zh": "黑曜石", "en": "obsidian" },
+          { "zh": "混凝土", "en": "concrete" },
+          { "zh": "纸张质感", "en": "paper texture" },
+          { "zh": "碳纤维", "en": "carbon fiber" },
+          { "zh": "水晶", "en": "crystal" },
+          { "zh": "蜡质", "en": "wax" },
+          { "zh": "刺绣", "en": "embroidered" }
+        ]
+      },
+      {
+        "id": "functional.artist",
+        "name": "艺术家风格",
+        "nameEn": "Artist",
+        "tags": [
+          { "zh": "克里姆特风格", "en": "gustav klimt style" },
+          { "zh": "伦勃朗风格", "en": "rembrandt style" },
+          { "zh": "墨比斯风格", "en": "moebius style" },
+          { "zh": "赛德·米德风格", "en": "syd mead style" },
+          { "zh": "西蒙·斯塔伦哈格风格", "en": "simon stalenhag style" },
+          { "zh": "洛伊什风格", "en": "loish style" },
+          { "zh": "WLOP 风格", "en": "wlop style" },
+          { "zh": "詹姆斯·简风格", "en": "james jean style" },
+          { "zh": "伊利亚·库夫希诺夫风格", "en": "ilya kuvshinov style" },
+          { "zh": "诺曼·洛克威尔风格", "en": "norman rockwell style" },
+          { "zh": "班克斯风格", "en": "banksy style" },
+          { "zh": "草间弥生风格", "en": "yayoi kusama style" },
+          { "zh": "埃贡·席勒风格", "en": "egon schiele style" },
+          { "zh": "卡拉瓦乔风格", "en": "caravaggio style" },
+          { "zh": "贝克辛斯基风格", "en": "beksinski style" },
+          { "zh": "罗斯·陈风格", "en": "ross tran style" },
+          { "zh": "皮克斯风格", "en": "pixar style" },
+          { "zh": "双城之战风格", "en": "arcane style" }
+        ]
+      },
+      {
+        "id": "functional.engine",
+        "name": "渲染引擎",
+        "nameEn": "Engine",
+        "tags": [
+          { "zh": "阿诺德渲染", "en": "arnold render" },
+          { "zh": "Corona 渲染", "en": "corona render" },
+          { "zh": "KeyShot 渲染", "en": "keyshot render" },
+          { "zh": "Eevee 渲染", "en": "eevee render" },
+          { "zh": "Marmoset 工具包", "en": "marmoset toolbag" },
+          { "zh": "Houdini 特效", "en": "houdini" },
+          { "zh": "Substance Painter 材质", "en": "substance painter" },
+          { "zh": "DAZ Studio", "en": "daz studio" },
+          { "zh": "Unity 引擎", "en": "unity engine" },
+          { "zh": "CryEngine 引擎", "en": "cryengine" },
+          { "zh": "Iray 渲染", "en": "iray render" },
+          { "zh": "路径追踪", "en": "path tracing" },
+          { "zh": "环境光遮蔽", "en": "ambient occlusion" },
+          { "zh": "体积渲染", "en": "volumetric rendering" }
+        ]
+      },
+      {
+        "id": "functional.aspect",
+        "name": "画面比例",
+        "nameEn": "Aspect Ratio",
+        "tags": [
+          { "zh": "5:4 比例", "en": "5:4 ratio" },
+          { "zh": "16:10 比例", "en": "16:10 ratio" },
+          { "zh": "4:5 竖版", "en": "4:5 portrait" },
+          { "zh": "2:1 比例", "en": "2:1 ratio" },
+          { "zh": "3:4 比例", "en": "3:4 ratio" },
+          { "zh": "2.39:1 宽银幕", "en": "2.39:1 anamorphic" },
+          { "zh": "竖版构图", "en": "vertical format" },
+          { "zh": "横版构图", "en": "horizontal format" },
+          { "zh": "A4 纸张", "en": "a4 paper" },
+          { "zh": "1.85:1 比例", "en": "1.85:1 ratio" }
+        ]
+      },
+      {
+        "id": "functional.use",
+        "name": "用途场景",
+        "nameEn": "Use Case",
+        "tags": [
+          { "zh": "主视觉", "en": "key visual" },
+          { "zh": "立绘原画", "en": "splash art" },
+          { "zh": "数字绘景", "en": "matte painting" },
+          { "zh": "缩略图", "en": "thumbnail" },
+          { "zh": "横幅设计", "en": "banner design" },
+          { "zh": "宣传册", "en": "brochure" },
+          { "zh": "社论插画", "en": "editorial illustration" },
+          { "zh": "童书插画", "en": "children's book illustration" },
+          { "zh": "贺卡", "en": "greeting card" },
+          { "zh": "T 恤印花", "en": "t-shirt print" },
+          { "zh": "手机壳设计", "en": "phone case design" },
+          { "zh": "壁画", "en": "mural" },
+          { "zh": "广告牌", "en": "billboard" },
+          { "zh": "精灵图", "en": "sprite sheet" }
+        ]
+      },
+      {
+        "id": "functional.output",
+        "name": "输出用途",
+        "nameEn": "Output Format",
+        "tags": [
+          { "zh": "贴纸", "en": "sticker" },
+          { "zh": "徽章", "en": "badge" },
+          { "zh": "邮票", "en": "postage stamp" },
+          { "zh": "卡牌", "en": "trading card" },
+          { "zh": "专辑封面", "en": "album cover" },
+          { "zh": "菜单设计", "en": "menu design" },
+          { "zh": "包装设计", "en": "packaging design" },
+          { "zh": "界面设计", "en": "ui design" },
+          { "zh": "信息图", "en": "infographic" },
+          { "zh": "漫画分镜", "en": "comic panel" },
+          { "zh": "表情符号", "en": "emoji" },
+          { "zh": "珐琅徽章", "en": "enamel pin" },
+          { "zh": "书籍封面", "en": "book cover" },
+          { "zh": "杂志封面", "en": "magazine cover" },
+          { "zh": "名片", "en": "business card" },
+          { "zh": "塔罗牌", "en": "tarot card" }
+        ]
+      },
+      {
+        "id": "functional.model",
+        "name": "模型与工作流",
+        "nameEn": "Model & Workflow",
+        "tags": [
+          { "zh": "Stable Diffusion 模型", "en": "stable diffusion" },
+          { "zh": "Midjourney 模型", "en": "midjourney" },
+          { "zh": "DALL·E 模型", "en": "dall-e" },
+          { "zh": "FLUX 模型", "en": "flux" },
+          { "zh": "SDXL 模型", "en": "sdxl" },
+          { "zh": "ControlNet 控制插件", "en": "controlnet" },
+          { "zh": "LoRA 微调模型", "en": "lora" },
+          { "zh": "ComfyUI 工作流", "en": "comfyui" },
+          { "zh": "Automatic1111 界面", "en": "automatic1111" },
+          { "zh": "IP-Adapter 图像适配", "en": "ip-adapter" },
+          { "zh": "图生图", "en": "img2img" },
+          { "zh": "局部重绘", "en": "inpainting" },
+          { "zh": "放大模型", "en": "upscaler" },
+          { "zh": "基础模型", "en": "checkpoint model" },
+          { "zh": "负面提示词", "en": "negative prompt" }
+        ]
+      },
+      {
+        "id": "functional.param",
+        "name": "画面参数",
+        "nameEn": "Parameters",
+        "tags": [
+          { "zh": "CFG 引导比例", "en": "cfg scale" },
+          { "zh": "采样器", "en": "sampler" },
+          { "zh": "采样步数", "en": "steps" },
+          { "zh": "随机种子", "en": "seed" },
+          { "zh": "去噪强度", "en": "denoising strength" },
+          { "zh": "引导强度", "en": "guidance scale" },
+          { "zh": "批量数量", "en": "batch size" },
+          { "zh": "分辨率", "en": "resolution" },
+          { "zh": "高清修复", "en": "hires fix" },
+          { "zh": "CLIP 跳过层", "en": "clip skip" },
+          { "zh": "固定种子", "en": "fixed seed" },
+          { "zh": "LoRA 权重", "en": "lora weight" },
+          { "zh": "ControlNet 权重", "en": "controlnet weight" },
+          { "zh": "参考图", "en": "reference image" },
+          { "zh": "风格强度", "en": "style strength" },
+          { "zh": "采样调度器", "en": "scheduler" }
+        ]
+      }
+    ]
+  }
+]

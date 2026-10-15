@@ -1,0 +1,18 @@
+scene        场景       groups: scene.nature, scene.city, scene.indoor, scene.fantasy, scene.interior, scene.transport, scene.industrial, scene.underwater, scene.space, scene.festival, scene.military, scene.campus, scene.commercial, scene.medical, scene.religious, scene.sports, scene.theater, scene.climate, scene.abstract, scene.wasteland, scene.home
+character    人物       groups: character.basic, character.feature, character.expression, character.action, character.clothing, character.occupation, character.age, character.appearance, character.hair, character.face, character.body, character.gaze, character.closeup, character.accessory, character.footwear, character.ethnic, character.scifi, character.fantasy, character.identity, character.vibe, character.relationship
+color        颜色       groups: color.palette, color.scheme, color.light, color.named, color.gradient, color.mood, color.material
+style        风格       groups: style.art, style.modern, style.photo, style.technique, style.genre, style.region, style.film, style.era, style.game, style.trend
+quality      画质       groups: quality.level, quality.render, quality.detail, quality.output, quality.post
+camera       构图镜头     groups: camera.shot, camera.lens, camera.composition, camera.body, camera.specialty, camera.movement, camera.perspective
+mood         氛围情绪     groups: mood.emotion, mood.weather, mood.time, mood.season, mood.narrative, mood.sensory
+functional   功能性      groups: functional.material, functional.artist, functional.engine, functional.aspect, functional.use, functional.output, functional.model, functional.param
+negative     负面提示词    groups: negative.quality, negative.anatomy, negative.content, negative.style, negative.hands, negative.face, negative.artifact, negative.clothing, negative.perspective, negative.text
+animal       动物       groups: animal.pet, animal.wild, animal.bird, animal.aquatic, animal.insect, animal.myth, animal.dino
+plant        植物       groups: plant.tree, plant.flower, plant.herb, plant.fungi, plant.crop
+food         食物饮品     groups: food.staple, food.dessert, food.drink, food.fruit, food.plating
+object       道具物品     groups: object.blade, object.firearm, object.magic, object.daily, object.vehicle, object.furniture
+effect       特效       groups: effect.light, effect.particle, effect.magic, effect.render
+era          时代文化     groups: era.history, era.modern, era.culture
+medium       艺术媒介技法   groups: medium.paint, medium.craft, medium.technique
+typography   排版文字     groups: typography.font, typography.layout, typography.effect
+base         基础元素     groups: base.sky, base.weather, base.nature, base.daily, base.view, base.state

@@ -1,0 +1,331 @@
+{
+  "version": 1,
+  "negativeTemplates": [
+    {
+      "id": "general",
+      "name": "通用去瑕疵",
+      "nameEn": "General Cleanup",
+      "description": "适合绝大多数场景的万能负面词，优先压掉画质崩坏与常见水印噪声。",
+      "tags": [
+        "low quality",
+        "worst quality",
+        "blurry",
+        "noise",
+        "grainy",
+        "low resolution",
+        "jpeg artifacts",
+        "low detail",
+        "out of focus",
+        "watermark",
+        "signature",
+        "text",
+        "logo",
+        "cropped",
+        "out of frame",
+        "grid lines",
+        "tiling",
+        "smeared details"
+      ]
+    },
+    {
+      "id": "portrait",
+      "name": "人像优化",
+      "nameEn": "Portrait Fix",
+      "description": "用于人物写真与半身肖像，重点修手部、五官与身体结构崩坏。",
+      "tags": [
+        "bad proportions",
+        "deformed",
+        "distorted body",
+        "malformed face",
+        "asymmetrical eyes",
+        "long neck",
+        "extra limbs",
+        "extra fingers",
+        "missing fingers",
+        "malformed hands",
+        "mutated hands",
+        "six fingers",
+        "fused fingers",
+        "extra hand",
+        "distorted hands",
+        "distorted eyes",
+        "uneven eyes",
+        "cross eyed",
+        "dead eyes",
+        "bad teeth",
+        "floating hair",
+        "hair clipping"
+      ]
+    },
+    {
+      "id": "photo",
+      "name": "写实摄影",
+      "nameEn": "Photoreal",
+      "description": "用于写实摄影出图，排除插画感、3D 渲染感与绘画笔触。",
+      "tags": [
+        "cartoon",
+        "anime",
+        "3d cgi",
+        "illustration",
+        "sketch lines",
+        "oil painting texture",
+        "plastic texture",
+        "cgi",
+        "flat colors",
+        "vector art",
+        "clipart",
+        "3d model",
+        "doll",
+        "oversharpened",
+        "oversaturated",
+        "overprocessed",
+        "vignetting",
+        "low quality"
+      ]
+    },
+    {
+      "id": "anime",
+      "name": "动漫插画",
+      "nameEn": "Anime Illustration",
+      "description": "用于二次元动漫插画，排除写实照片感、真人感与扫描印痕。",
+      "tags": [
+        "3d model",
+        "plastic texture",
+        "cgi",
+        "3d cgi",
+        "doll",
+        "amateur photo",
+        "overprocessed",
+        "low quality",
+        "worst quality",
+        "blurry",
+        "jpeg artifacts",
+        "noise",
+        "low detail",
+        "scan lines",
+        "moire pattern",
+        "tiling",
+        "checkerboard",
+        "posterization",
+        "glitch",
+        "smeared details"
+      ]
+    },
+    {
+      "id": "concept",
+      "name": "概念设计",
+      "nameEn": "Concept Design",
+      "description": "用于原画与概念设定稿，排除低质感、水印与各类文字标记。",
+      "tags": [
+        "low quality",
+        "low detail",
+        "poorly drawn",
+        "washed out",
+        "dull colors",
+        "banding",
+        "jagged edges",
+        "pixelated",
+        "lowres",
+        "color distortion",
+        "watermarked",
+        "copyright text",
+        "url",
+        "username",
+        "artist name",
+        "letters",
+        "caption",
+        "subtitles",
+        "chinese characters"
+      ]
+    },
+    {
+      "id": "landscape",
+      "name": "风景建筑",
+      "nameEn": "Landscape & Architecture",
+      "description": "用于自然风光与建筑场景，排除多余人物肢体、透视错误与空间畸变。",
+      "tags": [
+        "cloned face",
+        "extra heads",
+        "extra arms",
+        "extra legs",
+        "multiple hands",
+        "floating limbs",
+        "severed head",
+        "disfigured",
+        "bad perspective",
+        "warped background",
+        "warped walls",
+        "tilted horizon",
+        "crooked lines",
+        "uneven floor",
+        "merged background",
+        "inconsistent scale",
+        "low quality",
+        "blurry",
+        "pixelated",
+        "washed out",
+        "jagged edges"
+      ]
+    },
+    {
+      "id": "product",
+      "name": "产品静物",
+      "nameEn": "Product Still Life",
+      "description": "用于产品与静物商拍，排除杂乱元素、文字水印与曝光反光问题。",
+      "tags": [
+        "text",
+        "watermark",
+        "border",
+        "cropped",
+        "repeated",
+        "screenshot",
+        "ui elements",
+        "cut off",
+        "timestamp",
+        "signature",
+        "blurry",
+        "noise",
+        "grainy",
+        "jpeg artifacts",
+        "out of focus",
+        "overexposed",
+        "color distortion",
+        "banding",
+        "floating objects",
+        "floating clothes",
+        "plastic texture"
+      ]
+    },
+    {
+      "id": "minimal",
+      "name": "极简干净",
+      "nameEn": "Minimal Clean",
+      "description": "只保留最关键的核心负面词，适合不想过度约束画面的轻量场景。",
+      "tags": [
+        "low quality",
+        "worst quality",
+        "blurry",
+        "noise",
+        "jpeg artifacts",
+        "watermark",
+        "text",
+        "signature",
+        "logo",
+        "bad proportions",
+        "extra fingers",
+        "malformed hands"
+      ]
+    }
+  ],
+  "inspiration": {
+    "themes": [
+      {
+        "id": "portrait",
+        "name": "人物肖像",
+        "nameEn": "Portrait",
+        "slots": [
+          { "name": "主体", "categories": ["character"], "groups": ["character.basic", "character.age", "character.identity"], "count": 1 },
+          { "name": "外貌", "categories": ["character"], "groups": ["character.appearance", "character.feature", "character.face"], "count": 1 },
+          { "name": "表情", "categories": ["character"], "groups": ["character.expression", "character.gaze"], "count": 1 },
+          { "name": "发型", "categories": ["character"], "groups": ["character.hair"], "count": 1 },
+          { "name": "服装", "categories": ["character"], "groups": ["character.clothing", "character.accessory", "character.footwear"], "count": 1 },
+          { "name": "动作", "categories": ["character"], "groups": ["character.action"], "count": 1 },
+          { "name": "场景", "categories": ["scene"], "groups": ["scene.indoor", "scene.interior", "scene.city"], "count": 1 },
+          { "name": "色彩", "categories": ["color"], "groups": ["color.palette", "color.light", "color.mood"], "count": 1 },
+          { "name": "镜头", "categories": ["camera"], "groups": ["camera.shot", "camera.lens", "camera.composition"], "count": 2 },
+          { "name": "氛围", "categories": ["mood"], "groups": ["mood.emotion", "mood.sensory"], "count": 1 },
+          { "name": "画质", "categories": ["quality"], "groups": ["quality.level", "quality.render", "quality.detail"], "count": 1 }
+        ]
+      },
+      {
+        "id": "fantasy",
+        "name": "奇幻场景",
+        "nameEn": "Fantasy",
+        "slots": [
+          { "name": "场景", "categories": ["scene"], "groups": ["scene.fantasy", "scene.wasteland", "scene.abstract"], "count": 1 },
+          { "name": "主体", "categories": ["character"], "groups": ["character.fantasy", "character.ethnic"], "count": 1 },
+          { "name": "动作", "categories": ["character"], "groups": ["character.action"], "count": 1 },
+          { "name": "生物", "categories": ["animal"], "groups": ["animal.myth", "animal.dino"], "count": 1 },
+          { "name": "道具", "categories": ["object"], "groups": ["object.magic", "object.blade"], "count": 1 },
+          { "name": "特效", "categories": ["effect"], "groups": ["effect.magic", "effect.particle"], "count": 2 },
+          { "name": "时代", "categories": ["era"], "groups": ["era.history", "era.culture"], "count": 1 },
+          { "name": "风格", "categories": ["style"], "groups": ["style.art", "style.genre"], "count": 1 },
+          { "name": "色彩", "categories": ["color"], "groups": ["color.gradient", "color.mood"], "count": 1 },
+          { "name": "氛围", "categories": ["mood"], "groups": ["mood.narrative", "mood.emotion"], "count": 1 },
+          { "name": "画质", "categories": ["quality"], "groups": ["quality.level", "quality.render"], "count": 1 }
+        ]
+      },
+      {
+        "id": "cyberpunk",
+        "name": "赛博朋克",
+        "nameEn": "Cyberpunk",
+        "slots": [
+          { "name": "场景", "categories": ["scene"], "groups": ["scene.city", "scene.industrial"], "count": 1 },
+          { "name": "主体", "categories": ["character"], "groups": ["character.scifi", "character.identity"], "count": 1 },
+          { "name": "装备", "categories": ["object"], "groups": ["object.firearm", "object.vehicle"], "count": 1 },
+          { "name": "光效", "categories": ["effect"], "groups": ["effect.light", "effect.render"], "count": 2 },
+          { "name": "色彩", "categories": ["color"], "groups": ["color.named", "color.gradient"], "count": 2 },
+          { "name": "排版", "categories": ["typography"], "groups": ["typography.font", "typography.effect"], "count": 1 },
+          { "name": "年代", "categories": ["era"], "groups": ["era.modern"], "count": 1 },
+          { "name": "风格", "categories": ["style"], "groups": ["style.game", "style.modern", "style.trend"], "count": 1 },
+          { "name": "镜头", "categories": ["camera"], "groups": ["camera.specialty", "camera.lens"], "count": 1 },
+          { "name": "氛围", "categories": ["mood"], "groups": ["mood.emotion", "mood.time"], "count": 1 },
+          { "name": "画质", "categories": ["quality"], "groups": ["quality.render", "quality.post"], "count": 1 }
+        ]
+      },
+      {
+        "id": "nature",
+        "name": "自然风景",
+        "nameEn": "Nature Landscape",
+        "slots": [
+          { "name": "场景", "categories": ["scene"], "groups": ["scene.nature", "scene.underwater", "scene.climate"], "count": 1 },
+          { "name": "动物", "categories": ["animal"], "groups": ["animal.wild", "animal.bird", "animal.aquatic"], "count": 2 },
+          { "name": "植物", "categories": ["plant"], "groups": ["plant.tree", "plant.flower", "plant.herb"], "count": 2 },
+          { "name": "天空", "categories": ["base"], "groups": ["base.sky", "base.weather"], "count": 2 },
+          { "name": "时节", "categories": ["mood"], "groups": ["mood.weather", "mood.season", "mood.time"], "count": 1 },
+          { "name": "光线", "categories": ["color"], "groups": ["color.light", "color.palette"], "count": 1 },
+          { "name": "镜头", "categories": ["camera"], "groups": ["camera.shot", "camera.composition", "camera.perspective"], "count": 2 },
+          { "name": "画质", "categories": ["quality"], "groups": ["quality.level", "quality.detail"], "count": 1 },
+          { "name": "风格", "categories": ["style"], "groups": ["style.photo", "style.technique"], "count": 1 },
+          { "name": "氛围", "categories": ["mood"], "groups": ["mood.sensory", "mood.narrative"], "count": 1 }
+        ]
+      },
+      {
+        "id": "food",
+        "name": "美食静物",
+        "nameEn": "Food & Still Life",
+        "slots": [
+          { "name": "主体", "categories": ["food"], "groups": ["food.staple", "food.dessert", "food.drink"], "count": 2 },
+          { "name": "水果", "categories": ["food"], "groups": ["food.fruit", "food.plating"], "count": 1 },
+          { "name": "香草", "categories": ["plant"], "groups": ["plant.crop", "plant.herb"], "count": 1 },
+          { "name": "道具", "categories": ["object"], "groups": ["object.daily", "object.furniture"], "count": 1 },
+          { "name": "场景", "categories": ["scene"], "groups": ["scene.home", "scene.interior", "scene.commercial"], "count": 1 },
+          { "name": "色彩", "categories": ["color"], "groups": ["color.material", "color.mood", "color.light"], "count": 2 },
+          { "name": "镜头", "categories": ["camera"], "groups": ["camera.composition", "camera.lens", "camera.shot"], "count": 2 },
+          { "name": "风格", "categories": ["style"], "groups": ["style.photo", "style.modern"], "count": 1 },
+          { "name": "工艺", "categories": ["medium"], "groups": ["medium.craft", "medium.technique"], "count": 1 },
+          { "name": "画质", "categories": ["quality"], "groups": ["quality.detail", "quality.level"], "count": 1 },
+          { "name": "氛围", "categories": ["mood"], "groups": ["mood.sensory", "mood.emotion"], "count": 1 }
+        ]
+      },
+      {
+        "id": "mecha",
+        "name": "机甲科幻",
+        "nameEn": "Mecha Sci-Fi",
+        "slots": [
+          { "name": "主体", "categories": ["character"], "groups": ["character.scifi", "character.body"], "count": 1 },
+          { "name": "载具", "categories": ["object"], "groups": ["object.vehicle", "object.firearm"], "count": 2 },
+          { "name": "场景", "categories": ["scene"], "groups": ["scene.space", "scene.industrial", "scene.military"], "count": 1 },
+          { "name": "特效", "categories": ["effect"], "groups": ["effect.light", "effect.render", "effect.particle"], "count": 2 },
+          { "name": "色彩", "categories": ["color"], "groups": ["color.material", "color.named"], "count": 1 },
+          { "name": "镜头", "categories": ["camera"], "groups": ["camera.perspective", "camera.body", "camera.movement"], "count": 2 },
+          { "name": "时代", "categories": ["era"], "groups": ["era.modern", "era.history"], "count": 1 },
+          { "name": "风格", "categories": ["style"], "groups": ["style.game", "style.film"], "count": 1 },
+          { "name": "材质", "categories": ["functional"], "groups": ["functional.material", "functional.engine"], "count": 1 },
+          { "name": "画质", "categories": ["quality"], "groups": ["quality.render", "quality.output"], "count": 1 },
+          { "name": "氛围", "categories": ["mood"], "groups": ["mood.narrative", "mood.emotion"], "count": 1 }
+        ]
+      }
+    ]
+  }
+}

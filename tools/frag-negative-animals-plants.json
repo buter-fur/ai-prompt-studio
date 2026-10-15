@@ -1,0 +1,448 @@
+[
+  {
+    "id": "negative",
+    "name": "负面提示词",
+    "nameEn": "Negative",
+    "icon": "🚫",
+    "negative": true,
+    "groups": [
+      {
+        "id": "negative.quality",
+        "name": "画质问题",
+        "nameEn": "Quality Issues",
+        "tags": [
+          { "zh": "低分辨率图", "en": "lowres" },
+          { "zh": "画面失焦", "en": "out of focus" },
+          { "zh": "细节不足", "en": "low detail" },
+          { "zh": "画工拙劣", "en": "poorly drawn" },
+          { "zh": "业余摄影感", "en": "amateur photo" },
+          { "zh": "严重压缩", "en": "heavy compression" },
+          { "zh": "色彩发白", "en": "washed out" },
+          { "zh": "色彩暗淡", "en": "dull colors" },
+          { "zh": "色带断层", "en": "banding" },
+          { "zh": "边缘锯齿", "en": "jagged edges" }
+        ]
+      },
+      {
+        "id": "negative.anatomy",
+        "name": "人体结构问题",
+        "nameEn": "Anatomy Issues",
+        "tags": [
+          { "zh": "扭曲的四肢", "en": "twisted limbs" },
+          { "zh": "结构崩坏", "en": "broken anatomy" },
+          { "zh": "过长的脖子", "en": "long neck" },
+          { "zh": "多余的耳朵", "en": "extra ears" },
+          { "zh": "悬浮的肢体", "en": "floating limbs" },
+          { "zh": "断开的肢体", "en": "disconnected limbs" },
+          { "zh": "多余的头", "en": "extra heads" },
+          { "zh": "被拉长的身体", "en": "elongated body" },
+          { "zh": "扭曲的脖子", "en": "twisted neck" },
+          { "zh": "缺失的手臂", "en": "missing arms" },
+          { "zh": "缺失的腿", "en": "missing legs" },
+          { "zh": "过大的头", "en": "oversized head" }
+        ]
+      },
+      {
+        "id": "negative.content",
+        "name": "内容问题",
+        "nameEn": "Content Issues",
+        "tags": [
+          { "zh": "不适宜内容", "en": "nsfw" },
+          { "zh": "裸体", "en": "nude" },
+          { "zh": "打码遮挡", "en": "censored" },
+          { "zh": "对话气泡", "en": "speech bubble" },
+          { "zh": "时间戳", "en": "timestamp" },
+          { "zh": "截图", "en": "screenshot" },
+          { "zh": "界面元素", "en": "ui elements" },
+          { "zh": "分割画面", "en": "split image" },
+          { "zh": "拼贴画面", "en": "collage" },
+          { "zh": "画面被切断", "en": "cut off" }
+        ]
+      },
+      {
+        "id": "negative.style",
+        "name": "风格问题",
+        "nameEn": "Style Issues",
+        "tags": [
+          { "zh": "CGI 感", "en": "cgi" },
+          { "zh": "数码绘画感", "en": "digital painting" },
+          { "zh": "赛璐璐上色", "en": "cel shading" },
+          { "zh": "平涂色块", "en": "flat colors" },
+          { "zh": "矢量图形感", "en": "vector art" },
+          { "zh": "剪贴画", "en": "clipart" },
+          { "zh": "三维模型感", "en": "3d model" },
+          { "zh": "人偶感", "en": "doll" },
+          { "zh": "塑料油光", "en": "glossy" },
+          { "zh": "暗角", "en": "vignetting" },
+          { "zh": "过度处理", "en": "overprocessed" }
+        ]
+      },
+      {
+        "id": "negative.hands",
+        "name": "手部专项负面",
+        "nameEn": "Hand Issues",
+        "tags": [
+          { "zh": "变异的手", "en": "mutated hands" },
+          { "zh": "六根手指", "en": "six fingers" },
+          { "zh": "粘连的手指", "en": "fused fingers" },
+          { "zh": "蹼状手指", "en": "webbed fingers" },
+          { "zh": "爪形手", "en": "claw hands" },
+          { "zh": "扭曲的手", "en": "distorted hands" },
+          { "zh": "多余的拇指", "en": "extra thumbs" },
+          { "zh": "过长的手指", "en": "long fingers" },
+          { "zh": "断裂的手指", "en": "broken fingers" },
+          { "zh": "多出的一只手", "en": "extra hand" },
+          { "zh": "扭曲的手指", "en": "twisted fingers" }
+        ]
+      },
+      {
+        "id": "negative.face",
+        "name": "眼睛与面部专项负面",
+        "nameEn": "Face & Eyes Issues",
+        "tags": [
+          { "zh": "扭曲的眼睛", "en": "distorted eyes" },
+          { "zh": "斗鸡眼", "en": "cross eyed" },
+          { "zh": "双眼不齐", "en": "uneven eyes" },
+          { "zh": "无神的眼睛", "en": "dead eyes" },
+          { "zh": "空洞的眼睛", "en": "blank eyes" },
+          { "zh": "多余的瞳孔", "en": "extra pupils" },
+          { "zh": "第三只眼", "en": "third eye" },
+          { "zh": "扭曲的嘴", "en": "distorted mouth" },
+          { "zh": "牙齿畸形", "en": "bad teeth" },
+          { "zh": "融化的脸", "en": "melted face" }
+        ]
+      },
+      {
+        "id": "negative.artifact",
+        "name": "AI 典型伪影",
+        "nameEn": "AI Artifacts",
+        "tags": [
+          { "zh": "网格线", "en": "grid lines" },
+          { "zh": "ANSI 字符画", "en": "ansi art" },
+          { "zh": "ASCII 字符画", "en": "ascii art" },
+          { "zh": "扫描线", "en": "scan lines" },
+          { "zh": "摩尔纹", "en": "moire pattern" },
+          { "zh": "图像平铺", "en": "tiling" },
+          { "zh": "融化的纹理", "en": "melted texture" },
+          { "zh": "棋盘格", "en": "checkerboard" },
+          { "zh": "画面故障", "en": "glitch" },
+          { "zh": "色调分离", "en": "posterization" },
+          { "zh": "细节涂抹", "en": "smeared details" }
+        ]
+      },
+      {
+        "id": "negative.clothing",
+        "name": "服装与物理错误",
+        "nameEn": "Clothing & Physics Errors",
+        "tags": [
+          { "zh": "衣物穿模", "en": "clothing clipping" },
+          { "zh": "多余衣物", "en": "extra clothing" },
+          { "zh": "漂浮的衣物", "en": "floating clothes" },
+          { "zh": "漂浮的物体", "en": "floating objects" },
+          { "zh": "融化的衣物", "en": "melted clothes" },
+          { "zh": "不合理的服装", "en": "illogical clothing" },
+          { "zh": "漂浮的头发", "en": "floating hair" },
+          { "zh": "头发穿模", "en": "hair clipping" },
+          { "zh": "不配对的鞋子", "en": "mismatched shoes" }
+        ]
+      },
+      {
+        "id": "negative.perspective",
+        "name": "透视与空间错误",
+        "nameEn": "Perspective Errors",
+        "tags": [
+          { "zh": "透视错误", "en": "bad perspective" },
+          { "zh": "不可能的几何结构", "en": "impossible geometry" },
+          { "zh": "背景扭曲", "en": "warped background" },
+          { "zh": "墙面扭曲", "en": "warped walls" },
+          { "zh": "地平线倾斜", "en": "tilted horizon" },
+          { "zh": "线条歪斜", "en": "crooked lines" },
+          { "zh": "地面不平", "en": "uneven floor" },
+          { "zh": "背景融成一片", "en": "merged background" },
+          { "zh": "大小比例不一致", "en": "inconsistent scale" }
+        ]
+      },
+      {
+        "id": "negative.text",
+        "name": "文字与水印变体",
+        "nameEn": "Text & Watermark Variants",
+        "tags": [
+          { "zh": "带水印", "en": "watermarked" },
+          { "zh": "版权文字", "en": "copyright text" },
+          { "zh": "网址", "en": "url" },
+          { "zh": "用户名", "en": "username" },
+          { "zh": "画师署名", "en": "artist name" },
+          { "zh": "字母", "en": "letters" },
+          { "zh": "图片说明文字", "en": "caption" },
+          { "zh": "字幕", "en": "subtitles" },
+          { "zh": "中文字符", "en": "chinese characters" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "animal",
+    "name": "动物",
+    "nameEn": "Animal",
+    "icon": "🐾",
+    "groups": [
+      {
+        "id": "animal.pet",
+        "name": "宠物与家畜",
+        "nameEn": "Pets & Livestock",
+        "tags": [
+          { "zh": "家猫", "en": "domestic cat" },
+          { "zh": "小猫", "en": "kitten" },
+          { "zh": "家犬", "en": "domestic dog" },
+          { "zh": "小狗", "en": "puppy" },
+          { "zh": "金毛寻回犬", "en": "golden retriever" },
+          { "zh": "西伯利亚哈士奇", "en": "siberian husky" },
+          { "zh": "柯基犬", "en": "corgi" },
+          { "zh": "柴犬", "en": "shiba inu" },
+          { "zh": "兔子", "en": "rabbit" },
+          { "zh": "仓鼠", "en": "hamster" },
+          { "zh": "豚鼠", "en": "guinea pig" },
+          { "zh": "马", "en": "horse" },
+          { "zh": "绵羊", "en": "sheep" },
+          { "zh": "山羊", "en": "goat" },
+          { "zh": "奶牛", "en": "cow" }
+        ]
+      },
+      {
+        "id": "animal.wild",
+        "name": "野生动物（陆地）",
+        "nameEn": "Wild Animals (Land)",
+        "tags": [
+          { "zh": "狮子", "en": "lion" },
+          { "zh": "老虎", "en": "tiger" },
+          { "zh": "花豹", "en": "leopard" },
+          { "zh": "猎豹", "en": "cheetah" },
+          { "zh": "雪豹", "en": "snow leopard" },
+          { "zh": "狼", "en": "wolf" },
+          { "zh": "北极狐", "en": "arctic fox" },
+          { "zh": "棕熊", "en": "brown bear" },
+          { "zh": "北极熊", "en": "polar bear" },
+          { "zh": "大熊猫", "en": "giant panda" },
+          { "zh": "大象", "en": "elephant" },
+          { "zh": "长颈鹿", "en": "giraffe" },
+          { "zh": "斑马", "en": "zebra" },
+          { "zh": "犀牛", "en": "rhinoceros" },
+          { "zh": "鹿", "en": "deer" },
+          { "zh": "松鼠", "en": "squirrel" },
+          { "zh": "袋鼠", "en": "kangaroo" },
+          { "zh": "大猩猩", "en": "gorilla" }
+        ]
+      },
+      {
+        "id": "animal.bird",
+        "name": "鸟类",
+        "nameEn": "Birds",
+        "tags": [
+          { "zh": "鹰", "en": "eagle" },
+          { "zh": "隼", "en": "falcon" },
+          { "zh": "猫头鹰", "en": "owl" },
+          { "zh": "渡鸦", "en": "raven" },
+          { "zh": "麻雀", "en": "sparrow" },
+          { "zh": "蜂鸟", "en": "hummingbird" },
+          { "zh": "火烈鸟", "en": "flamingo" },
+          { "zh": "孔雀", "en": "peacock" },
+          { "zh": "天鹅", "en": "swan" },
+          { "zh": "鹤", "en": "crane" },
+          { "zh": "鹈鹕", "en": "pelican" },
+          { "zh": "企鹅", "en": "penguin" },
+          { "zh": "鹦鹉", "en": "parrot" },
+          { "zh": "翠鸟", "en": "kingfisher" }
+        ]
+      },
+      {
+        "id": "animal.aquatic",
+        "name": "水生生物",
+        "nameEn": "Aquatic Life",
+        "tags": [
+          { "zh": "海豚", "en": "dolphin" },
+          { "zh": "鲸鱼", "en": "whale" },
+          { "zh": "虎鲸", "en": "orca" },
+          { "zh": "鲨鱼", "en": "shark" },
+          { "zh": "章鱼", "en": "octopus" },
+          { "zh": "鱿鱼", "en": "squid" },
+          { "zh": "水母", "en": "jellyfish" },
+          { "zh": "海龟", "en": "sea turtle" },
+          { "zh": "海马", "en": "seahorse" },
+          { "zh": "海星", "en": "starfish" },
+          { "zh": "螃蟹", "en": "crab" },
+          { "zh": "小丑鱼", "en": "clownfish" },
+          { "zh": "锦鲤", "en": "koi fish" },
+          { "zh": "鳐鱼", "en": "stingray" }
+        ]
+      },
+      {
+        "id": "animal.insect",
+        "name": "昆虫与小生物",
+        "nameEn": "Insects & Small Creatures",
+        "tags": [
+          { "zh": "蝴蝶", "en": "butterfly" },
+          { "zh": "蜜蜂", "en": "bee" },
+          { "zh": "蜻蜓", "en": "dragonfly" },
+          { "zh": "瓢虫", "en": "ladybug" },
+          { "zh": "甲虫", "en": "beetle" },
+          { "zh": "蚂蚁", "en": "ant" },
+          { "zh": "螳螂", "en": "praying mantis" },
+          { "zh": "蚱蜢", "en": "grasshopper" },
+          { "zh": "蝉", "en": "cicada" },
+          { "zh": "飞蛾", "en": "moth" },
+          { "zh": "蜘蛛", "en": "spider" },
+          { "zh": "蝎子", "en": "scorpion" },
+          { "zh": "蜗牛", "en": "snail" }
+        ]
+      },
+      {
+        "id": "animal.myth",
+        "name": "神话与幻想生物",
+        "nameEn": "Mythical Creatures",
+        "tags": [
+          { "zh": "龙", "en": "dragon" },
+          { "zh": "中国龙", "en": "chinese dragon" },
+          { "zh": "凤凰", "en": "phoenix" },
+          { "zh": "狮鹫", "en": "griffin" },
+          { "zh": "独角兽", "en": "unicorn" },
+          { "zh": "天马", "en": "pegasus" },
+          { "zh": "美人鱼", "en": "mermaid" },
+          { "zh": "半人马", "en": "centaur" },
+          { "zh": "狼人", "en": "werewolf" },
+          { "zh": "海怪", "en": "kraken" },
+          { "zh": "牛头人", "en": "minotaur" },
+          { "zh": "小仙子", "en": "fairy" },
+          { "zh": "九尾狐", "en": "kitsune" },
+          { "zh": "地狱三头犬", "en": "cerberus" }
+        ]
+      },
+      {
+        "id": "animal.dino",
+        "name": "恐龙与古生物",
+        "nameEn": "Dinosaurs & Prehistoric",
+        "tags": [
+          { "zh": "霸王龙", "en": "tyrannosaurus rex" },
+          { "zh": "迅猛龙", "en": "velociraptor" },
+          { "zh": "三角龙", "en": "triceratops" },
+          { "zh": "剑龙", "en": "stegosaurus" },
+          { "zh": "腕龙", "en": "brachiosaurus" },
+          { "zh": "翼手龙", "en": "pterodactyl" },
+          { "zh": "甲龙", "en": "ankylosaurus" },
+          { "zh": "棘龙", "en": "spinosaurus" },
+          { "zh": "猛犸象", "en": "mammoth" },
+          { "zh": "剑齿虎", "en": "saber-toothed tiger" },
+          { "zh": "蛇颈龙", "en": "plesiosaur" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "plant",
+    "name": "植物",
+    "nameEn": "Plant",
+    "icon": "🌿",
+    "groups": [
+      {
+        "id": "plant.tree",
+        "name": "树木",
+        "nameEn": "Trees",
+        "tags": [
+          { "zh": "橡树", "en": "oak tree" },
+          { "zh": "松树", "en": "pine tree" },
+          { "zh": "柳树", "en": "willow tree" },
+          { "zh": "白桦树", "en": "birch tree" },
+          { "zh": "枫树", "en": "maple tree" },
+          { "zh": "棕榈树", "en": "palm tree" },
+          { "zh": "竹子", "en": "bamboo" },
+          { "zh": "红杉", "en": "redwood" },
+          { "zh": "猴面包树", "en": "baobab" },
+          { "zh": "蓝花楹", "en": "jacaranda" },
+          { "zh": "玉兰树", "en": "magnolia tree" },
+          { "zh": "橄榄树", "en": "olive tree" },
+          { "zh": "银杏树", "en": "ginkgo tree" },
+          { "zh": "盆景", "en": "bonsai" }
+        ]
+      },
+      {
+        "id": "plant.flower",
+        "name": "花卉",
+        "nameEn": "Flowers",
+        "tags": [
+          { "zh": "玫瑰", "en": "rose" },
+          { "zh": "郁金香", "en": "tulip" },
+          { "zh": "向日葵", "en": "sunflower" },
+          { "zh": "雏菊", "en": "daisy" },
+          { "zh": "百合", "en": "lily" },
+          { "zh": "兰花", "en": "orchid" },
+          { "zh": "牡丹", "en": "peony" },
+          { "zh": "荷花", "en": "lotus" },
+          { "zh": "菊花", "en": "chrysanthemum" },
+          { "zh": "绣球花", "en": "hydrangea" },
+          { "zh": "薰衣草", "en": "lavender" },
+          { "zh": "蒲公英", "en": "dandelion" },
+          { "zh": "罂粟花", "en": "poppy" },
+          { "zh": "山茶花", "en": "camellia" },
+          { "zh": "鸢尾花", "en": "iris" },
+          { "zh": "康乃馨", "en": "carnation" }
+        ]
+      },
+      {
+        "id": "plant.herb",
+        "name": "草本与藤蔓",
+        "nameEn": "Herbs & Vines",
+        "tags": [
+          { "zh": "蕨类植物", "en": "fern" },
+          { "zh": "常春藤", "en": "ivy" },
+          { "zh": "紫藤", "en": "wisteria" },
+          { "zh": "三叶草", "en": "clover" },
+          { "zh": "高草", "en": "tall grass" },
+          { "zh": "芦苇", "en": "reed" },
+          { "zh": "香蒲", "en": "cattail" },
+          { "zh": "多肉植物", "en": "succulent" },
+          { "zh": "仙人掌", "en": "cactus" },
+          { "zh": "龟背竹", "en": "monstera" },
+          { "zh": "捕蝇草", "en": "venus flytrap" },
+          { "zh": "迷迭香", "en": "rosemary" }
+        ]
+      },
+      {
+        "id": "plant.fungi",
+        "name": "菌类与苔藓",
+        "nameEn": "Fungi & Moss",
+        "tags": [
+          { "zh": "蘑菇", "en": "mushroom" },
+          { "zh": "毒蝇伞", "en": "fly agaric" },
+          { "zh": "鸡油菌", "en": "chanterelle" },
+          { "zh": "牛肝菌", "en": "porcini" },
+          { "zh": "羊肚菌", "en": "morel" },
+          { "zh": "香菇", "en": "shiitake" },
+          { "zh": "松露", "en": "truffle" },
+          { "zh": "地衣", "en": "lichen" },
+          { "zh": "苔藓", "en": "moss" }
+        ]
+      },
+      {
+        "id": "plant.crop",
+        "name": "农作物与果实",
+        "nameEn": "Crops & Fruits",
+        "tags": [
+          { "zh": "苹果", "en": "apple" },
+          { "zh": "梨", "en": "pear" },
+          { "zh": "桃子", "en": "peach" },
+          { "zh": "葡萄", "en": "grape" },
+          { "zh": "草莓", "en": "strawberry" },
+          { "zh": "蓝莓", "en": "blueberry" },
+          { "zh": "西瓜", "en": "watermelon" },
+          { "zh": "南瓜", "en": "pumpkin" },
+          { "zh": "玉米", "en": "corn" },
+          { "zh": "稻田", "en": "rice paddy" },
+          { "zh": "番茄", "en": "tomato" },
+          { "zh": "辣椒", "en": "chili pepper" },
+          { "zh": "柠檬", "en": "lemon" },
+          { "zh": "樱桃", "en": "cherry" },
+          { "zh": "石榴", "en": "pomegranate" }
+        ]
+      }
+    ]
+  }
+]

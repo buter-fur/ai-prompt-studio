@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI 文生图提示词工作台</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============ SVG 图标库（非 emoji） ============ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <!-- 界面图标 -->
+    <symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></symbol>
+    <symbol id="i-tags" viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></symbol>
+    <symbol id="i-sliders" viewBox="0 0 24 24"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></symbol>
+    <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></symbol>
+    <symbol id="i-monitor" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></symbol>
+    <symbol id="i-edit" viewBox="0 0 24 24"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></symbol>
+    <symbol id="i-bookmark" viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></symbol>
+    <symbol id="i-grip" viewBox="0 0 24 24"><line x1="9" y1="6" x2="9" y2="6.01"/><line x1="9" y1="12" x2="9" y2="12.01"/><line x1="9" y1="18" x2="9" y2="18.01"/><line x1="15" y1="6" x2="15" y2="6.01"/><line x1="15" y1="12" x2="15" y2="12.01"/><line x1="15" y1="18" x2="15" y2="18.01"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><polygon points="6 3 20 12 6 21 6 3"/></symbol>
+    <symbol id="i-shuffle" viewBox="0 0 24 24"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/></symbol>
+    <symbol id="i-scale" viewBox="0 0 24 24"><path d="M12 3v18"/><path d="M5 7l7-4 7 4"/><path d="M3 13a3 3 0 0 0 6 0L6 7z"/><path d="M15 13a3 3 0 0 0 6 0l-3-6z"/></symbol>
+    <symbol id="i-zap" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></symbol>
+    <symbol id="i-upload" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></symbol>
+
+    <!-- 分类图标 -->
+    <symbol id="i-cat-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></symbol>
+    <symbol id="i-cat-scene" viewBox="0 0 24 24"><polygon points="3 20 10 7 14 13 17 9 21 20"/><circle cx="17.5" cy="5.5" r="1.8"/></symbol>
+    <symbol id="i-cat-character" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></symbol>
+    <symbol id="i-cat-color" viewBox="0 0 24 24"><path d="M12 3l6 7.2a6.4 6.4 0 1 1-12 0z"/><path d="M9.5 14.5a2.5 2.5 0 0 0 5 0"/></symbol>
+    <symbol id="i-cat-style" viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></symbol>
+    <symbol id="i-cat-quality" viewBox="0 0 24 24"><path d="M11 3l1.8 4.7L17.5 9.5l-4.7 1.8L11 16l-1.8-4.7L4.5 9.5l4.7-1.8z"/><path d="M18.5 14.5l.9 2.1 2.1.9-2.1.9-.9 2.1-.9-2.1-2.1-.9 2.1-.9z"/></symbol>
+    <symbol id="i-cat-camera" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h3l2-3h6l2 3h3a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></symbol>
+    <symbol id="i-cat-mood" viewBox="0 0 24 24"><path d="M17.5 19H7a4.5 4.5 0 0 1-.6-8.96A6 6 0 0 1 18 9.5a4.75 4.75 0 0 1-.5 9.5z"/></symbol>
+    <symbol id="i-cat-functional" viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.3 7 12 12 20.7 7"/><line x1="12" y1="22" x2="12" y2="12"/></symbol>
+    <symbol id="i-cat-negative" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><line x1="5.3" y1="5.3" x2="18.7" y2="18.7"/></symbol>
+    <symbol id="i-cat-animal" viewBox="0 0 24 24"><circle cx="6.5" cy="9" r="1.8"/><circle cx="11" cy="6" r="1.8"/><circle cx="16" cy="6.5" r="1.8"/><circle cx="19" cy="10.5" r="1.8"/><path d="M12.5 12c-2.6 0-5.5 2-5.5 4.6C7 19 9.5 21 12.5 21s5.5-2 5.5-4.4C18 14 15.1 12 12.5 12z"/></symbol>
+    <symbol id="i-cat-plant" viewBox="0 0 24 24"><path d="M4 20c0-8 5-13 16-14 0 9-5 14-13 14z"/><path d="M4 20c2-5 5.5-8.5 11-11"/></symbol>
+    <symbol id="i-cat-food" viewBox="0 0 24 24"><path d="M17 8h1.5a3 3 0 0 1 0 6H17"/><path d="M3 8h14v6.5A5.5 5.5 0 0 1 11.5 20h-3A5.5 5.5 0 0 1 3 14.5z"/><line x1="7" y1="2" x2="7" y2="5"/><line x1="11" y1="2" x2="11" y2="5"/></symbol>
+    <symbol id="i-cat-object" viewBox="0 0 24 24"><polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5"/><line x1="13" y1="19" x2="19" y2="13"/><line x1="16" y1="16" x2="20" y2="20"/><line x1="19" y1="21" x2="21" y2="19"/></symbol>
+    <symbol id="i-cat-effect" viewBox="0 0 24 24"><path d="M15 4V2M15 16v-2M8 9h2M20 9h2M17.8 11.8l1.4 1.4M17.8 6.2l1.4-1.4M12.2 6.2l-1.4-1.4"/><line x1="3" y1="21" x2="12" y2="12"/></symbol>
+    <symbol id="i-cat-era" viewBox="0 0 24 24"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 21 7 3 7"/></symbol>
+    <symbol id="i-cat-medium" viewBox="0 0 24 24"><path d="M9.06 11.9l8.07-8.06a2.85 2.85 0 1 1 4.03 4.03l-8.06 8.08"/><path d="M7.07 14.94c-1.66 0-3 1.35-3 3.02 0 1.33-2.5 1.52-2 2.02 1.08 1.1 2.49 2.02 4 2.02 2.2 0 4-1.8 4-4.04a3.01 3.01 0 0 0-3-3.02z"/></symbol>
+    <symbol id="i-cat-typography" viewBox="0 0 24 24"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></symbol>
+    <symbol id="i-cat-base" viewBox="0 0 24 24"><polygon points="12 2 21 7 21 17 12 22 3 17 3 7"/><circle cx="12" cy="12" r="3"/></symbol>
+    <symbol id="i-cat-star" viewBox="0 0 24 24"><polygon points="12 2 15.1 8.6 22 9.5 17 14.4 18.2 21.5 12 18.2 5.8 21.5 7 14.4 2 9.5 8.9 8.6"/></symbol>
+    <symbol id="i-cat-heart" viewBox="0 0 24 24"><path d="M20.8 5.6a5.1 5.1 0 0 0-7.2 0L12 7.2l-1.6-1.6a5.1 5.1 0 1 0-7.2 7.2L12 21.4l8.8-8.6a5.1 5.1 0 0 0 0-7.2z"/></symbol>
+    <symbol id="i-cat-music" viewBox="0 0 24 24"><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></symbol>
+    <symbol id="i-cat-game" viewBox="0 0 24 24"><line x1="6" y1="11" x2="10" y2="11"/><line x1="8" y1="9" x2="8" y2="13"/><circle cx="16" cy="11" r="1"/><circle cx="18.5" cy="13.5" r="1"/><rect x="2" y="6" width="20" height="12" rx="5"/></symbol>
+    <symbol id="i-cat-science" viewBox="0 0 24 24"><path d="M9 3v6L4 19a2 2 0 0 0 1.7 3h12.6A2 2 0 0 0 20 19l-5-10V3"/><line x1="8" y1="3" x2="16" y2="3"/><line x1="7" y1="15" x2="17" y2="15"/></symbol>
+    <symbol id="i-cat-city" viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M5 21V7l6-4v18"/><path d="M11 21V11l8 3v7"/><line x1="8" y1="9" x2="8" y2="9.01"/><line x1="8" y1="13" x2="8" y2="13.01"/></symbol>
+    <symbol id="i-cat-travel" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><polygon points="15.5 8.5 13.5 13.5 8.5 15.5 10.5 10.5"/></symbol>
+    <symbol id="i-cat-magic" viewBox="0 0 24 24"><path d="M12 2l1.6 4.4L18 8l-4.4 1.6L12 14l-1.6-4.4L6 8l4.4-1.6z"/><path d="M18 15l.9 2.1 2.1.9-2.1.9L18 21l-.9-2.1-2.1-.9 2.1-.9z"/><line x1="3" y1="21" x2="7" y2="17"/></symbol>
+
+    <!-- 工具图标 -->
+    <symbol id="i-undo" viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></symbol>
+    <symbol id="i-languages" viewBox="0 0 24 24"><path d="M2 5h12"/><path d="M7 2h1"/><path d="M5 8l6 6"/><path d="M4 14h6"/><path d="M22 22l-5-10-5 10"/><path d="M14 18h6"/></symbol>
+    <symbol id="i-dice" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><line x1="8.5" y1="8.5" x2="8.51" y2="8.5"/><line x1="15.5" y1="15.5" x2="15.51" y2="15.5"/><line x1="12" y1="12" x2="12.01" y2="12"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><line x1="9" y1="12" x2="15" y2="12"/></symbol>
+    <symbol id="i-layout" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></symbol>
+    <symbol id="i-columns" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="18" rx="1.5"/><rect x="14" y="3" width="7" height="18" rx="1.5"/></symbol>
+    <symbol id="i-save" viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></symbol>
+    <symbol id="i-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></symbol>
+    <symbol id="i-box" viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.3 7 12 12 20.7 7"/><line x1="12" y1="22" x2="12" y2="12"/></symbol>
+    <symbol id="i-swap" viewBox="0 0 24 24"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></symbol>
+    <symbol id="i-sparkle" viewBox="0 0 24 24"><path d="M11 3l1.9 5.1L18 10l-5.1 1.9L11 17l-1.9-5.1L4 10l5.1-1.9z"/><path d="M18.5 15.5l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8z"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></symbol>
+  </defs>
+</svg>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark"><svg class="ico"><use href="#i-zap"/></svg></span>
+    <div class="brand-text">
+      <strong>AI 文生图提示词工作台</strong>
+      <small>分类标签 · 中英对照 · 智能推荐 · 图片反推</small>
+    </div>
+  </div>
+
+  <div class="topbar-actions">
+    <button class="btn" id="btnVision">
+      <svg class="ico"><use href="#i-image"/></svg><span>图片反推</span>
+    </button>
+    <button class="btn" id="btnLibrary">
+      <svg class="ico"><use href="#i-tags"/></svg><span>标签管理</span>
+    </button>
+    <button class="btn" id="btnSettings">
+      <svg class="ico"><use href="#i-sliders"/></svg><span>设置</span>
+    </button>
+
+    <span class="topbar-sep"></span>
+
+    <div class="dropdown" id="langDropdown">
+      <button class="btn dropdown-trigger" id="langTrigger" aria-haspopup="menu" aria-expanded="false">
+        <svg class="ico"><use href="#i-globe"/></svg>
+        <span id="langLabel">中英</span>
+        <svg class="ico ico-sm chev"><use href="#i-chevron"/></svg>
+      </button>
+      <div class="dropdown-menu" id="langMenu" role="menu">
+        <button role="menuitem" data-lang="zh"><span>中文</span><svg class="ico ico-sm chk"><use href="#i-check"/></svg></button>
+        <button role="menuitem" data-lang="en"><span>English</span><svg class="ico ico-sm chk"><use href="#i-check"/></svg></button>
+        <button role="menuitem" data-lang="both"><span>中英对照</span><svg class="ico ico-sm chk"><use href="#i-check"/></svg></button>
+      </div>
+    </div>
+
+    <button class="btn theme-btn" id="btnTheme" aria-label="切换主题">
+      <svg class="ico" id="themeIcon"><use href="#i-monitor"/></svg>
+      <span id="themeLabel">跟随系统</span>
+    </button>
+  </div>
+</header>
+
+<main class="layout">
+
+  <aside class="panel col-nav">
+    <div class="panel-head">
+      <h2>分类</h2>
+      <button class="icon-btn" id="btnManageFromNav" title="标签管理">
+        <svg class="ico ico-sm"><use href="#i-plus"/></svg>
+      </button>
+    </div>
+    <nav class="cat-list" id="catList"></nav>
+    <div class="panel-foot">
+      <div class="cat-count" id="catCount">—</div>
+      <div class="cat-hint" id="catHint">
+        <svg class="ico ico-sm"><use href="#i-grip"/></svg>
+        <span>拖动分类可调整顺序</span>
+      </div>
+    </div>
+  </aside>
+
+  <section class="panel col-library">
+    <div class="panel-head">
+      <h2 id="libTitle">标签库</h2>
+      <div class="search-wrap">
+        <svg class="ico ico-sm search-icon"><use href="#i-search"/></svg>
+        <input type="search" id="tagSearch" placeholder="搜索标签（中文或 English）">
+        <button class="search-clear" id="searchClear" hidden>
+          <svg class="ico ico-sm"><use href="#i-x"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="tag-scroll" id="tagScroll"></div>
+  </section>
+
+  <section class="panel col-workspace">
+
+    <!-- 工具条 -->
+    <div class="ws-toolbar">
+      <button class="tool" id="btnUndo" title="撤销 (Ctrl/Cmd + Z)">
+        <svg class="ico ico-sm"><use href="#i-undo"/></svg>
+      </button>
+      <button class="tool" id="btnRedo" title="重做 (Ctrl/Cmd + Shift + Z)">
+        <svg class="ico ico-sm"><use href="#i-swap"/></svg>
+      </button>
+      <span class="tool-sep"></span>
+      <button class="tool" id="btnLocalTranslate" title="用内置词库把中文片段换成英文标签（不联网）">
+        <svg class="ico ico-sm"><use href="#i-languages"/></svg><span class="tool-label">中→英</span>
+      </button>
+      <button class="tool" id="btnAiTranslate" title="调用大模型翻译（自由文本也能译）">
+        <svg class="ico ico-sm"><use href="#i-globe"/></svg><span class="tool-label">AI 翻译</span>
+      </button>
+      <button class="tool accent" id="btnAiPolish" title="写完提示词后，让大模型帮你调优">
+        <svg class="ico ico-sm"><use href="#i-sparkle"/></svg><span class="tool-label">AI 润色</span>
+      </button>
+      <span class="tool-sep"></span>
+      <button class="tool" id="btnNegativeTemplates" title="一键套用常用负面词">
+        <svg class="ico ico-sm"><use href="#i-shield"/></svg><span class="tool-label">负面模板</span>
+      </button>
+      <button class="tool" id="btnInspiration" title="随机生成一套完整提示词">
+        <svg class="ico ico-sm"><use href="#i-dice"/></svg><span class="tool-label">随机灵感</span>
+      </button>
+      <span class="tool-sep"></span>
+      <button class="tool" id="btnSlots" title="存多套方案，并排对比">
+        <svg class="ico ico-sm"><use href="#i-layout"/></svg><span class="tool-label">方案槽位</span>
+        <span class="tool-badge" id="slotBadge" hidden>0</span>
+      </button>
+      <button class="tool" id="btnProject" title="导入 / 导出工程与提示词">
+        <svg class="ico ico-sm"><use href="#i-box"/></svg><span class="tool-label">工程</span>
+      </button>
+    </div>
+
+    <!-- 正向 -->
+    <div class="ws-block">
+      <div class="ws-head">
+        <h3><span class="dot dot-pos"></span>正向提示词 <em>Prompt</em>
+          <span class="ws-count" id="countPos"></span></h3>
+        <div class="ws-head-actions">
+          <button class="mini" id="btnShufflePos" title="打乱标签顺序">
+            <svg class="ico ico-sm"><use href="#i-shuffle"/></svg> 打乱
+          </button>
+          <button class="mini" id="btnNormalizePos" title="去掉所有权重，恢复纯标签">
+            <svg class="ico ico-sm"><use href="#i-scale"/></svg> 清权重
+          </button>
+          <button class="mini" id="btnCopyPos">复制</button>
+          <button class="mini" id="btnClearPos">清空</button>
+        </div>
+      </div>
+      <div class="chips drop-zone" id="chipsPos" data-empty="点击左侧标签添加，或直接在下方输入；拖动标签可排序"></div>
+      <div class="parked" id="parkedPos" hidden>
+        <span class="parked-title"><svg class="ico ico-sm"><use href="#i-pause"/></svg> 已停用</span>
+        <div class="parked-chips" id="parkedPosChips"></div>
+      </div>
+      <textarea id="promptText" rows="4" placeholder="正向提示词…"></textarea>
+    </div>
+
+    <!-- 负面 -->
+    <div class="ws-block">
+      <div class="ws-head">
+        <h3><span class="dot dot-neg"></span>负面提示词 <em>Negative</em>
+          <span class="ws-count" id="countNeg"></span></h3>
+        <div class="ws-head-actions">
+          <button class="mini" id="btnShuffleNeg" title="打乱标签顺序">
+            <svg class="ico ico-sm"><use href="#i-shuffle"/></svg> 打乱
+          </button>
+          <button class="mini" id="btnNormalizeNeg" title="去掉所有权重">
+            <svg class="ico ico-sm"><use href="#i-scale"/></svg> 清权重
+          </button>
+          <button class="mini" id="btnCopyNeg">复制</button>
+          <button class="mini" id="btnClearNeg">清空</button>
+        </div>
+      </div>
+      <div class="chips drop-zone" id="chipsNeg" data-empty="负面标签会加到这里；拖动标签可排序"></div>
+      <div class="parked" id="parkedNeg" hidden>
+        <span class="parked-title"><svg class="ico ico-sm"><use href="#i-pause"/></svg> 已停用</span>
+        <div class="parked-chips" id="parkedNegChips"></div>
+      </div>
+      <textarea id="negText" rows="3" placeholder="负面提示词…"></textarea>
+    </div>
+
+    <div class="ws-block grow">
+      <div class="ws-head">
+        <h3><span class="dot dot-rec"></span>智能推荐 <em>Suggestions</em></h3>
+        <div class="ws-head-actions">
+          <button class="mini" id="btnRefreshRec">换一批</button>
+        </div>
+      </div>
+      <div class="rec-list" id="recList"></div>
+    </div>
+
+    <div class="ws-actions">
+      <button class="btn primary" id="btnSavePreset">
+        <svg class="ico ico-sm"><use href="#i-bookmark"/></svg><span>收藏当前组合</span>
+      </button>
+      <button class="btn" id="btnOpenPresets">
+        <svg class="ico ico-sm"><use href="#i-book"/></svg><span>我的组合</span>
+      </button>
+      <button class="btn" id="btnReset">
+        <svg class="ico ico-sm"><use href="#i-refresh"/></svg><span>重置</span>
+      </button>
+      <button class="btn accent push-right" id="btnCopyAll" title="一次性复制正面 + 负面提示词（前缀格式在设置里调）">
+        <svg class="ico ico-sm"><use href="#i-copy"/></svg><span>复制全部</span>
+      </button>
+      <button class="btn" id="btnShortcuts" title="快捷键一览（按 ? 也可以）">
+        <svg class="ico ico-sm"><use href="#i-help"/></svg><span>快捷键</span>
+      </button>
+    </div>
+
+  </section>
+</main>
+
+<!-- ============ 设置弹窗 ============ -->
+<div class="modal" id="modalSettings" hidden>
+  <div class="modal-box">
+    <div class="modal-head">
+      <h3>设置</h3>
+      <button class="icon-btn" data-close><svg class="ico ico-sm"><use href="#i-x"/></svg></button>
+    </div>
+    <div class="modal-body">
+
+      <div class="field-group">
+        <h4>大模型接口 <small>OpenAI 兼容协议</small></h4>
+
+        <label class="field">
+          <span>服务商预设 <em class="field-note">选一个会自动填好地址和推荐模型</em></span>
+          <select id="setProvider"></select>
+        </label>
+        <p class="field-tip" id="providerNote" hidden></p>
+
+        <label class="field">
+          <span>接口地址 Base URL</span>
+          <input type="text" id="setBaseUrl" placeholder="https://api.openai.com/v1">
+        </label>
+        <label class="field">
+          <span>API Key</span>
+          <input type="password" id="setApiKey" placeholder="sk-...  （仅保存在本机，不会上传）">
+        </label>
+        <label class="field">
+          <span>模型名称 Model</span>
+          <input type="text" id="setModel" placeholder="gpt-4o-mini / deepseek-chat / qwen-plus ...">
+        </label>
+
+        <div class="row-inline" style="margin-bottom:12px">
+          <button class="btn" id="btnTestConnection">
+            <svg class="ico ico-sm"><use href="#i-zap"/></svg><span>测试连接</span>
+          </button>
+          <span class="hint">先用免费的 <code>GET /models</code> 验证，不消耗额度</span>
+        </div>
+        <div class="conn-result" id="connResult" hidden></div>
+
+        <div class="row-inline field-row">
+          <label class="field">
+            <span>超时（秒）</span>
+            <input type="number" id="setTimeout" min="5" max="600" step="5">
+          </label>
+          <label class="field">
+            <span>最大输出长度 max_tokens</span>
+            <input type="number" id="setMaxTokens" min="256" max="65536" step="512" placeholder="8192">
+          </label>
+        </div>
+        <p class="field-tip">
+          如果你用的是<strong>推理模型</strong>（deepseek-reasoner / o1 这类），
+          它会先输出一大段思考过程再写正文，很容易把额度吃光导致「只返回思考、没有正文」。
+          本工具遇到这种情况会<strong>自动把上限翻倍重试一次</strong>；仍然不够时把这里调大（建议 16384），
+          或直接换用非推理模型（deepseek-chat / gpt-4o-mini / qwen-plus 等）做润色、翻译和图片反推。
+        </p>
+      </div>
+
+      <div class="field-group">
+        <h4>复制格式 <small>影响所有「复制」按钮</small></h4>
+        <label class="field">
+          <span>复制时是否加上前缀</span>
+          <select id="setCopyMode">
+            <option value="none">都不加（纯提示词）</option>
+            <option value="negative">只给负面提示词加</option>
+            <option value="both">正面和负面都加</option>
+          </select>
+        </label>
+        <div class="row-inline field-row">
+          <label class="field">
+            <span>正面前缀</span>
+            <input type="text" id="setCopyPosPrefix" placeholder="Positive prompt: ">
+          </label>
+          <label class="field">
+            <span>负面前缀</span>
+            <input type="text" id="setCopyNegPrefix" placeholder="Negative prompt: ">
+          </label>
+        </div>
+        <p class="field-tip">复制出来的实际效果预览：</p>
+        <pre class="copy-preview" id="copyPreview"></pre>
+      </div>
+
+      <div class="field-group">
+        <h4>解析提示词模板 <small>可自定义</small></h4>
+        <label class="field">
+          <span>System 提示词</span>
+          <textarea id="setSysPrompt" rows="10"></textarea>
+        </label>
+        <label class="field">
+          <span>User 提示词</span>
+          <textarea id="setUserPrompt" rows="2"></textarea>
+        </label>
+        <div class="row-inline">
+          <button class="mini" id="btnResetPrompt">恢复默认模板</button>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <h4>润色提示词模板 <small>可自定义</small></h4>
+        <label class="field">
+          <span>System 提示词（润色方式与输出格式由「AI 润色」弹窗里的选项自动追加）</span>
+          <textarea id="setPolishPrompt" rows="8"></textarea>
+        </label>
+        <div class="row-inline">
+          <button class="mini" id="btnResetPolishPrompt">恢复默认模板</button>
+        </div>
+      </div>
+
+    </div>
+    <div class="modal-foot">
+      <span class="save-hint" id="saveHint"></span>
+      <button class="btn" data-close>取消</button>
+      <button class="btn primary" id="btnSaveSettings">保存</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 标签管理弹窗 ============ -->
+<div class="modal" id="modalLibrary" hidden>
+  <div class="modal-box xwide">
+    <div class="modal-head">
+      <h3>标签管理</h3>
+      <div class="row-inline" style="margin-left:auto;margin-right:10px">
+        <button class="mini" id="btnAddCategory">
+          <svg class="ico ico-sm"><use href="#i-plus"/></svg> 新建分类
+        </button>
+        <button class="mini" id="btnImportTags">
+          <svg class="ico ico-sm"><use href="#i-upload"/></svg> 导入
+        </button>
+        <button class="mini" id="btnExportTags">
+          <svg class="ico ico-sm"><use href="#i-download"/></svg> 导出
+        </button>
+        <button class="mini danger" id="btnResetTags">恢复内置库</button>
+      </div>
+      <button class="icon-btn" data-close><svg class="ico ico-sm"><use href="#i-x"/></svg></button>
+    </div>
+    <div class="modal-body lib-body">
+
+      <aside class="lib-cats">
+        <div class="search-wrap" style="max-width:none;margin-bottom:8px">
+          <svg class="ico ico-sm search-icon"><use href="#i-search"/></svg>
+          <input type="search" id="libCatSearch" placeholder="筛选分类">
+        </div>
+        <div class="lib-cat-list" id="libCatList"></div>
+      </aside>
+
+      <section class="lib-detail" id="libDetail"></section>
+
+    </div>
+    <div class="modal-foot">
+      <span class="hint" id="libHint">改动会实时保存到 data/tags.user.json，内置库不受影响。</span>
+      <button class="btn primary" data-close>完成</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 通用表单弹窗 ============ -->
+<div class="modal modal-top" id="modalForm" hidden>
+  <div class="modal-box small">
+    <div class="modal-head">
+      <h3 id="formTitle">编辑</h3>
+      <button class="icon-btn" data-close><svg class="ico ico-sm"><use href="#i-x"/></svg></button>
+    </div>
+    <div class="modal-body" id="formBody"></div>
+    <div class="modal-foot">
+      <span class="save-hint err" id="formError"></span>
+      <button class="btn" data-close>取消</button>
+      <button class="btn primary" id="btnFormOk">确定</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 图片反推弹窗 ============ -->
+<div class="modal" id="modalVision" hidden>
+  <div class="modal-box wide">
+    <div class="modal-head">
+      <h3>图片反推提示词</h3>
+      <button class="icon-btn" data-close><svg class="ico ico-sm"><use href="#i-x"/></svg></button>
+    </div>
+    <div class="modal-body vision-body">
+
+      <div class="vision-left">
+        <div class="dropzone" id="dropzone">
+          <input type="file" id="fileInput" accept="image/*" hidden>
+          <div class="dz-empty" id="dzEmpty">
+            <svg class="ico dz-icon"><use href="#i-image"/></svg>
+            <p>点击选择图片，或把图片拖进来</p>
+            <small>支持 PNG / JPG / WEBP / GIF，也可直接 Ctrl+V 粘贴</small>
+          </div>
+          <img id="preview" alt="预览" hidden>
+        </div>
+        <div class="row-inline">
+          <button class="mini" id="btnPickImage">选择图片</button>
+          <button class="mini" id="btnClearImage">移除</button>
+          <span class="hint" id="imgMeta"></span>
+        </div>
+        <label class="field">
+          <span>本次使用的 User 提示词（留空则用设置里的默认值）</span>
+          <textarea id="visionUserPrompt" rows="3"></textarea>
+        </label>
+        <button class="btn primary block" id="btnAnalyze">
+          <svg class="ico ico-sm"><use href="#i-zap"/></svg><span>开始解析</span>
+        </button>
+        <div class="status" id="visionStatus"></div>
+      </div>
+
+      <div class="vision-right">
+        <div class="ws-head">
+          <h3>解析结果</h3>
+          <div class="ws-head-actions">
+            <button class="mini" id="btnFillFromResult">应用到工作区</button>
+          </div>
+        </div>
+        <textarea id="visionResult" rows="18" placeholder="解析结果会显示在这里…"></textarea>
+        <div class="reasoning-box" id="visionReasoning" hidden>
+          <div class="reasoning-head" data-toggle-reasoning="visionReasoning">
+            <svg class="ico ico-sm"><use href="#i-chart"/></svg>
+            <span>模型思考过程</span>
+            <span class="hint">仅用于排查，不会写进提示词</span>
+            <span class="tool-spacer"></span>
+            <svg class="ico ico-sm chev"><use href="#i-chevron"/></svg>
+          </div>
+          <pre class="reasoning-body" id="visionReasoningBody"></pre>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ============ 我的组合弹窗 ============ -->
+<div class="modal" id="modalPresets" hidden>
+  <div class="modal-box">
+    <div class="modal-head">
+      <h3>我的组合</h3>
+      <button class="icon-btn" data-close><svg class="ico ico-sm"><use href="#i-x"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div class="preset-list" id="presetList"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ AI 翻译弹窗 ============ -->
+<div class="modal" id="modalTranslate" hidden>
+  <div class="modal-box wide">
+    <div class="modal-head">
+      <h3>AI 翻译</h3>
+      <button class="icon-btn" data-close><svg class="ico ico-sm"><use href="#i-x"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div class="row-inline" style="margin-bottom:12px">
+        <div class="seg" id="translateDir">
+          <button class="seg-btn is-active" data-dir="zh2en">中文 → 英文提示词</button>
+          <button class="seg-btn" data-dir="en2zh">英文 → 中文对照</button>
+        </div>
+        <span class="tool-spacer"></span>
+        <button class="mini" id="btnTranslateLoadPos">载入正向提示词</button>
+        <button class="mini" id="btnTranslateSwap">结果转为原文</button>
+      </div>
+      <div class="translate-grid">
+        <div class="ws-block">
+          <div class="ws-head"><h3>原文</h3></div>
+          <textarea id="translateSource" rows="13" placeholder="把要翻译的内容贴到这里…"></textarea>
+        </div>
+        <div class="ws-block">
+          <div class="ws-head">
+            <h3>译文</h3>
+            <div class="ws-head-actions">
+              <button class="mini" id="btnTranslateCopy">复制</button>
+              <button class="mini" id="btnTranslateApply">应用到正向</button>
+            </div>
+          </div>
+          <textarea id="translateResult" rows="13" placeholder="翻译结果会显示在这里…"></textarea>
+        </div>
+      </div>
+      <div class="status" id="translateStatus"></div>
+    </div>
+    <div class="modal-foot">
+      <span class="hint">走「设置」里配置的 OpenAI 兼容接口</span>
+      <button class="btn" data-close>关闭</button>
+      <button class="btn primary" id="btnTranslateRun">
+        <svg class="ico ico-sm"><use href="#i-languages"/></svg><span>开始翻译</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 负面模板弹窗 ============ -->
+<div class="modal" id="modalNegTemplates" hidden>
+  <div class="modal-box">
+    <div class="modal-head">
+      <h3>负面提示词模板</h3>
+      <button class="icon-btn" data-close><svg class="ico ico-sm"><use href="#i-x"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div class="tpl-list" id="negTplList"></div>
+    </div>
+    <div class="modal-foot">
+      <span class="hint">「替换」会清空现有负面词；「追加」会合并并自动去重。</span>
+      <button class="btn primary" data-close>完成</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 随机灵感弹窗 ============ -->
+<div class="modal" id="modalInspiration" hidden>
+  <div class="modal-box wide">
+    <div class="modal-head">
+      <h3>随机灵感</h3>
+      <div class="row-inline" style="margin-left:auto;margin-right:10px">
+        <button class="mini" id="btnInspireReroll">
+          <svg class="ico ico-sm"><use href="#i-dice"/></svg> 换一批
+        </button>
+      </div>
+      <button class="icon-btn" data-close><svg class="ico ico-sm"><use href="#i-x"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div class="inspire-themes" id="inspireThemes"></div>
+      <div class="inspire-list" id="inspireList"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 方案槽位弹窗 ============ -->
+<div class="modal" id="modalSlots" hidden>
+  <div class="modal-box wide">
+    <div class="modal-head">
+      <h3>方案槽位</h3>
+      <div class="row-inline" style="margin-left:auto;margin-right:10px">
+        <button class="mini" id="btnCompareSlots">
+          <svg class="ico ico-sm"><use href="#i-columns"/></svg> 并排对比
+        </button>
+      </div>
+      <button class="icon-btn" data-close><svg class="ico ico-sm"><use href="#i-x"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div class="slot-list" id="slotList"></div>
+      <div class="slot-compare" id="slotCompare" hidden></div>
+    </div>
+    <div class="modal-foot">
+      <span class="hint">槽位会保存在 data/settings.json，关闭软件后依然在。</span>
+      <button class="btn primary" data-close>完成</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 工程弹窗 ============ -->
+<div class="modal" id="modalProject" hidden>
+  <div class="modal-box">
+    <div class="modal-head">
+      <h3>工程</h3>
+      <button class="icon-btn" data-close><svg class="ico ico-sm"><use href="#i-x"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div class="field-group">
+        <h4>导出 <small>备份 / 分享</small></h4>
+        <div class="row-inline">
+          <button class="btn" id="btnExportProject">
+            <svg class="ico ico-sm"><use href="#i-download"/></svg><span>导出完整工程 JSON</span>
+          </button>
+          <button class="btn" id="btnExportPrompt">
+            <svg class="ico ico-sm"><use href="#i-save"/></svg><span>导出当前提示词 TXT</span>
+          </button>
+        </div>
+        <p class="hint" style="margin-top:9px">
+          工程 JSON 含 4 个方案槽位、全部收藏组合、界面偏好，<b>不含 API Key</b>；
+          标签库默认不打包（可勾选下方选项导入时一并带上）。
+        </p>
+      </div>
+      <div class="field-group">
+        <h4>导入 <small>会覆盖同名字段</small></h4>
+        <div class="row-inline">
+          <button class="btn" id="btnImportProject">
+            <svg class="ico ico-sm"><use href="#i-upload"/></svg><span>选择工程 JSON…</span>
+          </button>
+        </div>
+        <label class="form-check" style="margin-top:12px">
+          <input type="checkbox" id="importWithPresets" checked>
+          <span>导入收藏组合（替换现有收藏）</span>
+        </label>
+        <label class="form-check" style="margin-top:8px">
+          <input type="checkbox" id="importWithSlots" checked>
+          <span>导入方案槽位</span>
+        </label>
+        <label class="form-check" style="margin-top:8px">
+          <input type="checkbox" id="importWithTags">
+          <span>导入标签库（会覆盖你的自定义标签库）</span>
+        </label>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <span class="hint" id="projectHint"></span>
+      <button class="btn primary" data-close>完成</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 快捷键弹窗 ============ -->
+<div class="modal" id="modalShortcuts" hidden>
+  <div class="modal-box">
+    <div class="modal-head">
+      <h3>快捷键</h3>
+      <button class="icon-btn" data-close><svg class="ico ico-sm"><use href="#i-x"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div class="kbd-list" id="kbdList"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ AI 润色弹窗 ============ -->
+<div class="modal" id="modalPolish" hidden>
+  <div class="modal-box xwide">
+    <div class="modal-head">
+      <h3>AI 提示词润色</h3>
+      <button class="icon-btn" data-close><svg class="ico ico-sm"><use href="#i-x"/></svg></button>
+    </div>
+    <div class="modal-body">
+
+      <div class="polish-controls">
+        <div class="polish-row">
+          <span class="polish-label">润色方式</span>
+          <div class="seg" id="polishStyle">
+            <button class="seg-btn is-active" data-style="balanced">均衡调优</button>
+            <button class="seg-btn" data-style="enrich">丰富细节</button>
+            <button class="seg-btn" data-style="simplify">精简凝练</button>
+            <button class="seg-btn" data-style="reorder">规范排序</button>
+            <button class="seg-btn" data-style="fix">纠错修正</button>
+          </div>
+        </div>
+        <div class="polish-row">
+          <span class="polish-label">输出目标</span>
+          <div class="seg" id="polishTarget">
+            <button class="seg-btn is-active" data-target="tags">标签式 · SD / ComfyUI</button>
+            <button class="seg-btn" data-target="midjourney">Midjourney</button>
+            <button class="seg-btn" data-target="natural">自然语言 · Flux / DALL·E</button>
+          </div>
+        </div>
+        <div class="polish-row">
+          <span class="polish-label">额外要求</span>
+          <input type="text" id="polishExtra" placeholder="可选，例如「加强雨天氛围」「控制在 30 个词以内」「不要改动人物」">
+        </div>
+        <div class="polish-row">
+          <span class="polish-label">额外任务</span>
+          <label class="form-check" style="margin:0">
+            <input type="checkbox" id="polishSuggestWeights" checked>
+            <span>根据提示词给出<strong>权重建议</strong>（返回后可自由勾选，再一起应用）</span>
+          </label>
+        </div>
+        <div class="polish-desc" id="polishDesc"></div>
+      </div>
+
+      <div class="polish-grid">
+        <div class="ws-block">
+          <div class="ws-head">
+            <h3>当前提示词</h3>
+            <div class="ws-head-actions">
+              <button class="mini" id="btnPolishReload">重新载入工作区</button>
+            </div>
+          </div>
+          <textarea id="polishSource" rows="8" placeholder="正向提示词…"></textarea>
+          <textarea id="polishSourceNeg" rows="3" placeholder="负面提示词（会一起提交）…"></textarea>
+        </div>
+        <div class="ws-block">
+          <div class="ws-head">
+            <h3><span class="dot dot-rec"></span>润色结果</h3>
+            <div class="ws-head-actions">
+              <button class="mini" id="btnPolishMergeNo" hidden
+                      title="把负面提示词拼成 Midjourney 的 --no 参数，追加到正向末尾">合成 --no</button>
+              <button class="mini" id="btnPolishIterate" title="把结果放回左边，继续二次润色">用结果继续</button>
+              <button class="mini" id="btnPolishCopy">复制</button>
+            </div>
+          </div>
+          <textarea id="polishResult" rows="8" placeholder="点右下角「开始润色」…"></textarea>
+          <textarea id="polishResultNeg" rows="3" placeholder="负面提示词结果（模型认为不需要时会留空）…"></textarea>
+        </div>
+      </div>
+
+      <div class="polish-weights" id="polishWeights" hidden>
+        <div class="polish-weights-head">
+          <svg class="ico ico-sm"><use href="#i-scale"/></svg>
+          <span>权重建议</span>
+          <span class="rec-badge" id="polishWeightCount">0 / 0</span>
+          <span class="tool-spacer"></span>
+          <button class="mini" id="btnWeightAll">全选</button>
+          <button class="mini" id="btnWeightNone">全不选</button>
+          <button class="mini" id="btnWeightReset">恢复建议值</button>
+        </div>
+        <div class="weight-list" id="polishWeightList"></div>
+        <p class="hint weight-hint">
+          勾选的权重会<strong>实时写进上面的「润色结果」</strong>，点「应用到工作区」一起生效；取消勾选会自动还原成无权重。
+        </p>
+      </div>
+
+      <div class="polish-diff" id="polishDiff" hidden></div>
+      <div class="polish-notes" id="polishNotes" hidden></div>
+
+      <div class="reasoning-box" id="polishReasoning" hidden>
+        <div class="reasoning-head" data-toggle-reasoning="polishReasoning">
+          <svg class="ico ico-sm"><use href="#i-chart"/></svg>
+          <span>模型思考过程</span>
+          <span class="hint">仅用于排查，不会写进提示词</span>
+          <span class="tool-spacer"></span>
+          <svg class="ico ico-sm chev"><use href="#i-chevron"/></svg>
+        </div>
+        <pre class="reasoning-body" id="polishReasoningBody"></pre>
+      </div>
+
+      <div class="status" id="polishStatus"></div>
+    </div>
+    <div class="modal-foot">
+      <span class="hint">走「设置」里配置的接口，润色模板可自定义</span>
+      <button class="btn" data-close>关闭</button>
+      <button class="btn" id="btnPolishApplyNeg" disabled>只应用负面</button>
+      <button class="btn primary" id="btnPolishApply" disabled>
+        <svg class="ico ico-sm"><use href="#i-check"/></svg><span>应用到工作区</span>
+      </button>
+      <button class="btn" id="btnPolishRun">
+        <svg class="ico ico-sm"><use href="#i-sparkle"/></svg><span>开始润色</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast" hidden></div>
+
+<script src="app.js"></script>
+</body>
+</html>
