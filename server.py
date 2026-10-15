@@ -973,6 +973,12 @@ def run_webview_window(url: str, server: ThreadingHTTPServer) -> bool:
     没装 pywebview、或者它起不来（例如 Windows 缺 WebView2 运行时）时返回 False，
     调用方会退回到 tkinter 状态窗口、再退回浏览器。
     """
+    # macOS 由 Swift 外壳负责开窗口。这里直接返回 False：
+    # 一是重复，二是 pywebview 依赖的 pyobjc 和打包用的 Python 签名不一致，
+    # 真去 import 会直接崩（dlopen 报 Team ID 不匹配）。
+    if sys.platform == "darwin":
+        return False
+
     try:
         import webview  # type: ignore
     except Exception:

@@ -14,10 +14,26 @@ ROOT = os.path.dirname(os.path.abspath(SPECPATH))
 BUILD = os.path.join(ROOT, "build")
 EXEC_NAME = "PromptStudio"
 
-hidden = []
-# pywebview 的后端是按平台动态导入的，静态分析抓不到，得手动收一遍
-hidden += collect_submodules("webview")
-hidden += ["clr", "pythonnet", "proxy_tools", "bottle"]
+def _importable(name):
+    """PyInstaller 会把「找不到的 hidden import」当硬错误中止，
+    所以只列当前环境里真正能导入的模块。"""
+    try:
+        __import__(name)
+        return True
+    except Exception:
+        return False
+
+
+# pywebview 的后端是按平台动态导入的，静态分析抓不到，得手动收一遍。
+# android / gtk / qt 这些后端在本平台装不上，用 on_error="ignore" 静默跳过。
+hidden = list(collect_submodules("webview", on_error="ignore"))
+
+# 注意：pythonnet 是 pip 包名，导入名是 clr —— 写 'pythonnet' 会直接让构建失败。
+# 这几个按平台差异很大（clr 只在 Windows 有），所以逐个探测。
+for extra in ("clr", "pythonnet", "clr_loader", "proxy_tools", "bottle",
+              "typing_extensions", "importlib_resources"):
+    if _importable(extra):
+        hidden.append(extra)
 
 a = Analysis(
     [os.path.join(ROOT, "server.py")],

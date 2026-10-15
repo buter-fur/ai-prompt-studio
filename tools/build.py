@@ -181,10 +181,26 @@ def run_pyinstaller(py, spec_name):
     env["PYINSTALLER_CONFIG_DIR"] = os.path.join(BUILD, "pyinstaller-cache")
     os.makedirs(env["PYINSTALLER_CONFIG_DIR"], exist_ok=True)
     shutil.rmtree(os.path.join(BUILD, "work"), ignore_errors=True)
-    run([py, "-m", "PyInstaller", "--noconfirm", "--clean", "--log-level", "WARN",
+    proc = subprocess.run(
+        [py, "-m", "PyInstaller", "--noconfirm", "--clean", "--log-level", "WARN",
          "--distpath", DIST, "--workpath", os.path.join(BUILD, "work"),
          os.path.join(HERE, spec_name)],
-        cwd=ROOT, env=env)
+        cwd=ROOT, env=env, capture_output=True, text=True,
+    )
+    output = (proc.stdout or "") + (proc.stderr or "")
+    print(output, end="")
+
+    if proc.returncode != 0:
+        # CI 日志常被截断，把关键行再打一遍到末尾，免得看不到真正的原因
+        keys = [ln for ln in output.splitlines()
+                if "ERROR" in ln or "Traceback" in ln or "Error:" in ln]
+        print("\n" + "!" * 64)
+        print("  PyInstaller 打包失败，关键信息（完整日志见上方）：")
+        print("!" * 64)
+        for line in (keys or output.splitlines())[-15:]:
+            print("   " + line)
+        print("!" * 64)
+        sys.exit(proc.returncode)
 
 
 # --------------------------------------------------------------------------
