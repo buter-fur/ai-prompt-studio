@@ -90,5 +90,5 @@ coll = COLLECT(
     a.datas,
     strip=False,
     upx=False,
-    name="AI提示词工作台",              # 外层文件夹用中文名，双击进去就是 exe
+    name="AI-Prompt-Studio",            # 外层文件夹用 ASCII：中文名在 zip 里容易乱码
 )

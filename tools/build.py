@@ -48,7 +48,8 @@ IS_WIN = SYSTEM == "Windows"
 
 APP_TITLE = "AI提示词工作台"
 EXEC_NAME = "PromptStudio"
-APP_NAME = "AI提示词工作台"
+APP_NAME = "AI提示词工作台"        # macOS .app 的显示名
+WIN_BUNDLE = "AI-Prompt-Studio"    # Windows 目录 / zip 用 ASCII，避免中文名解压乱码
 
 # Windows 上要打进包里的运行时依赖（原生窗口）
 WIN_RUNTIME_DEPS = ["pywebview>=5.0"]
@@ -288,7 +289,7 @@ def build_windows(py, ico):
     step("④ 打包（PyInstaller，含原生窗口 pywebview）")
     ensure_pip_target(py, WIN_RUNTIME_DEPS, RUNTIME_LIBS)
     run_pyinstaller(py, "PromptStudio-win.spec")
-    out = os.path.join(DIST, APP_NAME)
+    out = os.path.join(DIST, WIN_BUNDLE)
     if not os.path.isdir(out):
         out = os.path.join(DIST, EXEC_NAME)
     return out
@@ -301,9 +302,9 @@ def build_linux(py):
     return os.path.join(DIST, APP_NAME)
 
 
-def make_zip(folder):
+def make_zip(folder, zip_name=None):
     """Windows 产物打成 zip，方便分发。"""
-    zip_path = folder.rstrip("\\/") + ".zip"
+    zip_path = os.path.join(os.path.dirname(folder), zip_name or (os.path.basename(folder) + ".zip"))
     with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED) as zf:
         for base, _dirs, files in os.walk(folder):
             for name in files:
@@ -344,7 +345,7 @@ def main():
         ico = ensure_ico(py)
         ensure_pyinstaller(py)
         out = build_windows(py, ico)
-        out = make_zip(out) if os.path.isdir(out) else out
+        out = make_zip(out, "AI-Prompt-Studio-Windows.zip") if os.path.isdir(out) else out
     else:
         ensure_pyinstaller(py)
         out = build_linux(py)

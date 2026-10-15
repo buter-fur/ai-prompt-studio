@@ -44,12 +44,12 @@ jobs:
       - name: 压缩 .app
         run: |
           cd build/dist
-          zip -r -y "../../AI提示词工作台-macOS.zip" "AI提示词工作台.app"
+          zip -r -y "../../AI-Prompt-Studio-macOS.zip" "AI提示词工作台.app"
       - name: 上传产物
         uses: actions/upload-artifact@v4
         with:
           name: prompt-studio-macos
-          path: AI提示词工作台-macOS.zip
+          path: AI-Prompt-Studio-macOS.zip
           if-no-files-found: error
 
   # ---------------------------------------------------------------- Windows
