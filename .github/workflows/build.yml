@@ -10,6 +10,11 @@ on:
 permissions:
   contents: write
 
+# Windows runner 默认走 ANSI 代码页，脚本里的中文输出会炸，全局强制 UTF-8
+env:
+  PYTHONUTF8: '1'
+  PYTHONIOENCODING: utf-8
+
 jobs:
   # ---------------------------------------------------------------- 测试
   test:

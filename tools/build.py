@@ -25,6 +25,16 @@ import subprocess
 import sys
 import zipfile
 
+# Windows 上重定向输出默认走 ANSI 代码页（cp1252 / cp936），
+# 本脚本要打大量中文，不强制 UTF-8 会直接抛 UnicodeEncodeError 把构建搞挂。
+for _stream in (sys.stdout, sys.stderr):
+    try:
+        _stream.reconfigure(encoding="utf-8", errors="replace")
+    except Exception:
+        pass
+os.environ.setdefault("PYTHONUTF8", "1")
+os.environ.setdefault("PYTHONIOENCODING", "utf-8")
+
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 BUILD = os.path.join(ROOT, "build")
@@ -46,8 +56,18 @@ MAC_RUNTIME_DEPS = []               # macOS 用 Swift 外壳，不需要 pywebvi
 LINUX_RUNTIME_DEPS = ["pywebview>=5.0"]
 
 
+def utf8_env(extra=None):
+    env = dict(os.environ)
+    env["PYTHONUTF8"] = "1"
+    env["PYTHONIOENCODING"] = "utf-8"
+    if extra:
+        env.update(extra)
+    return env
+
+
 def run(cmd, **kwargs):
     print("   $", " ".join(str(c) for c in cmd))
+    kwargs.setdefault("env", utf8_env())
     subprocess.run(cmd, check=True, **kwargs)
 
 
@@ -162,8 +182,8 @@ def ensure_ico(py):
 def ensure_pyinstaller(py):
     probe = subprocess.run(
         [py, "-m", "PyInstaller", "--version"],
-        capture_output=True, text=True,
-        env=dict(os.environ, PYTHONPATH=PYLIBS),
+        capture_output=True, text=True, encoding="utf-8", errors="replace",
+        env=utf8_env({"PYTHONPATH": PYLIBS}),
     )
     if probe.returncode == 0:
         print("③ PyInstaller 就绪 (%s)" % probe.stdout.strip())
@@ -175,7 +195,7 @@ def ensure_pyinstaller(py):
 
 
 def run_pyinstaller(py, spec_name):
-    env = dict(os.environ)
+    env = utf8_env()
     env["PYTHONPATH"] = os.pathsep.join([PYLIBS, RUNTIME_LIBS])
     # PyInstaller 默认往用户目录写缓存，这里挪进项目，既干净又能在受限环境里跑
     env["PYINSTALLER_CONFIG_DIR"] = os.path.join(BUILD, "pyinstaller-cache")
@@ -186,6 +206,7 @@ def run_pyinstaller(py, spec_name):
          "--distpath", DIST, "--workpath", os.path.join(BUILD, "work"),
          os.path.join(HERE, spec_name)],
         cwd=ROOT, env=env, capture_output=True, text=True,
+        encoding="utf-8", errors="replace",
     )
     output = (proc.stdout or "") + (proc.stderr or "")
     print(output, end="")
@@ -300,7 +321,8 @@ def main():
 
     py = find_python()
     ver = subprocess.run([py, "-c", "import sys;print(sys.version.split()[0])"],
-                         capture_output=True, text=True).stdout.strip()
+                         capture_output=True, text=True, encoding="utf-8",
+                         errors="replace").stdout.strip()
     if IS_MAC and "Xcode.app" in py:
         print("⚠ 正在用 Xcode 自带的 Python（%s），打出来的 .app 可能签不过。" % ver)
         print("  建议： APS_BUILD_PYTHON=/path/to/python3 python3 tools/build.py")
@@ -348,4 +370,19 @@ def main():
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    try:
+        sys.exit(main())
+    except subprocess.CalledProcessError as exc:
+        print("\n" + "!" * 64)
+        print("  ✗ 外部命令失败，退出码 %s" % exc.returncode)
+        print("    命令: %s" % " ".join(str(c) for c in (exc.cmd or [])))
+        print("!" * 64)
+        sys.exit(exc.returncode or 1)
+    except Exception:
+        import traceback
+        print("\n" + "!" * 64)
+        print("  ✗ 打包脚本异常：")
+        print("!" * 64)
+        traceback.print_exc()
+        print("!" * 64)
+        sys.exit(1)
