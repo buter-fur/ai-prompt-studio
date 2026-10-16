@@ -669,16 +669,27 @@ textarea::placeholder { color: var(--text-faint); font-family: var(--font); }
 .rec-chip .tag-en { color: var(--text-faint); font-size: 11px; font-style: italic; }
 .rec-chip .rec-score { font-size: 10px; color: var(--rec); font-weight: 700; }
 
+/* 提示词多的时候这一行以前会被顶到屏幕外面，要滚动才够得着。
+   现在让它常驻第三栏底部：position: sticky 负责内容溢出时吸底，
+   margin-top: auto 负责内容少时也贴底。 */
 .ws-actions {
+  position: sticky;
+  bottom: 0;
+  z-index: 6;
   flex: 0 0 auto;
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
   border-top: 1px solid var(--line-soft);
-  margin-top: auto;
-  padding-top: 12px;
+  margin: auto -13px -13px;      /* 抵消 .col-workspace 的内边距，横向铺满 */
+  padding: 12px 13px 13px;
+  background: var(--panel);
+  box-shadow: 0 -14px 22px -14px rgba(0, 0, 0, .8);
 }
-/* 把「快捷键」推到右下角 */
+html[data-theme="light"] .ws-actions {
+  box-shadow: 0 -14px 22px -14px rgba(30, 40, 80, .22);
+}
+/* 把「复制全部 / 快捷键」推到右下角 */
 .ws-actions .push-right { margin-left: auto; }
 
 /* ------------------------------ 弹窗 ------------------------------------ */
@@ -1790,3 +1801,120 @@ kbd {
   background: rgba(251, 191, 36, .07);
   color: var(--rec);
 }
+
+/* ==========================================================================
+   模型名下拉（可下拉选，也可直接手填）
+   ========================================================================== */
+
+.combo { position: relative; display: flex; align-items: center; }
+
+.combo input { width: 100%; padding-right: 34px; }   /* 右侧留给箭头 */
+
+.combo-btn {
+  position: absolute;
+  right: 1px; top: 1px; bottom: 1px;
+  width: 30px;
+  display: grid;
+  place-items: center;
+  border: none;
+  border-left: 1px solid var(--line);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  background: var(--panel-2);
+  color: var(--text-dim);
+  cursor: pointer;
+  transition: .13s;
+}
+.combo-btn:hover { background: var(--panel-3); color: var(--text); }
+.combo-btn .ico { transition: transform .15s; }
+.combo.is-open .combo-btn .ico { transform: rotate(180deg); }
+
+.combo-menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0; right: 0;
+  z-index: 40;
+  max-height: 232px;
+  overflow-y: auto;
+  padding: 4px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--panel-2);
+  box-shadow: var(--shadow);
+}
+.combo-menu[hidden] { display: none; }
+
+.combo-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 7px 9px;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  background: transparent;
+  color: var(--text-dim);
+  font-family: var(--mono);
+  font-size: 12px;
+  text-align: left;
+  cursor: pointer;
+  transition: .1s;
+}
+.combo-item:hover { background: var(--panel-3); border-color: var(--line); color: var(--text); }
+.combo-item.is-active {
+  color: var(--accent);
+  border-color: rgba(108, 140, 255, .4);
+  background: var(--accent-soft);
+}
+.combo-empty { padding: 9px 10px; color: var(--text-faint); font-size: 12px; }
+
+/* ==========================================================================
+   方案槽位：正向 / 负面分开展示
+   ========================================================================== */
+
+.slot-opt { margin-bottom: 4px; }
+.slot-opt-tip { margin: 0 0 12px; }
+
+.slot-line {
+  display: flex;
+  gap: 7px;
+  align-items: flex-start;
+  padding: 2px 0;
+  word-break: break-word;
+}
+.slot-line + .slot-line {
+  border-top: 1px dashed var(--line-soft);
+  margin-top: 4px;
+  padding-top: 6px;
+}
+
+.slot-lbl {
+  flex: 0 0 auto;
+  width: 17px; height: 17px;
+  display: grid;
+  place-items: center;
+  border-radius: 4px;
+  font-size: 10.5px;
+  font-weight: 700;
+  margin-top: 1px;
+}
+.slot-lbl.pos { background: rgba(74, 222, 128, .16); color: var(--pos); }
+.slot-lbl.neg { background: rgba(248, 113, 113, .16); color: var(--neg); }
+.slot-line .dim { color: var(--text-faint); font-style: normal; }
+
+/* 并排对比里的负面区 */
+.compare-neg {
+  display: flex;
+  gap: 6px;
+  align-items: baseline;
+  margin: 0 0 7px;
+  padding: 6px 8px;
+  border-radius: 6px;
+  border: 1px solid rgba(248, 113, 113, .3);
+  background: rgba(248, 113, 113, .08);
+  font-size: 11.5px;
+  line-height: 1.6;
+  word-break: break-word;
+}
+.compare-neg b { flex: 0 0 auto; color: var(--neg); font-size: 10.5px; letter-spacing: .5px; }
+.compare-neg span { color: var(--text-dim); }

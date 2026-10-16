@@ -170,8 +170,9 @@
         <svg class="ico ico-sm"><use href="#i-swap"/></svg>
       </button>
       <span class="tool-sep"></span>
-      <button class="tool" id="btnLocalTranslate" title="用内置词库把中文片段换成英文标签（不联网）">
-        <svg class="ico ico-sm"><use href="#i-languages"/></svg><span class="tool-label">中→英</span>
+      <button class="tool" id="btnLocalTranslate"
+              title="用内置标签库做中英互译（不联网）。按标签整条匹配，不做逐词翻译；输入中文就转英文，输入英文就转中文">
+        <svg class="ico ico-sm"><use href="#i-languages"/></svg><span class="tool-label">中英互译</span>
       </button>
       <button class="tool" id="btnAiTranslate" title="调用大模型翻译（自由文本也能译）">
         <svg class="ico ico-sm"><use href="#i-globe"/></svg><span class="tool-label">AI 翻译</span>
@@ -301,10 +302,17 @@
           <span>API Key</span>
           <input type="password" id="setApiKey" placeholder="sk-...  （仅保存在本机，不会上传）">
         </label>
-        <label class="field">
-          <span>模型名称 Model</span>
-          <input type="text" id="setModel" placeholder="gpt-4o-mini / deepseek-chat / qwen-plus ...">
-        </label>
+        <div class="field">
+          <span>模型名称 Model <em class="field-note">从下拉里挑，或直接手填</em></span>
+          <div class="combo" id="modelCombo">
+            <input type="text" id="setModel" autocomplete="off" spellcheck="false"
+                   placeholder="gpt-4o-mini / deepseek-chat / qwen-plus ...">
+            <button type="button" class="combo-btn" id="btnModelPick" aria-label="展开常用模型">
+              <svg class="ico ico-sm"><use href="#i-chevron"/></svg>
+            </button>
+            <div class="combo-menu" id="modelMenu" hidden></div>
+          </div>
+        </div>
 
         <div class="row-inline" style="margin-bottom:12px">
           <button class="btn" id="btnTestConnection">
@@ -611,6 +619,11 @@
       <button class="icon-btn" data-close><svg class="ico ico-sm"><use href="#i-x"/></svg></button>
     </div>
     <div class="modal-body">
+      <label class="check slot-opt">
+        <input type="checkbox" id="slotStoreNeg">
+        <span>存入时一并保存<strong>负面提示词</strong></span>
+      </label>
+      <p class="field-tip slot-opt-tip" id="slotStoreNegTip"></p>
       <div class="slot-list" id="slotList"></div>
       <div class="slot-compare" id="slotCompare" hidden></div>
     </div>

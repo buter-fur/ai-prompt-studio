@@ -1621,12 +1621,84 @@ function updateProviderNote() {
 
 function applyProvider(id) {
   const provider = LLM_PROVIDERS.find((p) => p.id === id);
-  if (!provider || provider.id === 'custom') { updateProviderNote(); return; }
+  if (!provider || provider.id === 'custom') {
+    updateProviderNote();
+    updateModelOptions();
+    return;
+  }
   $('#setBaseUrl').value = provider.baseUrl;
   $('#setModel').value = provider.model;
   $('#connResult').hidden = true;
   updateProviderNote();
+  updateModelOptions();
   toast(`已填入「${provider.name}」的地址和推荐模型，可自行修改`);
+}
+
+/** 各服务商的常用模型清单，只用于下拉提示；输入框仍可任意手填 */
+const PROVIDER_MODELS = {
+  deepseek: ['deepseek-chat', 'deepseek-reasoner', 'deepseek-flash', 'deepseek-v4-pro'],
+  openai: ['gpt-4o-mini', 'gpt-4o', 'gpt-4.1', 'gpt-4.1-mini', 'o4-mini'],
+  dashscope: ['qwen-plus', 'qwen-max', 'qwen-turbo', 'qwen-vl-max', 'qwen-vl-plus'],
+  zhipu: ['glm-4-flash', 'glm-4-plus', 'glm-4-air', 'glm-4v-plus', 'glm-4v-flash'],
+  moonshot: ['moonshot-v1-8k', 'moonshot-v1-32k', 'moonshot-v1-128k',
+             'moonshot-v1-8k-vision-preview'],
+  siliconflow: ['Qwen/Qwen2.5-7B-Instruct', 'Qwen/Qwen2.5-VL-72B-Instruct',
+                'deepseek-ai/DeepSeek-V3', 'Qwen/Qwen3-8B'],
+  ollama: ['llama3.1', 'llava', 'qwen2.5vl', 'gemma3', 'mistral'],
+};
+
+const currentProviderId = () => ($('#setProvider') ? $('#setProvider').value : 'custom');
+
+/** 模型下拉菜单随服务商变化 */
+function updateModelOptions() {
+  const menu = $('#modelMenu');
+  if (!menu) return;
+  const models = PROVIDER_MODELS[currentProviderId()] || [];
+  if (!models.length) {
+    menu.innerHTML = '<div class="combo-empty">当前是自定义服务商，直接手填模型名即可</div>';
+    return;
+  }
+  const picked = $('#setModel').value.trim();
+  menu.innerHTML = models.map((m) => `
+    <button type="button" class="combo-item${m === picked ? ' is-active' : ''}" data-model="${esc(m)}">
+      <span>${esc(m)}</span>
+      ${m === picked ? '<svg class="ico ico-sm"><use href="#i-check"/></svg>' : ''}
+    </button>`).join('');
+  menu.querySelectorAll('[data-model]').forEach((b) => b.addEventListener('click', () => {
+    pickModel(b.dataset.model);
+  }));
+}
+
+/** 从下拉里选中一个模型 */
+function pickModel(name) {
+  if (!name) return;
+  $('#setModel').value = name;
+  closeModelMenu();
+  $('#connResult').hidden = true;
+  toast(`已选择模型 ${name}`);
+}
+
+function openModelMenu() {
+  const menu = $('#modelMenu');
+  if (!menu) return;
+  updateModelOptions();
+  menu.hidden = false;
+  $('#modelCombo').classList.add('is-open');
+}
+
+function closeModelMenu() {
+  const menu = $('#modelMenu');
+  if (!menu) return;
+  menu.hidden = true;
+  const combo = $('#modelCombo');
+  if (combo) combo.classList.remove('is-open');
+}
+
+function toggleModelMenu() {
+  const menu = $('#modelMenu');
+  if (!menu) return;
+  if (menu.hidden) openModelMenu();
+  else closeModelMenu();
 }
 
 async function testConnection() {
@@ -1686,6 +1758,8 @@ function fillSettingsForm() {
   renderProviderOptions();
   $('#setProvider').value = matchProvider(s.base_url);
   updateProviderNote();
+  updateModelOptions();
+  closeModelMenu();
   $('#setBaseUrl').value = s.base_url || '';
   $('#setApiKey').value = s.api_key || '';
   $('#setModel').value = s.model || '';
@@ -2043,7 +2117,9 @@ function updateCopyPreview() {
   ) || '（没有内容）';
 }
 
-/* ======================= 本地词库：中文 → 英文 ========================== */
+/* ====================== 本地标签库：中英互译 ============================ */
+
+const HAS_CJK = /[\u4e00-\u9fff]/;
 
 function lookupChinese(fragment) {
   const text = String(fragment || '').trim();
@@ -2111,30 +2187,68 @@ function translateTextLocally(text) {
   return { text: serializeSegments(out), hit, missed };
 }
 
+/**
+ * 英 → 中：按标签整条匹配，不做逐词翻译。
+ * 只把「整段就等于某个标签 en」的片段换掉，找不到的原样留着。
+ */
+function translateEnToZh(text) {
+  const items = parseSegments(text);
+  const out = [];
+  let hit = 0;
+
+  for (const item of items) {
+    const tag = tagByEn(item.base);
+    if (tag && tag.zh) {
+      out.push({ base: tag.zh, weight: item.weight });
+      hit += 1;
+    } else {
+      out.push(item);
+    }
+  }
+  return { text: serializeSegments(out), hit, missed: [] };
+}
+
+/** 按这一侧的内容自动判方向：含中文就中译英，否则英译中 */
+function translateSide(text) {
+  const raw = String(text || '');
+  if (!raw.trim()) return { text: raw, hit: 0, missed: [], dir: null };
+  if (HAS_CJK.test(raw)) return { ...translateTextLocally(raw), dir: 'zh2en' };
+  return { ...translateEnToZh(raw), dir: 'en2zh' };
+}
+
 function runLocalTranslate() {
-  const pos = translateTextLocally($('#promptText').value);
-  const negText = $('#negText').value;
-  const hasNegChinese = /[\u4e00-\u9fff]/.test(negText);
-  const neg = hasNegChinese ? translateTextLocally(negText) : { text: negText, hit: 0, missed: [] };
+  const posBefore = $('#promptText').value;
+  const negBefore = $('#negText').value;
+  const pos = translateSide(posBefore);
+  const neg = translateSide(negBefore);
 
   const changed = pos.hit + neg.hit;
   if (!changed) {
-    toast('没有找到可替换的中文片段，试试「AI 翻译」', 2800);
+    toast(
+      HAS_CJK.test(posBefore + negBefore)
+        ? '没有能整条匹配的中文标签，试试联网的「AI 翻译」'
+        : '这些英文在标签库里没有对应标签，试试联网的「AI 翻译」',
+      3200,
+    );
     return;
   }
 
-  $('#promptText').value = pos.text;
-  if (hasNegChinese) $('#negText').value = neg.text;
+  if (pos.hit) $('#promptText').value = pos.text;
+  if (neg.hit) $('#negText').value = neg.text;
   commitUndo();
   onPromptChanged();
   renderTags();
 
+  const dirs = new Set([pos.dir, neg.dir].filter(Boolean));
+  const label = dirs.size === 1
+    ? (dirs.has('zh2en') ? '中文 → 英文' : '英文 → 中文')
+    : '中英互译';
   const missed = pos.missed.concat(neg.missed);
   toast(
     missed.length
-      ? `已替换 ${changed} 段，${missed.length} 段词库里没有：${missed.slice(0, 3).join('、')}`
-      : `已替换 ${changed} 段中文为英文标签`,
-    missed.length ? 3600 : 2200,
+      ? `${label}：替换 ${changed} 个标签；词库里没有：${missed.slice(0, 3).join('、')}`
+      : `${label}：已按标签替换 ${changed} 处`,
+    missed.length ? 3600 : 2400,
   );
 }
 
@@ -2392,6 +2506,83 @@ function updateSlotBadge() {
   badge.textContent = String(n);
 }
 
+/** 槽位是否算「有内容」 */
+function slotFilled(slot) {
+  return Boolean(slot && (String(slot.prompt || '').trim() || String(slot.negative || '').trim()));
+}
+
+/** 一句话描述槽位里有什么，用于确认框 */
+function slotSummary(slot) {
+  const pos = parseSegments(String(slot.prompt || '')).length;
+  const neg = parseSegments(String(slot.negative || '')).length;
+  const parts = [];
+  parts.push(pos ? `${pos} 个正向标签` : '无正向');
+  parts.push(neg ? `${neg} 个负面标签` : '无负面');
+  return parts.join('，');
+}
+
+/** 槽位卡片正文：正向 + 负面都摊开显示，避免「以为没存负面」 */
+function slotBody(slot) {
+  const pos = String(slot.prompt || '').trim();
+  const neg = String(slot.negative || '').trim();
+  const rows = [];
+  rows.push(`<div class="slot-line"><b class="slot-lbl pos">正</b><span>${pos ? esc(pos) : '<i class="dim">（无正向）</i>'}</span></div>`);
+  if (neg) rows.push(`<div class="slot-line"><b class="slot-lbl neg">负</b><span>${esc(neg)}</span></div>`);
+  return rows.join('');
+}
+
+/** 存入当前工作区内容 */
+function saveToSlot(index) {
+  const storeNeg = state.settings.slot_store_negative !== false;
+  const prompt = $('#promptText').value.trim();
+  const negative = storeNeg ? $('#negText').value.trim() : '';
+  const existing = state.slots[index] || { prompt: '', negative: '' };
+  const occupied = slotFilled(existing);
+
+  // 空值绝不覆盖 —— 想清空只能用「清空」按钮
+  if (!prompt && !negative) {
+    toast(
+      occupied
+        ? `工作区是空的，没有内容可存入。想清空槽位 ${SLOT_KEYS[index]} 请点「清空」按钮。`
+        : '工作区是空的，没有内容可以存入。',
+      3600,
+    );
+    return;
+  }
+
+  if (occupied) {
+    const ok = window.confirm(
+      `槽位 ${SLOT_KEYS[index]} 里已经有内容了。\n\n` +
+      `现在：${slotSummary(existing)}\n` +
+      `即将变成：${slotSummary({ prompt, negative })}\n\n` +
+      '确定覆盖吗？\n（只想清空的话，请用「清空」按钮）',
+    );
+    if (!ok) { toast('已取消，槽位内容未改动'); return; }
+  }
+
+  state.slots[index] = { prompt, negative };
+  saveSlots();
+  renderSlots();
+  toast(
+    negative
+      ? `已存入槽位 ${SLOT_KEYS[index]}（正向 + 负面）`
+      : `已存入槽位 ${SLOT_KEYS[index]}（仅正向）`,
+  );
+}
+
+/** 同步「存负面」开关的界面状态 */
+function syncSlotOption() {
+  const on = state.settings.slot_store_negative !== false;
+  const box = $('#slotStoreNeg');
+  if (box) box.checked = on;
+  const tip = $('#slotStoreNegTip');
+  if (tip) {
+    tip.textContent = on
+      ? '当前：点「存入当前」会把正向和负面一起存进槽位。'
+      : '当前：点「存入当前」只存正向。已存进槽位的负面不会被清掉，只是之后不再更新。';
+  }
+}
+
 function renderSlots() {
   const box = $('#slotList');
   box.innerHTML = state.slots.map((slot, index) => {
@@ -2404,7 +2595,7 @@ function renderSlots() {
           <strong>${empty ? '空槽位' : `${count} 个正向标签`}</strong>
           <time>${empty ? '' : (slot.negative.trim() ? '含负面词' : '无负面词')}</time>
         </div>
-        <div class="slot-body${empty ? ' empty' : ''}">${empty ? '还没有内容，点「存入当前」保存当前提示词' : esc(slot.prompt || '（只有负面词）')}</div>
+        <div class="slot-body${empty ? ' empty' : ''}">${empty ? '还没有内容，点「存入当前」保存当前提示词' : slotBody(slot)}</div>
         <div class="row-inline">
           <button class="mini" data-slot-save="${index}">存入当前</button>
           <button class="mini" data-slot-load="${index}"${empty ? ' disabled' : ''}>载入</button>
@@ -2415,11 +2606,7 @@ function renderSlots() {
   }).join('');
 
   box.querySelectorAll('[data-slot-save]').forEach((b) => b.addEventListener('click', () => {
-    const index = Number(b.dataset.slotSave);
-    state.slots[index] = { prompt: $('#promptText').value, negative: $('#negText').value };
-    saveSlots();
-    renderSlots();
-    toast(`已存入槽位 ${SLOT_KEYS[index]}`);
+    saveToSlot(Number(b.dataset.slotSave));
   }));
 
   box.querySelectorAll('[data-slot-load]').forEach((b) => b.addEventListener('click', () => {
@@ -2442,6 +2629,13 @@ function renderSlots() {
 
   box.querySelectorAll('[data-slot-clear]').forEach((b) => b.addEventListener('click', () => {
     const index = Number(b.dataset.slotClear);
+    const slot = state.slots[index];
+    const ok = window.confirm(
+      `确定清空槽位 ${SLOT_KEYS[index]} 吗？\n\n` +
+      `将丢弃：${slotSummary(slot)}\n\n` +
+      '这一步无法撤销。',
+    );
+    if (!ok) { toast('已取消，槽位未改动'); return; }
     state.slots[index] = { prompt: '', negative: '' };
     saveSlots();
     renderSlots();
@@ -2457,9 +2651,18 @@ function renderCompare() {
   if (!state.compareOpen) { box.hidden = true; box.innerHTML = ''; return; }
 
   const columns = state.slots
-    .map((slot, index) => ({ key: SLOT_KEYS[index], items: parseSegments(slot.prompt) }))
-    .filter((col) => col.items.length);
-  columns.push({ key: '当前', items: parseSegments($('#promptText').value), current: true });
+    .map((slot, index) => ({
+      key: SLOT_KEYS[index],
+      items: parseSegments(slot.prompt),
+      negative: String(slot.negative || '').trim(),
+    }))
+    .filter((col) => col.items.length || col.negative);
+  columns.push({
+    key: '当前',
+    items: parseSegments($('#promptText').value),
+    negative: $('#negText').value.trim(),
+    current: true,
+  });
 
   if (columns.length < 2) {
     box.hidden = false;
@@ -2490,6 +2693,7 @@ function renderCompare() {
             <span>${esc(col.key)}</span>
             <span class="hint">${col.items.length} 个</span>
           </div>
+          ${col.negative ? `<div class="compare-neg"><b>负面</b><span>${esc(col.negative)}</span></div>` : ''}
           <div class="compare-col-body">
             ${col.items.map((item) => {
               const info = counter.get(item.base.toLowerCase()) || { in: new Set(), known: true };
@@ -2669,7 +2873,7 @@ const SHORTCUTS = [
   { keys: [MOD, 'K'], desc: '聚焦标签搜索框' },
   { keys: [MOD, 'S'], desc: '收藏当前组合' },
   { keys: [MOD, 'Shift', 'C'], desc: '复制正向 + 负面提示词（格式见设置）' },
-  { keys: ['Alt', 'G'], desc: '用内置词库把中文换成英文（不联网）' },
+  { keys: ['Alt', 'G'], desc: '本地中英互译：按标签匹配，中文转英文、英文转中文（不联网）' },
   { keys: ['Alt', 'L'], desc: '打开 AI 翻译' },
   { keys: ['Alt', 'P'], desc: '打开 AI 润色' },
   { keys: ['Alt', 'T'], desc: '打开负面词模板' },
@@ -2761,7 +2965,26 @@ function bindEfficiencyEvents() {
   $('#btnAiPolish').addEventListener('click', openPolish);
   $('#btnNegativeTemplates').addEventListener('click', openNegativeTemplates);
   $('#btnInspiration').addEventListener('click', openInspiration);
-  $('#btnSlots').addEventListener('click', () => { renderSlots(); openModal('#modalSlots'); });
+  $('#btnSlots').addEventListener('click', () => {
+    syncSlotOption();
+    renderSlots();
+    openModal('#modalSlots');
+  });
+
+  // 槽位：是否一并保存负面提示词
+  $('#slotStoreNeg').addEventListener('change', async (event) => {
+    state.settings.slot_store_negative = event.target.checked;
+    syncSlotOption();
+    try {
+      await api('/api/settings', {
+        method: 'POST',
+        body: JSON.stringify({ slot_store_negative: event.target.checked }),
+      });
+      toast(event.target.checked ? '存入槽位时会一并保存负面提示词' : '存入槽位时只保存正向提示词');
+    } catch (_) {
+      toast('设置没能保存，请重试', 2800);
+    }
+  });
   $('#btnProject').addEventListener('click', () => {
     $('#projectHint').textContent = '';
     openModal('#modalProject');
@@ -3434,6 +3657,27 @@ function bindEvents() {
   // 服务商预设 + 连接测试
   $('#setProvider').addEventListener('change', () => applyProvider($('#setProvider').value));
   $('#btnTestConnection').addEventListener('click', testConnection);
+
+  // 模型名：下拉可选，也能直接手填
+  $('#btnModelPick').addEventListener('click', (event) => {
+    event.stopPropagation();
+    toggleModelMenu();
+  });
+  $('#setModel').addEventListener('input', () => { $('#connResult').hidden = true; });
+  // 点别处 / 按 Esc 关掉下拉
+  document.addEventListener('click', (event) => {
+    const combo = $('#modelCombo');
+    if (combo && !combo.hidden && !combo.contains(event.target)) closeModelMenu();
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape') return;
+    const menu = $('#modelMenu');
+    if (menu && !menu.hidden) {
+      closeModelMenu();
+      event.stopPropagation();   // 别把设置弹窗也一起关了
+      event.preventDefault();
+    }
+  }, true);
   // 手动改了地址就自动切到「自定义」，避免预设和实际配置对不上还没提示
   $('#setBaseUrl').addEventListener('input', () => {
     const matched = matchProvider($('#setBaseUrl').value);

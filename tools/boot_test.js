@@ -185,6 +185,14 @@ const sandbox = {
 sandbox.window = sandbox;
 sandbox.globalThis = sandbox;
 
+// window.confirm 在沙箱里默认不存在；给个可控的桩，方便测「确认 / 取消」两条路径
+let confirmAnswer = true;
+let confirmCalls = [];
+sandbox.confirm = (message) => {
+  confirmCalls.push(String(message || ''));
+  return confirmAnswer;
+};
+
 let source = fs.readFileSync(path.join(ROOT, 'app/app.js'), 'utf8');
 source += `
 globalThis.__probe = { state, toggleTag, renderLibrary, openLibrary, setLanguage, cycleTheme,
@@ -208,6 +216,9 @@ globalThis.__probe = { state, toggleTag, renderLibrary, openLibrary, setLanguage
   LLM_PROVIDERS, matchProvider, applyProvider, testConnection,
   renderProviderOptions, updateProviderNote,
   splitNoParam, stripTrailingBlocks, mergeNoParam, updateMergeNoButton, isNoneWord,
+  slotFilled, slotSummary, slotBody, saveToSlot, syncSlotOption,
+  PROVIDER_MODELS, updateModelOptions, openModelMenu, closeModelMenu, toggleModelMenu, pickModel,
+  translateEnToZh, translateSide, HAS_CJK,
   formatPromptText, copyPrefixFlags, copyPositive, copyNegative, copyBoth,
   updateCopyPreview, COPY_MODE_OPTIONS, DEFAULT_COPY_POS_PREFIX, DEFAULT_COPY_NEG_PREFIX,
   getPolishState: () => ({ style: polishStyle, target: polishTarget }),
@@ -1056,6 +1067,208 @@ const negValue = () => getEl('#negText').value;
   p.setPolishTarget('natural');
   check('自然语言模式隐藏合成按钮', getEl('#btnPolishMergeNo').hidden === true);
   p.setPolishTarget('tags');
+
+  console.log('\n[31] 方案槽位：空值不覆盖 + 负面存储 + 二次确认');
+  const setSlot = (i, prompt, negative) => { st.slots[i] = { prompt, negative }; };
+  const setWork = (prompt, negative) => {
+    getEl('#promptText').value = prompt;
+    getEl('#negText').value = negative || '';
+  };
+  confirmAnswer = true;
+  confirmCalls = [];
+
+  // —— 原始 bug：槽位有内容 + 工作区空白 = 被清空 ——
+  setSlot(0, '1girl, forest', 'low quality');
+  setWork('', '');
+  p.saveToSlot(0);
+  check('空工作区不会清空已有槽位', st.slots[0].prompt === '1girl, forest', st.slots[0].prompt);
+  check('空工作区不会清掉负面', st.slots[0].negative === 'low quality', st.slots[0].negative);
+  check('空工作区不会弹覆盖确认', confirmCalls.length === 0, `confirm ${confirmCalls.length} 次`);
+
+  // —— 空槽位 + 空工作区：也不写入 ——
+  setSlot(1, '', '');
+  p.saveToSlot(1);
+  check('两边都空时不写入', st.slots[1].prompt === '' && st.slots[1].negative === '');
+
+  // —— 正常存入（开关默认开）——
+  st.settings.slot_store_negative = true;
+  setSlot(2, '', '');
+  setWork('1girl, cat', 'blurry');
+  p.saveToSlot(2);
+  check('存入正向', st.slots[2].prompt === '1girl, cat', st.slots[2].prompt);
+  check('存入负面（开关打开时）', st.slots[2].negative === 'blurry', st.slots[2].negative);
+
+  // —— 开关关闭时只存正向 ——
+  st.settings.slot_store_negative = false;
+  setSlot(3, '', '');
+  setWork('a dog', 'watermark');
+  p.saveToSlot(3);
+  check('开关关闭时只存正向', st.slots[3].prompt === 'a dog', st.slots[3].prompt);
+  check('开关关闭时不存负面', st.slots[3].negative === '', st.slots[3].negative);
+  st.settings.slot_store_negative = true;
+
+  // —— 覆盖已有槽位要确认：取消则不动 ——
+  setSlot(0, 'old prompt', 'old neg');
+  setWork('new prompt', 'new neg');
+  confirmAnswer = false;
+  confirmCalls = [];
+  p.saveToSlot(0);
+  check('覆盖前弹了确认框', confirmCalls.length === 1);
+  check('确认框说明了会覆盖', confirmCalls[0].includes('已经有内容'), confirmCalls[0].split('\n')[0]);
+  check('取消后正向不变', st.slots[0].prompt === 'old prompt', st.slots[0].prompt);
+  check('取消后负面不变', st.slots[0].negative === 'old neg', st.slots[0].negative);
+
+  // —— 确认则覆盖 ——
+  confirmAnswer = true;
+  confirmCalls = [];
+  p.saveToSlot(0);
+  check('确认后完成覆盖', st.slots[0].prompt === 'new prompt' && st.slots[0].negative === 'new neg',
+    `${st.slots[0].prompt} / ${st.slots[0].negative}`);
+
+  // —— 空槽位存入不打扰用户 ——
+  setSlot(1, '', '');
+  setWork('only pos', '');
+  confirmCalls = [];
+  p.saveToSlot(1);
+  check('空槽位存入不弹确认', confirmCalls.length === 0);
+  check('空槽位存入成功', st.slots[1].prompt === 'only pos');
+
+  // —— 槽位卡片正文同时展示正负 ——
+  const body = p.slotBody({ prompt: 'a, b', negative: 'x, y' });
+  check('槽位正文含正向', body.includes('a, b'));
+  check('槽位正文含负面', body.includes('x, y'));
+  check('槽位正文有正负标记', body.includes('slot-lbl pos') && body.includes('slot-lbl neg'));
+  check('无负面时不渲染负面行', !p.slotBody({ prompt: 'a', negative: '' }).includes('slot-lbl neg'));
+  check('只有负面时也能显示', p.slotBody({ prompt: '', negative: 'z' }).includes('z'));
+
+  // —— slotSummary 描述 ——
+  check('slotSummary 统计正负', p.slotSummary({ prompt: 'a, b, c', negative: 'x' }) === '3 个正向标签，1 个负面标签',
+    p.slotSummary({ prompt: 'a, b, c', negative: 'x' }));
+  check('slotFilled 判定', p.slotFilled({ prompt: '', negative: 'x' }) === true
+    && p.slotFilled({ prompt: '', negative: '' }) === false);
+
+  // —— 并排对比纳入负面 ——
+  st.compareOpen = false;
+  st.slots[0] = { prompt: 'a', negative: 'NEG-A' };
+  st.slots[1] = { prompt: 'b', negative: 'NEG-B' };
+  st.compareOpen = true;
+  p.renderCompare();
+  const cmp = getEl('#slotCompare').innerHTML;
+  check('对比里出现负面区', cmp.includes('compare-neg'));
+  check('对比里含槽位负面内容', cmp.includes('NEG-A'), 'NEG-A');
+  check('对比里含另一个槽位负面', cmp.includes('NEG-B'));
+  st.compareOpen = false;
+
+  // —— 开关同步 ——
+  st.settings.slot_store_negative = false;
+  p.syncSlotOption();
+  check('开关未勾选', getEl('#slotStoreNeg').checked === false);
+  check('提示文案跟着变', getEl('#slotStoreNegTip').textContent.includes('只存正向'),
+    getEl('#slotStoreNegTip').textContent.slice(0, 24));
+  st.settings.slot_store_negative = true;
+  p.syncSlotOption();
+  check('开关已勾选', getEl('#slotStoreNeg').checked === true);
+
+  console.log('\n[32] 模型名下拉（可选可手填）');
+  const nonCustom = p.LLM_PROVIDERS.filter((x) => x.id !== 'custom');
+  check('每个服务商都配了模型清单',
+    nonCustom.every((x) => (p.PROVIDER_MODELS[x.id] || []).length > 0),
+    nonCustom.filter((x) => !(p.PROVIDER_MODELS[x.id] || []).length).map((x) => x.id).join(',') || '全部有');
+  check('DeepSeek 清单含 deepseek-chat', p.PROVIDER_MODELS.deepseek.includes('deepseek-chat'));
+  check('OpenAI 清单含 gpt-4o-mini', p.PROVIDER_MODELS.openai.includes('gpt-4o-mini'));
+
+  // 切到 DeepSeek，下拉应列出其模型
+  getEl('#setProvider').value = 'deepseek';
+  p.applyProvider('deepseek');
+  const menu = getEl('#modelMenu');
+  check('下拉已渲染条目', menu.innerHTML.includes('data-model='));
+  check('下拉列出 deepseek-reasoner', menu.innerHTML.includes('deepseek-reasoner'));
+  check('当前模型被标为选中', menu.innerHTML.includes('is-active'), 'deepseek-chat');
+
+  // 选中一项（测试桩的 querySelectorAll 不做选择器解析，所以直接调 pickModel）
+  getEl('#setProvider').value = 'deepseek';
+  p.updateModelOptions();
+  p.pickModel('deepseek-reasoner');
+  check('从下拉选中后写回输入框', getEl('#setModel').value === 'deepseek-reasoner', getEl('#setModel').value);
+  check('选中后下拉自动收起', getEl('#modelMenu').hidden === true);
+
+  // 自定义服务商 → 提示手填
+  getEl('#setProvider').value = 'custom';
+  p.updateModelOptions();
+  check('自定义服务商提示手填', menu.innerHTML.includes('直接手填'), menu.innerHTML.slice(0, 40));
+
+  // 开合
+  getEl('#setProvider').value = 'openai';
+  p.openModelMenu();
+  check('openModelMenu 展开', menu.hidden === false);
+  check('展开时带 is-open 样式', getEl('#modelCombo').classList.contains('is-open'));
+  p.closeModelMenu();
+  check('closeModelMenu 收起', menu.hidden === true);
+  check('收起后去掉 is-open', !getEl('#modelCombo').classList.contains('is-open'));
+  p.toggleModelMenu();
+  check('toggle 能展开', menu.hidden === false);
+  p.toggleModelMenu();
+  check('toggle 能收起', menu.hidden === true);
+
+  // 手填仍然可用
+  getEl('#setModel').value = 'my-own-model';
+  check('仍然支持手填任意模型名', getEl('#setModel').value === 'my-own-model');
+
+  console.log('\n[33] 本地中英互译（按标签匹配）');
+  check('HAS_CJK 判定', p.HAS_CJK.test('中文') === true && p.HAS_CJK.test('english') === false);
+
+  // 英 → 中
+  const someTag = st.tagIndex.find((t) => t.zh && t.en && !t.en.includes(','));
+  check('词库里有可用样本', Boolean(someTag), someTag && `${someTag.en} → ${someTag.zh}`);
+
+  const e2z = p.translateEnToZh(someTag.en);
+  check('英译中：整条标签被换掉', e2z.text === someTag.zh, `${someTag.en} → ${e2z.text}`);
+  check('英译中：计到 1 次命中', e2z.hit === 1);
+
+  const mixed = p.translateEnToZh(`${someTag.en}, not-a-real-tag-xyz`);
+  check('英译中：只换认得的标签', mixed.text.includes(someTag.zh) && mixed.text.includes('not-a-real-tag-xyz'),
+    mixed.text);
+  check('英译中：命中数正确', mixed.hit === 1);
+
+  check('英译中：位置无关（大小写与空格）',
+    p.translateEnToZh(`  ${someTag.en.toUpperCase()}  `).hit === 1, someTag.en.toUpperCase());
+
+  // 方向自动判断
+  check('translateSide：含中文 → zh2en', p.translateSide('一只猫').dir === 'zh2en');
+  check('translateSide：纯英文 → en2zh', p.translateSide(someTag.en).dir === 'en2zh');
+  check('translateSide：空串不判方向', p.translateSide('').dir === null);
+  check('translateSide：空串不报错', p.translateSide('   ').hit === 0);
+
+  // 端到端：英 → 中
+  setWork(someTag.en, '');
+  st.settings.slot_store_negative = true;
+  p.runLocalTranslate();
+  check('工作区英译中生效', promptValue() === someTag.zh, `${someTag.en} → ${promptValue()}`);
+
+  // 端到端：中 → 英（原有方向不能被改坏）
+  setWork(someTag.zh, '');
+  p.runLocalTranslate();
+  check('工作区中译英仍然生效', promptValue() === someTag.en, `${someTag.zh} → ${promptValue()}`);
+
+  // 无命中时不动文本
+  setWork('zzz-not-a-tag-zzz', '');
+  p.runLocalTranslate();
+  check('无命中时不改动文本', promptValue() === 'zzz-not-a-tag-zzz', promptValue());
+
+  // 不做逐词翻译：单个英文单词不是标签时保持原样
+  const wordOnly = p.translateEnToZh('zzznotatag');
+  check('不按词拆分：整条不是标签就不换', wordOnly.text === 'zzznotatag' && wordOnly.hit === 0);
+
+  console.log('\n[34] 右下操作栏吸底（CSS）');
+  const css = fs.readFileSync(path.join(ROOT, 'app/style.css'), 'utf8');
+  const wsRule = css.slice(css.indexOf('.ws-actions {'), css.indexOf('/* 把「复制全部'));
+  check('底部栏用了 position: sticky', wsRule.includes('position: sticky'));
+  check('底部栏吸底到 bottom: 0', wsRule.includes('bottom: 0'));
+  check('底部栏有背景（否则内容会透出来）', wsRule.includes('background: var(--panel)'));
+  check('底部栏有 z-index', /z-index:\s*\d+/.test(wsRule));
+  check('底部栏横向抵消容器内边距', wsRule.includes('margin: auto -13px -13px'));
+  check('保留了 push-right 右推规则', css.includes('.ws-actions .push-right { margin-left: auto; }'));
+  check('浅色主题有单独阴影', css.includes('html[data-theme="light"] .ws-actions'));
 
   console.log(`\n接口调用 ${calls.length} 次：${[...new Set(calls)].join(' | ')}`);
   console.log(failed ? '\n❌ 存在失败项\n' : '\n✅ 全部通过\n');

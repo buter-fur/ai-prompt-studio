@@ -116,6 +116,7 @@ def default_settings() -> dict:
         "copy_positive_prefix": "Positive prompt: ",
         "copy_negative_prefix": "Negative prompt: ",
         "parked": {"pos": [], "neg": []},
+        "slot_store_negative": True,   # 存入方案槽位时是否一并保存负面提示词
         "slots": [
             {"prompt": "", "negative": ""},
             {"prompt": "", "negative": ""},
