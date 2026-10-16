@@ -7,6 +7,7 @@
 // 编译：xcrun swiftc -O -module-cache-path <cache> -o AppWindow AppWindow.swift
 
 import Cocoa
+import UniformTypeIdentifiers
 import WebKit
 
 private let appTitle = "AI 文生图提示词工作台"
@@ -90,7 +91,7 @@ final class SaveBridge: NSObject, WKScriptMessageHandler {
 
 // MARK: - App
 
-final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, WKNavigationDelegate {
+final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, WKNavigationDelegate, WKUIDelegate {
     private var window: NSWindow!
     private var webView: WKWebView!
     private let bridge = SaveBridge()
@@ -178,6 +179,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, WKNa
 
         webView = WKWebView(frame: .zero, configuration: config)
         webView.navigationDelegate = self
+        // 不设 uiDelegate 的话：<input type="file"> 点了没反应，
+        // window.confirm() 直接返回 false —— 删除分类/分组会静默失效。
+        webView.uiDelegate = self
         webView.setValue(false, forKey: "drawsBackground")
         bridge.webView = webView
 
@@ -497,6 +501,81 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, WKNa
     @objc private func zoomReset() {
         zoom = 1.0
         webView.pageZoom = 1.0
+    }
+}
+
+// MARK: - JS 原生面板：文件选择 / alert / confirm / prompt
+//
+// WKWebView 和 Safari 不同：这些面板必须由宿主自己弹，否则一律静默失败。
+
+extension AppDelegate {
+    /// <input type="file"> —— 图片反推的「选择图片」按钮走这里
+    func webView(_ webView: WKWebView,
+                 runOpenPanelWith parameters: WKOpenPanelParameters,
+                 initiatedByFrame frame: WKFrameInfo,
+                 completionHandler: @escaping ([URL]?) -> Void) {
+        let panel = NSOpenPanel()
+        panel.title = "选择图片"
+        panel.message = "挑一张图片，AI 会帮你反推出提示词"
+        panel.prompt = "选择"
+        panel.canChooseFiles = true
+        panel.canChooseDirectories = parameters.allowsDirectories
+        panel.allowsMultipleSelection = parameters.allowsMultipleSelection
+        panel.canCreateDirectories = false
+        // 前端是 accept="image/*"，这里按图片类型过滤
+        panel.allowedContentTypes = [.image]
+
+        panel.begin { response in
+            completionHandler(response == .OK ? panel.urls : nil)
+        }
+    }
+
+    /// window.confirm() —— 删除分类 / 删除分组 / 恢复内置标签库都要用它
+    func webView(_ webView: WKWebView,
+                 runJavaScriptConfirmPanelWithMessage message: String,
+                 initiatedByFrame frame: WKFrameInfo,
+                 completionHandler: @escaping (Bool) -> Void) {
+        let alert = NSAlert()
+        alert.messageText = appTitle
+        alert.informativeText = message
+        alert.alertStyle = .warning
+        alert.addButton(withTitle: "确定")
+        alert.addButton(withTitle: "取消")
+        alert.window.initialFirstResponder = alert.buttons.first
+        completionHandler(alert.runModal() == .alertFirstButtonReturn)
+    }
+
+    /// window.alert()
+    func webView(_ webView: WKWebView,
+                 runJavaScriptAlertPanelWithMessage message: String,
+                 initiatedByFrame frame: WKFrameInfo,
+                 completionHandler: @escaping () -> Void) {
+        let alert = NSAlert()
+        alert.messageText = appTitle
+        alert.informativeText = message
+        alert.addButton(withTitle: "好")
+        alert.runModal()
+        completionHandler()
+    }
+
+    /// window.prompt()
+    func webView(_ webView: WKWebView,
+                 runJavaScriptTextInputPanelWithPrompt prompt: String,
+                 defaultText: String?,
+                 initiatedByFrame frame: WKFrameInfo,
+                 completionHandler: @escaping (String?) -> Void) {
+        let alert = NSAlert()
+        alert.messageText = appTitle
+        alert.informativeText = prompt
+        alert.addButton(withTitle: "确定")
+        alert.addButton(withTitle: "取消")
+
+        let field = NSTextField(frame: NSRect(x: 0, y: 0, width: 280, height: 24))
+        field.stringValue = defaultText ?? ""
+        alert.accessoryView = field
+        alert.window.initialFirstResponder = field
+
+        completionHandler(alert.runModal() == .alertFirstButtonReturn ? field.stringValue : nil)
     }
 }
 
