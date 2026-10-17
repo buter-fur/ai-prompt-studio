@@ -1,6 +1,26 @@
 # 统一按 LF 存，检出时也不转换，避免跨平台差异
 * text=auto eol=lf
 
+# ---------------------------------------------------------------------------
+# 例外：Windows 批处理必须是 CRLF
+#
+# cmd.exe 解析 .bat 时是按 CR + LF 两个字节来定位行边界的。整行只有 LF 时
+# 行缓冲会错位，命令名被截断，实测报错：
+#     cd /d "%~dp0"     → 'd' 不是内部或外部命令
+#     if %errorlevel%==0 ( → 'vel%==0 (' 不是内部或外部命令
+# 连带 if 块失效，python server.py 永远执行不到，窗口一闪就关。
+#
+# 光把文件改成 CRLF 不够：git 里存的还是 LF，重新 clone / 下载 ZIP 又会变回去。
+# 必须在这里声明 eol=crlf，让检出和 git archive（GitHub 的 ZIP）都输出 CRLF。
+# ---------------------------------------------------------------------------
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# bash / zsh 脚本反过来必须保持 LF，写 CRLF 会报 bad interpreter
+*.sh text eol=lf
+*.command text eol=lf
+*.bash text eol=lf
+
 # 二进制
 *.png binary
 *.ico binary
